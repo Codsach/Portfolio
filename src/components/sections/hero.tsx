@@ -184,17 +184,17 @@ export default function HeroSection({ id }: { id: string }) {
                       View My Work <ArrowRight className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
-                  <Button asChild variant="secondary" size="lg">
+                  <Button asChild variant="outline" size="lg">
                     <Link href="/resume.pdf" target="_blank">
                       View Resume <FileText className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
-                  <Button asChild variant="secondary" size="lg">
+                  <Button asChild variant="outline" size="lg">
                     <a href="/resume.pdf" download>
                       Download Resume <Download className="ml-2 h-5 w-5" />
                     </a>
                   </Button>
-                  <Button asChild variant="secondary" size="lg">
+                  <Button asChild variant="outline" size="lg">
                     <Link href="#contact">Contact Me</Link>
                   </Button>
                 </div>
