@@ -30,25 +30,29 @@ const WaveBackground = () => {
               xlinkHref="#gentle-wave"
               x="48"
               y="0"
-              className="fill-primary/5 animate-[wave_45s_linear_infinite]"
+              className="fill-primary/5"
+              style={{ animation: 'wave 45s linear infinite' }}
             />
             <use
               xlinkHref="#gentle-wave"
               x="48"
               y="3"
-              className="fill-primary/5 animate-[wave_38s_linear_infinite_reverse]"
+              className="fill-primary/5"
+              style={{ animation: 'wave 38s linear infinite reverse' }}
             />
             <use
               xlinkHref="#gentle-wave"
               x="48"
               y="5"
-              className="fill-accent/5 animate-[wave_32s_linear_infinite]"
+              className="fill-accent/5"
+              style={{ animation: 'wave 32s linear infinite' }}
             />
             <use
               xlinkHref="#gentle-wave"
               x="48"
               y="7"
-              className="fill-accent/5 animate-[wave_27s_linear_infinite]"
+              className="fill-accent/5"
+              style={{ animation: 'wave 27s linear infinite' }}
             />
           </g>
         </svg>
@@ -59,7 +63,7 @@ const WaveBackground = () => {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-160px);
+            transform: translateX(-176px);
           }
         }
         .parallax > use {
