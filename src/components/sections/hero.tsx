@@ -32,26 +32,26 @@ export default function HeroSection({ id }: { id: string }) {
             {isMounted && (
               <>
                 <div
-                  className="animate-fade-in-up"
+                  className="animate-fade-in-up text-center"
                   style={{ animationDelay: '0.2s' }}
                 >
-                  <p className="text-lg font-medium text-accent">
+                  <h1 className="text-5xl md:text-8xl font-headline font-bold tracking-tighter">
                     Hi, I’m John Doe
-                  </p>
-                </div>
-                <div
-                  className="animate-fade-in-up"
-                  style={{ animationDelay: '0.4s' }}
-                >
-                  <h1 className="text-5xl md:text-7xl font-headline font-bold tracking-tighter">
-                    I design & build modern web experiences
                   </h1>
                 </div>
                 <div
-                  className="animate-fade-in-up"
+                  className="animate-fade-in-up text-center"
+                  style={{ animationDelay: '0.4s' }}
+                >
+                  <p className="text-lg font-medium text-accent">
+                    I design & build modern web experiences
+                  </p>
+                </div>
+                <div
+                  className="animate-fade-in-up text-center"
                   style={{ animationDelay: '0.6s' }}
                 >
-                  <p className="text-md text-muted-foreground max-w-lg mx-auto">
+                  <p className="text-md md:text-xl text-muted-foreground max-w-lg mx-auto">
                     A passionate developer and designer creating beautiful,
                     functional, and user-centered digital products.
                   </p>
