@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText, Download } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { ArrowRight, FileText, Download, Forward } from 'lucide-react';
+import { useEffect, useState, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { useAnimation } from '@/context/animation-context';
 
@@ -78,22 +78,32 @@ export default function HeroSection({ id }: { id: string }) {
   const [isMounted, setIsMounted] = useState(false);
   const { isHeroAnimationDone, setHeroAnimationDone } = useAnimation();
   const [isTypingDone, setIsTypingDone] = useState(false);
+  
+  const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const fullAnimationTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
-    const typingTimer = setTimeout(() => {
+    typingTimerRef.current = setTimeout(() => {
       setIsTypingDone(true);
     }, 2500); // Typing animation duration
 
-    const fullAnimationTimer = setTimeout(() => {
+    fullAnimationTimerRef.current = setTimeout(() => {
       setHeroAnimationDone(true);
     }, 4500); // Full animation (typing + glow)
 
     return () => {
-      clearTimeout(typingTimer);
-      clearTimeout(fullAnimationTimer);
+      if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+      if (fullAnimationTimerRef.current) clearTimeout(fullAnimationTimerRef.current);
     };
   }, [setHeroAnimationDone]);
+
+  const handleSkipAnimation = () => {
+    if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
+    if (fullAnimationTimerRef.current) clearTimeout(fullAnimationTimerRef.current);
+    setIsTypingDone(true);
+    setHeroAnimationDone(true);
+  };
 
   return (
     <section
@@ -103,6 +113,17 @@ export default function HeroSection({ id }: { id: string }) {
         isHeroAnimationDone ? 'bg-transparent' : 'bg-black'
       )}
     >
+      {!isHeroAnimationDone && (
+        <Button
+          variant="ghost"
+          size="sm"
+          className="absolute top-4 right-4 z-20 text-white/50 hover:text-white hover:bg-white/10"
+          onClick={handleSkipAnimation}
+        >
+          Skip Animation <Forward className="ml-2 h-4 w-4" />
+        </Button>
+      )}
+
       <div className="container mx-auto">
         <div className="relative z-10 text-center">
           <div className="space-y-6">
