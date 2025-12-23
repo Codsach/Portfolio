@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect }from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import Logo from '@/components/logo';
+import { useAnimation } from '@/context/animation-context';
 
 const navItems = [
   { href: '#home', label: 'Home' },
@@ -19,6 +20,7 @@ const navItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { isHeroAnimationDone } = useAnimation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,11 +39,13 @@ export default function Header() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-1000',
         isScrolled
           ? 'bg-background/80 shadow-md backdrop-blur-sm'
-          : 'bg-transparent'
+          : 'bg-transparent',
+        isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
       )}
+      style={{ transitionDelay: isHeroAnimationDone ? '0s' : '0ms' }}
     >
       <div className="container mx-auto flex h-16 items-center justify-between">
         <Logo />

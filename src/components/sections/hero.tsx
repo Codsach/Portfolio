@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { useAnimation } from '@/context/animation-context';
 
 const AbstractShape = () => (
   <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1/2 h-full -z-10 overflow-hidden">
@@ -17,16 +18,24 @@ const AbstractShape = () => (
 
 export default function HeroSection({ id }: { id: string }) {
   const [isMounted, setIsMounted] = useState(false);
-  const [isAnimationDone, setIsAnimationDone] = useState(false);
+  const { isHeroAnimationDone, setHeroAnimationDone } = useAnimation();
+  const [isTypingDone, setIsTypingDone] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    const timer = setTimeout(() => {
-      setIsAnimationDone(true);
-    }, 2500); // Same duration as the typing animation
+    const typingTimer = setTimeout(() => {
+      setIsTypingDone(true);
+    }, 2500); // Typing animation duration
 
-    return () => clearTimeout(timer);
-  }, []);
+    const fullAnimationTimer = setTimeout(() => {
+      setHeroAnimationDone(true);
+    }, 4500); // Full animation (typing + glow)
+
+    return () => {
+      clearTimeout(typingTimer);
+      clearTimeout(fullAnimationTimer);
+    };
+  }, [setHeroAnimationDone]);
 
   return (
     <section
@@ -38,33 +47,34 @@ export default function HeroSection({ id }: { id: string }) {
           <div className="space-y-6">
             {isMounted && (
               <>
-                <div
-                  className="animate-fade-in-up"
-                  style={{ animationDelay: '0.2s' }}
-                >
-                  <div className="inline-block">
-                    <h1
-                      className={cn(
-                        'text-5xl md:text-8xl font-headline font-bold tracking-tighter',
-                        !isAnimationDone && 'typing-glow-effect',
-                        isAnimationDone && 'typing-glow-effect animation-done'
-                      )}
-                    >
-                      Hi, I’m John Doe
-                    </h1>
-                  </div>
+                <div className="inline-block">
+                  <h1
+                    className={cn(
+                      'text-5xl md:text-8xl font-headline font-bold tracking-tighter',
+                      !isTypingDone && 'typing-glow-effect',
+                      isTypingDone && 'typing-glow-effect animation-done'
+                    )}
+                  >
+                    Hi, I’m John Doe
+                  </h1>
                 </div>
                 <div
-                  className="animate-fade-in-up"
-                  style={{ animationDelay: '3.0s' }}
+                  className={cn(
+                    'transition-opacity duration-1000',
+                    isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
+                  )}
+                  style={{transitionDelay: '200ms'}}
                 >
                   <p className="text-lg md:text-xl font-medium text-accent">
                     I design & build modern web experiences
                   </p>
                 </div>
                 <div
-                  className="animate-fade-in-up"
-                  style={{ animationDelay: '3.2s' }}
+                  className={cn(
+                    'transition-opacity duration-1000',
+                    isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
+                  )}
+                  style={{transitionDelay: '400ms'}}
                 >
                   <p className="text-md md:text-xl text-muted-foreground max-w-lg mx-auto">
                     A passionate developer and designer creating beautiful,
@@ -72,8 +82,11 @@ export default function HeroSection({ id }: { id: string }) {
                   </p>
                 </div>
                 <div
-                  className="flex gap-4 justify-center animate-fade-in-up"
-                  style={{ animationDelay: '3.4s' }}
+                  className={cn(
+                    'flex gap-4 justify-center transition-opacity duration-1000',
+                    isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
+                  )}
+                   style={{transitionDelay: '600ms'}}
                 >
                   <Button asChild size="lg">
                     <Link href="#projects">
@@ -90,22 +103,6 @@ export default function HeroSection({ id }: { id: string }) {
         </div>
       </div>
       <AbstractShape />
-      <style jsx>{`
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.5s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
     </section>
   );
 }

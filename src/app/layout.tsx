@@ -1,10 +1,13 @@
-import type { Metadata } from 'next';
+
+'use client';
+
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import { AnimationProvider } from '@/context/animation-context';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -15,12 +18,6 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
 });
-
-export const metadata: Metadata = {
-  title: 'PortfolioPro | A Modern Developer Portfolio',
-  description:
-    'A modern, clean, and professional personal portfolio website built with Next.js and inspired by Webflow design systems.',
-};
 
 export default function RootLayout({
   children,
@@ -48,9 +45,11 @@ export default function RootLayout({
           spaceGrotesk.variable
         )}
       >
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <AnimationProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </AnimationProvider>
         <Toaster />
       </body>
     </html>
