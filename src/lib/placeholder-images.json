@@ -3,7 +3,7 @@
     {
       "id": "about-profile",
       "description": "A portrait of a person smiling, used in the about section.",
-      "imageUrl": "https://images.unsplash.com/photo-1591461283504-48919ae873f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwb3J0cmFpdCUyMHBlcnNvbnxlbnwwfHx8fDE3NjY0MDExNjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://storage.googleapis.com/aifirebase-1-1-prod.appspot.com/users%2Fw7nI9v9jVxe1jWAP0m1f74jD6T32%2Flibraries%2Fuser-images%2Ftmp-1-1721739501515?alt=media&token=e937d1d2-7c70-492c-b26a-93dd67b07244",
       "imageHint": "portrait person"
     },
     {
