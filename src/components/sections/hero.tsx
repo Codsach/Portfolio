@@ -156,7 +156,14 @@ export default function HeroSection({ id }: { id: string }) {
           </div>
         </div>
       </div>
-      <WaveBackground />
+      <div
+        className={cn(
+          'transition-opacity duration-1000',
+          isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
+        )}
+      >
+        <WaveBackground />
+      </div>
     </section>
   );
 }
