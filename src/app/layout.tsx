@@ -7,7 +7,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import { AnimationProvider } from '@/context/animation-context';
+import { AnimationProvider, useAnimation } from '@/context/animation-context';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,6 +18,23 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
 });
+
+function SiteWrapper({ children }: { children: React.ReactNode }) {
+  const { isHeroAnimationDone } = useAnimation();
+
+  return (
+    <>
+      <div
+        className={cn(
+          'fixed inset-0 z-[100] bg-black transition-opacity duration-1000',
+          isHeroAnimationDone ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        )}
+        style={{ transitionDelay: '500ms' }}
+      />
+      {children}
+    </>
+  );
+}
 
 export default function RootLayout({
   children,
@@ -46,9 +63,11 @@ export default function RootLayout({
         )}
       >
         <AnimationProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <SiteWrapper>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </SiteWrapper>
         </AnimationProvider>
         <Toaster />
       </body>
