@@ -69,6 +69,10 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+  
+  .dark body {
+    background: radial-gradient(ellipse at center, hsl(220 40% 12%) 0%, hsl(0 0% 0%) 100%);
+  }
 
   .dark body::before {
     content: '';
