@@ -73,7 +73,7 @@ export default function HeroSection({ id }: { id: string }) {
                     className={cn(
                       'text-5xl md:text-8xl font-headline font-bold tracking-tighter',
                       !isTypingDone && 'typing-glow-effect',
-                      isTypingDone && 'typing-glow-effect animation-done'
+                      isTypingDone && 'typing-glow-effect animation-done text-gradient'
                     )}
                   >
                     Hi, I’m John Doe
