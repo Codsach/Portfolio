@@ -74,7 +74,6 @@ html {
 
 @layer utilities {
   .typing-glow-effect {
-    color: hsl(var(--primary));
     font-family: var(--font-headline);
     white-space: nowrap;
     overflow: hidden;
