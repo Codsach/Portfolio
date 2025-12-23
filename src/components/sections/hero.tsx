@@ -104,7 +104,8 @@ export default function HeroSection({ id }: { id: string }) {
     };
   }, [setHeroAnimationDone, isHeroAnimationDone]);
 
-  const handleSkipAnimation = () => {
+  const handleSkipAnimation = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
     if (fullAnimationTimerRef.current) clearTimeout(fullAnimationTimerRef.current);
     setIsTypingDone(true);
@@ -120,14 +121,16 @@ export default function HeroSection({ id }: { id: string }) {
       )}
     >
       {isMounted && !isHeroAnimationDone && (
-        <Button
-          variant="ghost"
-          size="sm"
-          className="absolute top-4 right-4 z-20 text-white/50 hover:text-white hover:bg-white/10"
-          onClick={handleSkipAnimation}
-        >
-          Skip Animation <Forward className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="absolute top-4 right-4 z-50">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-white/50 hover:text-white hover:bg-white/10"
+            onClick={handleSkipAnimation}
+          >
+            Skip Animation <Forward className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
       )}
 
       <div className="container mx-auto">
