@@ -20,7 +20,7 @@ export function ProjectCard({ project }: { project: Project }) {
   );
 
   return (
-    <Card className="h-full flex flex-col group overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] rounded-2xl">
+    <Card className="h-full flex flex-col group overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
       {projectImage && (
         <div className="overflow-hidden rounded-t-2xl">
           <Image
