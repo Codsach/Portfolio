@@ -43,7 +43,7 @@ export default function HeroSection({ id }: { id: string }) {
                   className="animate-fade-in-up"
                   style={{ animationDelay: '0.4s' }}
                 >
-                  <h1 className="text-4xl md:text-6xl font-headline font-bold tracking-tighter">
+                  <h1 className="text-5xl md:text-7xl font-headline font-bold tracking-tighter">
                     I design & build modern web experiences
                   </h1>
                 </div>
@@ -51,7 +51,7 @@ export default function HeroSection({ id }: { id: string }) {
                   className="animate-fade-in-up"
                   style={{ animationDelay: '0.6s' }}
                 >
-                  <p className="text-lg text-muted-foreground max-w-lg mx-auto">
+                  <p className="text-md text-muted-foreground max-w-lg mx-auto">
                     A passionate developer and designer creating beautiful,
                     functional, and user-centered digital products.
                   </p>
