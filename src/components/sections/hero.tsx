@@ -8,10 +8,11 @@ import { cn } from '@/lib/utils';
 import { useAnimation } from '@/context/animation-context';
 
 const AbstractShape = () => (
-  <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1/2 h-full -z-10 overflow-hidden">
-    <div className="absolute w-[800px] h-[800px] -right-96 top-1/2 -translate-y-1/2">
-      <div className="absolute w-full h-full rounded-full bg-accent/10 animate-[spin_30s_linear_infinite]"></div>
-      <div className="absolute w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 animate-[spin_40s_linear_infinite_reverse]"></div>
+  <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px]">
+      <div className="absolute w-full h-full rounded-full bg-primary/5 animate-[spin_40s_linear_infinite]"></div>
+      <div className="absolute w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 animate-[spin_50s_linear_infinite_reverse]"></div>
+      <div className="absolute w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/20 animate-[spin_60s_linear_infinite]"></div>
     </div>
   </div>
 );
