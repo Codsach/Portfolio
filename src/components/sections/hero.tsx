@@ -7,15 +7,35 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useAnimation } from '@/context/animation-context';
 
-const AbstractShape = () => (
-  <div className="absolute inset-0 -z-10 overflow-hidden">
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px]">
-      <div className="absolute w-full h-full rounded-full bg-primary/5 animate-[spin_40s_linear_infinite]"></div>
-      <div className="absolute w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 animate-[spin_50s_linear_infinite_reverse]"></div>
-      <div className="absolute w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/20 animate-[spin_60s_linear_infinite]"></div>
+const AbstractShape = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const parallaxStyle = {
+    transform: `translateY(${scrollY * 0.3}px)`,
+  };
+
+  return (
+    <div
+      className="absolute inset-0 -z-10 overflow-hidden"
+      style={parallaxStyle}
+    >
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px]">
+        <div className="absolute w-full h-full rounded-full bg-primary/5 animate-[spin_40s_linear_infinite]"></div>
+        <div className="absolute w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 animate-[spin_50s_linear_infinite_reverse]"></div>
+        <div className="absolute w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/20 animate-[spin_60s_linear_infinite]"></div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function HeroSection({ id }: { id: string }) {
   const [isMounted, setIsMounted] = useState(false);
