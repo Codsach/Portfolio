@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, FileText } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useAnimation } from '@/context/animation-context';
@@ -30,13 +30,13 @@ const WaveBackground = () => {
               xlinkHref="#gentle-wave"
               x="48"
               y="0"
-              className="fill-primary/5 animate-[wave_45s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite]"
+              className="fill-primary/5 animate-[wave_45s_linear_infinite]"
             />
             <use
               xlinkHref="#gentle-wave"
               x="48"
               y="3"
-              className="fill-primary/5 animate-[wave_38s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite_reverse]"
+              className="fill-primary/5 animate-[wave_38s_linear_infinite_reverse]"
             />
             <use
               xlinkHref="#gentle-wave"
@@ -48,7 +48,7 @@ const WaveBackground = () => {
               xlinkHref="#gentle-wave"
               x="48"
               y="7"
-              className="fill-accent/5 animate-[wave_27s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite]"
+              className="fill-accent/5 animate-[wave_27s_linear_infinite]"
             />
           </g>
         </svg>
@@ -140,7 +140,7 @@ export default function HeroSection({ id }: { id: string }) {
                 </div>
                 <div
                   className={cn(
-                    'flex gap-4 justify-center transition-opacity duration-1000',
+                    'flex flex-wrap gap-4 justify-center transition-opacity duration-1000',
                     isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
                   )}
                    style={{transitionDelay: '600ms'}}
@@ -148,6 +148,11 @@ export default function HeroSection({ id }: { id: string }) {
                   <Button asChild size="lg">
                     <Link href="#projects">
                       View My Work <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg">
+                    <Link href="/resume.pdf" target="_blank">
+                      View Resume <FileText className="ml-2 h-5 w-5" />
                     </Link>
                   </Button>
                   <Button asChild variant="outline" size="lg">
