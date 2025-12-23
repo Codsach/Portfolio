@@ -92,6 +92,12 @@ html {
     border-right-color: transparent;
   }
 
+  .text-gradient {
+    background: linear-gradient(90deg, #4FC3FF, #8B5CF6);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
   @keyframes typing {
     from {
       width: 0;
