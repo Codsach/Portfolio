@@ -7,32 +7,65 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useAnimation } from '@/context/animation-context';
 
-const AbstractShape = () => {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const parallaxStyle = {
-    transform: `translateY(${scrollY * 0.3}px)`,
-  };
-
+const WaveBackground = () => {
   return (
-    <div
-      className="absolute inset-0 -z-10 overflow-hidden"
-      style={parallaxStyle}
-    >
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px]">
-        <div className="absolute w-full h-full rounded-full bg-primary/5 animate-[spin_40s_linear_infinite]"></div>
-        <div className="absolute w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 animate-[spin_50s_linear_infinite_reverse]"></div>
-        <div className="absolute w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-accent/20 animate-[spin_60s_linear_infinite]"></div>
+    <div className="absolute inset-0 -z-10 overflow-hidden">
+      <div className="absolute bottom-0 left-0 right-0 h-full w-full">
+        <svg
+          className="h-full w-full"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          viewBox="0 24 150 28"
+          preserveAspectRatio="none"
+          shapeRendering="auto"
+        >
+          <defs>
+            <path
+              id="gentle-wave"
+              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+            />
+          </defs>
+          <g className="parallax">
+            <use
+              xlinkHref="#gentle-wave"
+              x="48"
+              y="0"
+              className="fill-primary/10 animate-[wave_25s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite]"
+            />
+            <use
+              xlinkHref="#gentle-wave"
+              x="48"
+              y="3"
+              className="fill-primary/20 animate-[wave_18s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite_reverse]"
+            />
+            <use
+              xlinkHref="#gentle-wave"
+              x="48"
+              y="5"
+              className="fill-accent/10 animate-[wave_12s_linear_infinite]"
+            />
+            <use
+              xlinkHref="#gentle-wave"
+              x="48"
+              y="7"
+              className="fill-accent/20 animate-[wave_7s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite]"
+            />
+          </g>
+        </svg>
       </div>
+      <style jsx>{`
+        @keyframes wave {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-160px);
+          }
+        }
+        .parallax > use {
+          animation-delay: -2s;
+        }
+      `}</style>
     </div>
   );
 };
@@ -123,7 +156,7 @@ export default function HeroSection({ id }: { id: string }) {
           </div>
         </div>
       </div>
-      <AbstractShape />
+      <WaveBackground />
     </section>
   );
 }
