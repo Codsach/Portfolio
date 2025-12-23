@@ -27,8 +27,8 @@ export default function HeroSection({ id }: { id: string }) {
       className="relative flex items-center min-h-screen bg-background overflow-hidden"
     >
       <div className="container mx-auto">
-        <div className="relative z-10 grid md:grid-cols-2 gap-8 items-center">
-          <div className="space-y-6 text-center md:text-left">
+        <div className="relative z-10 text-center">
+          <div className="space-y-6">
             {isMounted && (
               <>
                 <div
@@ -51,13 +51,13 @@ export default function HeroSection({ id }: { id: string }) {
                   className="animate-fade-in-up"
                   style={{ animationDelay: '0.6s' }}
                 >
-                  <p className="text-lg text-muted-foreground max-w-lg mx-auto md:mx-0">
+                  <p className="text-lg text-muted-foreground max-w-lg mx-auto">
                     A passionate developer and designer creating beautiful,
                     functional, and user-centered digital products.
                   </p>
                 </div>
                 <div
-                  className="flex gap-4 justify-center md:justify-start animate-fade-in-up"
+                  className="flex gap-4 justify-center animate-fade-in-up"
                   style={{ animationDelay: '0.8s' }}
                 >
                   <Button asChild size="lg">
