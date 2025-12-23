@@ -7,12 +7,14 @@ type ScrollRevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
+  threshold?: number;
 };
 
 export function ScrollReveal({
   children,
   className,
   delay = 0,
+  threshold = 0.1,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -24,12 +26,14 @@ export function ScrollReveal({
           setTimeout(() => {
             setIsVisible(true);
           }, delay);
-          observer.unobserve(entry.target);
+        } else {
+          // Reset when it goes out of view
+          setIsVisible(false);
         }
       },
       {
         rootMargin: '0px',
-        threshold: 0.1,
+        threshold: threshold,
       }
     );
 
@@ -43,7 +47,7 @@ export function ScrollReveal({
         observer.unobserve(currentRef);
       }
     };
-  }, [delay]);
+  }, [delay, threshold]);
 
   return (
     <div
