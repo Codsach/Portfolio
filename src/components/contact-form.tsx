@@ -3,8 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useFormState } from 'react-dom';
-import { useEffect } from 'react';
+import { useActionState, useEffect } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -46,7 +45,7 @@ const initialState = {
 
 export function ContactForm() {
   const { toast } = useToast();
-  const [state, formAction] = useFormState(submitContactForm, initialState);
+  const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -56,10 +55,6 @@ export function ContactForm() {
       message: '',
     },
   });
-
-  const {
-    formState: { isSubmitting },
-  } = form;
 
   useEffect(() => {
     if (state?.message === 'success') {
@@ -126,8 +121,8 @@ export function ContactForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? (
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...
                 </>
