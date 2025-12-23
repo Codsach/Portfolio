@@ -9,14 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_25px_rgba(79,195,255,0.35)] focus-visible:shadow-[0_0_25px_rgba(79,195,255,0.35)]",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_25px_hsl(var(--primary)/0.5)] focus-visible:shadow-[0_0_25px_hsl(var(--primary)/0.5)]",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-[0_0_25px_hsl(var(--destructive)/0.5)] focus-visible:shadow-[0_0_25px_hsl(var(--destructive)/0.5)]",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] focus-visible:shadow-[0_0_25px_hsl(var(--accent)/0.5)]",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-[0_0_25px_hsl(var(--secondary)/0.5)] focus-visible:shadow-[0_0_25px_hsl(var(--secondary)/0.5)]",
+        ghost: "hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_25px_hsl(var(--accent)/0.3)] focus-visible:shadow-[0_0_25px_hsl(var(--accent)/0.3)]",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
