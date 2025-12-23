@@ -13,7 +13,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-[0_0_25px_hsl(var(--destructive)/0.5)] focus-visible:shadow-[0_0_25px_hsl(var(--destructive)/0.5)]",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] focus-visible:shadow-[0_0_25px_hsl(var(--accent)/0.5)]",
+          "border border-input bg-white/5 hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] focus-visible:shadow-[0_0_25px_hsl(var(--accent)/0.5)]",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-[0_0_25px_hsl(var(--accent)/0.5)] focus-visible:shadow-[0_0_25px_hsl(var(--accent)/0.5)]",
         ghost: "hover:bg-accent hover:text-accent-foreground hover:shadow-[0_0_25px_hsl(var(--accent)/0.3)] focus-visible:shadow-[0_0_25px_hsl(var(--accent)/0.3)]",
