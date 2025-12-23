@@ -94,7 +94,10 @@ export default function HeroSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative flex items-center min-h-screen overflow-hidden"
+      className={cn(
+        'relative flex items-center min-h-screen overflow-hidden transition-colors duration-1000',
+        isHeroAnimationDone ? 'bg-transparent' : 'bg-black'
+      )}
     >
       <div className="container mx-auto">
         <div className="relative z-10 text-center">
