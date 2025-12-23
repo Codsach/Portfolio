@@ -1,17 +1,18 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/logo';
+import { IconBrandGithub, IconBrandLinkedin } from '@/components/icons';
 
 const socialLinks = [
   {
     href: 'https://github.com',
-    icon: Github,
+    icon: IconBrandGithub,
     label: 'GitHub',
   },
   {
     href: 'https://linkedin.com',
-    icon: Linkedin,
+    icon: IconBrandLinkedin,
     label: 'LinkedIn',
   },
   {
