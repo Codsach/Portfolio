@@ -100,7 +100,7 @@ html {
   .typing-glow-effect.animation-done {
     animation:
       typing 2.5s steps(30, end) forwards,
-      glow-pulse 2s ease-in-out 2.5s 2;
+      glow-pulse 2s ease-in-out 2;
     border-right-color: transparent;
   }
 
