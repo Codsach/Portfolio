@@ -27,7 +27,6 @@ html {
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -100,7 +99,7 @@ html {
   .typing-glow-effect.animation-done {
     animation:
       typing 2.5s steps(30, end) forwards,
-      glow-pulse 2s ease-in-out infinite;
+      glow-pulse 2s ease-in-out 2;
     border-right-color: transparent;
   }
 
