@@ -94,7 +94,7 @@ export default function HeroSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative flex items-center min-h-screen bg-background overflow-hidden"
+      className="relative flex items-center min-h-screen overflow-hidden"
     >
       <div className="container mx-auto">
         <div className="relative z-10 text-center">
