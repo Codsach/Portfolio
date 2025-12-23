@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 const AbstractShape = () => (
   <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1/2 h-full -z-10 overflow-hidden">
@@ -16,9 +17,15 @@ const AbstractShape = () => (
 
 export default function HeroSection({ id }: { id: string }) {
   const [isMounted, setIsMounted] = useState(false);
+  const [isAnimationDone, setIsAnimationDone] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
+    const timer = setTimeout(() => {
+      setIsAnimationDone(true);
+    }, 2500); // Same duration as the typing animation
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -32,24 +39,32 @@ export default function HeroSection({ id }: { id: string }) {
             {isMounted && (
               <>
                 <div
-                  className="animate-fade-in-up text-center"
+                  className="animate-fade-in-up"
                   style={{ animationDelay: '0.2s' }}
                 >
-                  <h1 className="text-5xl md:text-8xl font-headline font-bold tracking-tighter">
-                    Hi, I’m John Doe
-                  </h1>
+                  <div className="inline-block">
+                    <h1
+                      className={cn(
+                        'text-5xl md:text-8xl font-headline font-bold tracking-tighter',
+                        !isAnimationDone && 'typing-glow-effect',
+                        isAnimationDone && 'typing-glow-effect animation-done'
+                      )}
+                    >
+                      Hi, I’m John Doe
+                    </h1>
+                  </div>
                 </div>
                 <div
-                  className="animate-fade-in-up text-center"
-                  style={{ animationDelay: '0.4s' }}
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: '3.0s' }}
                 >
-                  <p className="text-lg font-medium text-accent">
+                  <p className="text-lg md:text-xl font-medium text-accent">
                     I design & build modern web experiences
                   </p>
                 </div>
                 <div
-                  className="animate-fade-in-up text-center"
-                  style={{ animationDelay: '0.6s' }}
+                  className="animate-fade-in-up"
+                  style={{ animationDelay: '3.2s' }}
                 >
                   <p className="text-md md:text-xl text-muted-foreground max-w-lg mx-auto">
                     A passionate developer and designer creating beautiful,
@@ -58,7 +73,7 @@ export default function HeroSection({ id }: { id: string }) {
                 </div>
                 <div
                   className="flex gap-4 justify-center animate-fade-in-up"
-                  style={{ animationDelay: '0.8s' }}
+                  style={{ animationDelay: '3.4s' }}
                 >
                   <Button asChild size="lg">
                     <Link href="#projects">

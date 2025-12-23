@@ -70,3 +70,74 @@ html {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .typing-glow-effect {
+    color: hsl(var(--primary));
+    font-family: var(--font-headline);
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.15em solid hsl(var(--accent));
+    animation:
+      typing 2.5s steps(30, end) forwards,
+      glow 1s ease-in-out infinite alternate,
+      blink-caret 0.75s step-end infinite;
+  }
+
+  /* Fade out glow and cursor after typing animation */
+  .typing-glow-effect.animation-done {
+    animation:
+      typing 2.5s steps(30, end) forwards,
+      fade-out-glow 1s ease-out forwards;
+    border-right-color: transparent;
+  }
+
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink-caret {
+    from,
+    to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: hsl(var(--accent));
+    }
+  }
+
+  @keyframes glow {
+    from {
+      text-shadow:
+        0 0 5px hsl(var(--primary)),
+        0 0 10px hsl(var(--primary)),
+        0 0 20px hsl(var(--accent)),
+        0 0 30px hsl(var(--accent));
+    }
+    to {
+      text-shadow:
+        0 0 10px hsl(var(--primary)),
+        0 0 20px hsl(var(--accent)),
+        0 0 30px hsl(var(--accent)),
+        0 0 40px hsl(var(--accent));
+    }
+  }
+
+  @keyframes fade-out-glow {
+    from {
+      text-shadow:
+        0 0 10px hsl(var(--primary)),
+        0 0 20px hsl(var(--accent)),
+        0 0 30px hsl(var(--accent)),
+        0 0 40px hsl(var(--accent));
+    }
+    to {
+      text-shadow: none;
+    }
+  }
+}
