@@ -1,7 +1,7 @@
-import { Badge } from '../ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { ScrollReveal } from '../scroll-reveal';
 import { skills } from '@/lib/data';
+import { getIconForTechnology } from '@/components/icons';
 
 export default function SkillsSection({ id }: { id: string }) {
   return (
@@ -26,12 +26,19 @@ export default function SkillsSection({ id }: { id: string }) {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {category.technologies.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-sm">
-                        {tech}
-                      </Badge>
-                    ))}
+                  <div className="flex flex-wrap gap-4">
+                    {category.technologies.map((tech) => {
+                      const Icon = getIconForTechnology(tech);
+                      return (
+                        <div
+                          key={tech}
+                          className="flex items-center gap-2 bg-muted/50 border border-transparent hover:border-accent rounded-full px-3 py-1 transition-colors"
+                        >
+                          {Icon && <Icon className="h-5 w-5" />}
+                          <span className="text-sm font-medium">{tech}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>

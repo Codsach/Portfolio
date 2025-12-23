@@ -1,17 +1,18 @@
 import { ContactForm } from '../contact-form';
 import { ScrollReveal } from '../scroll-reveal';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import Link from 'next/link';
+import { IconBrandGithub, IconBrandLinkedin } from '@/components/icons';
 
 const socialLinks = [
   {
     name: 'GitHub',
-    icon: Github,
+    icon: IconBrandGithub,
     url: 'https://github.com',
   },
   {
     name: 'LinkedIn',
-    icon: Linkedin,
+    icon: IconBrandLinkedin,
     url: 'https://linkedin.com',
   },
   {

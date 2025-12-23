@@ -1,4 +1,4 @@
-import { Code, Database, Wrench, LucideIcon } from 'lucide-react';
+import { Code, Database, Wrench, type LucideIcon } from 'lucide-react';
 
 export type Project = {
   title: string;
@@ -12,7 +12,8 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: 'Project Alpha',
-    description: 'A modern e-commerce platform with a focus on user experience and performance.',
+    description:
+      'A modern e-commerce platform with a focus on user experience and performance.',
     techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe'],
     liveDemoUrl: '#',
     sourceCodeUrl: '#',
@@ -28,7 +29,8 @@ export const projects: Project[] = [
   },
   {
     title: 'Project Gamma',
-    description: 'A data visualization dashboard for tracking key business metrics.',
+    description:
+      'A data visualization dashboard for tracking key business metrics.',
     techStack: ['SvelteKit', 'D3.js', 'PostgreSQL', 'Auth.js'],
     liveDemoUrl: '#',
     sourceCodeUrl: '#',
@@ -49,7 +51,7 @@ export const skills: SkillCategory[] = [
     technologies: [
       'HTML5',
       'CSS3',
-      'JavaScript (ES6+)',
+      'JavaScript',
       'TypeScript',
       'React',
       'Next.js',
@@ -59,7 +61,14 @@ export const skills: SkillCategory[] = [
   {
     title: 'Backend',
     icon: Database,
-    technologies: ['Node.js', 'Express', 'Firebase', 'PostgreSQL', 'REST APIs', 'GraphQL'],
+    technologies: [
+      'Node.js',
+      'Express',
+      'Firebase',
+      'PostgreSQL',
+      'REST APIs',
+      'GraphQL',
+    ],
   },
   {
     title: 'Tools',
