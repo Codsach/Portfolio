@@ -81,7 +81,6 @@ html {
     border-right: 0.15em solid hsl(var(--accent));
     animation:
       typing 2.5s steps(30, end) forwards,
-      glow 1.5s ease-in-out infinite alternate,
       blink-caret 0.75s step-end infinite;
   }
 
@@ -89,7 +88,7 @@ html {
   .typing-glow-effect.animation-done {
     animation:
       typing 2.5s steps(30, end) forwards,
-      fade-out-glow 0.5s ease-out forwards;
+      glow-pulse 2s ease-out forwards;
     border-right-color: transparent;
   }
 
@@ -112,30 +111,17 @@ html {
     }
   }
 
-  @keyframes glow {
-    from {
+  @keyframes glow-pulse {
+    0%, 100% { text-shadow: none; }
+    25%, 75% {
       text-shadow:
-        0 0 2px hsl(var(--primary)),
-        0 0 5px hsl(var(--primary)),
-        0 0 10px hsl(var(--accent));
+        0 0 5px hsl(var(--primary) / 0.5),
+        0 0 10px hsl(var(--accent) / 0.5);
     }
-    to {
+    50% {
       text-shadow:
-        0 0 5px hsl(var(--primary)),
-        0 0 10px hsl(var(--accent)),
-        0 0 15px hsl(var(--accent));
-    }
-  }
-
-  @keyframes fade-out-glow {
-    from {
-      text-shadow:
-        0 0 5px hsl(var(--primary)),
-        0 0 10px hsl(var(--accent)),
-        0 0 15px hsl(var(--accent));
-    }
-    to {
-      text-shadow: none;
+        0 0 10px hsl(var(--primary)),
+        0 0 20px hsl(var(--accent));
     }
   }
 }
