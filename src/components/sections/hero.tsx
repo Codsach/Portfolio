@@ -36,7 +36,7 @@ const WaveBackground = () => {
               xlinkHref="#gentle-wave"
               x="48"
               y="3"
-              className="fill-primary/10 animate-[wave_18s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite_reverse]"
+              className="fill-primary/5 animate-[wave_18s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite_reverse]"
             />
             <use
               xlinkHref="#gentle-wave"
@@ -48,7 +48,7 @@ const WaveBackground = () => {
               xlinkHref="#gentle-wave"
               x="48"
               y="7"
-              className="fill-accent/10 animate-[wave_7s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite]"
+              className="fill-accent/5 animate-[wave_7s_cubic-bezier(0.55,0.5,0.45,0.5)_infinite]"
             />
           </g>
         </svg>
@@ -112,7 +112,7 @@ export default function HeroSection({ id }: { id: string }) {
                       isTypingDone && 'typing-glow-effect animation-done'
                     )}
                   >
-                    Hi, I’m John Doe
+                    Hi, I’m Sachin R
                   </h1>
                 </div>
                 <div
