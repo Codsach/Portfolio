@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText } from 'lucide-react';
+import { ArrowRight, FileText, Download } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useAnimation } from '@/context/animation-context';
@@ -160,6 +160,11 @@ export default function HeroSection({ id }: { id: string }) {
                     </Link>
                   </Button>
                   <Button asChild variant="outline" size="lg">
+                    <a href="/resume.pdf" download>
+                      Download Resume <Download className="ml-2 h-5 w-5" />
+                    </a>
+                  </Button>
+                  <Button asChild variant="secondary" size="lg">
                     <Link href="#contact">Contact Me</Link>
                   </Button>
                 </div>
