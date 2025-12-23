@@ -29,7 +29,7 @@ export default function Footer() {
           <div className="text-center md:text-left">
             <Logo />
             <p className="text-sm text-muted-foreground mt-2">
-              © {new Date().getFullYear()} PortfolioPro. All rights reserved.
+              © {new Date().getFullYear()} Portfolio. All rights reserved.
             </p>
           </div>
           <div className="flex items-center gap-2">

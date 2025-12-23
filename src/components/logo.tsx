@@ -12,7 +12,7 @@ export default function Logo({ className }: { className?: string }) {
       )}
     >
       <Code2 className="h-6 w-6 text-accent" />
-      <span>PortfolioPro</span>
+      <span>Portfolio</span>
     </Link>
   );
 }
