@@ -13,7 +13,7 @@ export default function AboutSection({ id }: { id: string }) {
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div className="relative flex justify-center">
               {aboutImage && (
-                <Card className="overflow-hidden rounded-2xl shadow-xl">
+                <Card className="overflow-hidden shadow-xl">
                   <Image
                     src={aboutImage.imageUrl}
                     alt={aboutImage.description}
