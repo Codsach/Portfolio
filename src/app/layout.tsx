@@ -26,7 +26,7 @@ function SiteWrapper({ children }: { children: React.ReactNode }) {
     <>
       <div
         className={cn(
-          'fixed inset-0 z-[100] bg-black transition-opacity duration-1000',
+          'fixed inset-0 z-40 bg-black transition-opacity duration-1000',
           isHeroAnimationDone ? 'opacity-0 pointer-events-none' : 'opacity-100'
         )}
         style={{ transitionDelay: '500ms' }}
