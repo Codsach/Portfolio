@@ -38,13 +38,13 @@ html {
   .dark {
     --background: 222 83% 5%; /* #020617 */
     --foreground: 210 20% 98%; /* #F8FAFC */
-    --card: 222 83% 5%; /* #020617 */
+    --card: 215 28% 17%; /* #1E293B */
     --card-foreground: 210 20% 98%;
     --popover: 222 83% 5%;
     --popover-foreground: 210 20% 98%;
     --primary: 204 94% 60%; /* #38BDF8 */
     --primary-foreground: 222 83% 5%;
-    --secondary: 215 28% 63%; /* #94A3B8 */
+    --secondary: 215 28% 17%; /* #1E293B */
     --secondary-foreground: 210 20% 98%;
     --muted: 215 28% 17%; /* #1E293B */
     --muted-foreground: 215 28% 63%; /* #94A3B8 */
