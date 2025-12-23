@@ -4,7 +4,7 @@ import { projects } from '@/lib/data';
 
 export default function ProjectsSection({ id }: { id: string }) {
   return (
-    <section id={id} className="py-20 md:py-32 bg-white dark:bg-card">
+    <section id={id} className="py-20 md:py-32 bg-background">
       <div className="container mx-auto">
         <ScrollReveal className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-headline font-bold">
