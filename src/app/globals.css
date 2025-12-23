@@ -38,9 +38,9 @@ html {
   .dark {
     --background: 222 83% 5%; /* #020617 */
     --foreground: 210 20% 98%; /* #F8FAFC */
-    --card: 215 28% 17%; /* #1E293B */
+    --card: 215 28% 17% / 0.1; /* #1E293B with alpha for glassmorphism */
     --card-foreground: 210 20% 98%;
-    --popover: 222 83% 5%;
+    --popover: 222 83% 5% / 0.7;
     --popover-foreground: 210 20% 98%;
     --primary: 204 94% 60%; /* #38BDF8 */
     --primary-foreground: 222 83% 5%;
@@ -53,7 +53,7 @@ html {
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 20% 98%;
     --border: 215 28% 17%; /* #1E293B */
-    --input: 215 28% 17%;
+    --input: 215 28% 17% / 0.5;
     --ring: 204 94% 60%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -100,7 +100,7 @@ html {
   .typing-glow-effect.animation-done {
     animation:
       typing 2.5s steps(30, end) forwards,
-      glow-pulse 2s ease-in-out 2;
+      glow-pulse 2s ease-in-out infinite;
     border-right-color: transparent;
   }
 

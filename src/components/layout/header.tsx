@@ -39,10 +39,10 @@ export default function Header() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-1000',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
-          ? 'bg-background/80 shadow-md backdrop-blur-sm'
-          : 'bg-transparent',
+          ? 'bg-background/50 border-b border-white/10 shadow-md backdrop-blur-lg'
+          : 'bg-transparent border-b border-transparent',
         isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
       )}
       style={{ transitionDelay: isHeroAnimationDone ? '0s' : '0ms' }}
