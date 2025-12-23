@@ -20,7 +20,7 @@ export function ProjectCard({ project }: { project: Project }) {
   );
 
   return (
-    <Card className="h-full flex flex-col group overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] rounded-2xl">
+    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02] rounded-2xl">
       {projectImage && (
         <div className="overflow-hidden rounded-t-2xl">
           <Image
@@ -37,7 +37,7 @@ export function ProjectCard({ project }: { project: Project }) {
         <CardTitle className="font-headline">{project.title}</CardTitle>
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow">
+      <CardContent>
         <div className="flex flex-wrap gap-2">
           {project.techStack.map((tech) => (
             <Badge key={tech} variant="secondary">
@@ -46,7 +46,7 @@ export function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
       </CardContent>
-      <CardFooter className="gap-4 mt-auto">
+      <CardFooter className="gap-4">
         <Button asChild variant="outline">
           <Link href={project.liveDemoUrl} target="_blank">
             Live Demo <ArrowUpRight className="ml-2 h-4 w-4" />
