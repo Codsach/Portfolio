@@ -71,9 +71,9 @@ export default function HeroSection({ id }: { id: string }) {
                 <div className="inline-block">
                   <h1
                     className={cn(
-                      'text-5xl md:text-8xl font-headline font-bold tracking-tighter',
+                      'text-5xl md:text-8xl font-headline font-bold tracking-tighter text-gradient',
                       !isTypingDone && 'typing-glow-effect',
-                      isTypingDone && 'typing-glow-effect animation-done text-gradient'
+                      isTypingDone && 'typing-glow-effect animation-done'
                     )}
                   >
                     Hi, I’m John Doe
