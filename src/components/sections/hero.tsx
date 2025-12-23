@@ -83,6 +83,12 @@ export default function HeroSection({ id }: { id: string }) {
   const fullAnimationTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // Skip animations if they are already marked as done
+    if (isHeroAnimationDone) {
+      setIsTypingDone(true);
+      return;
+    }
+
     setIsMounted(true);
     typingTimerRef.current = setTimeout(() => {
       setIsTypingDone(true);
@@ -96,7 +102,7 @@ export default function HeroSection({ id }: { id: string }) {
       if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
       if (fullAnimationTimerRef.current) clearTimeout(fullAnimationTimerRef.current);
     };
-  }, [setHeroAnimationDone]);
+  }, [setHeroAnimationDone, isHeroAnimationDone]);
 
   const handleSkipAnimation = () => {
     if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
@@ -113,7 +119,7 @@ export default function HeroSection({ id }: { id: string }) {
         isHeroAnimationDone ? 'bg-transparent' : 'bg-black'
       )}
     >
-      {!isHeroAnimationDone && (
+      {isMounted && !isHeroAnimationDone && (
         <Button
           variant="ghost"
           size="sm"
