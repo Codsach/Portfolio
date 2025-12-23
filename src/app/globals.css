@@ -36,24 +36,24 @@ html {
   }
 
   .dark {
-    --background: 225 83% 5%;
-    --foreground: 210 20% 98%;
-    --card: 225 83% 5%;
+    --background: 222 83% 5%; /* #020617 */
+    --foreground: 210 20% 98%; /* #F8FAFC */
+    --card: 222 83% 5%; /* #020617 */
     --card-foreground: 210 20% 98%;
-    --popover: 225 83% 5%;
+    --popover: 222 83% 5%;
     --popover-foreground: 210 20% 98%;
-    --primary: 204 94% 60%;
-    --primary-foreground: 225 83% 5%;
-    --secondary: 220 18% 18%;
+    --primary: 204 94% 60%; /* #38BDF8 */
+    --primary-foreground: 222 83% 5%;
+    --secondary: 215 28% 63%; /* #94A3B8 */
     --secondary-foreground: 210 20% 98%;
-    --muted: 220 18% 18%;
-    --muted-foreground: 215 19% 65%;
-    --accent: 204 94% 60%;
-    --accent-foreground: 225 83% 5%;
+    --muted: 215 28% 17%; /* #1E293B */
+    --muted-foreground: 215 28% 63%; /* #94A3B8 */
+    --accent: 204 94% 60%; /* #38BDF8 */
+    --accent-foreground: 222 83% 5%;
     --destructive: 0 63% 31%;
     --destructive-foreground: 210 20% 98%;
-    --border: 220 14% 15%;
-    --input: 220 14% 15%;
+    --border: 215 28% 17%; /* #1E293B */
+    --input: 215 28% 17%;
     --ring: 204 94% 60%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -81,7 +81,7 @@ html {
     border-right: 0.15em solid hsl(var(--accent));
     animation:
       typing 2.5s steps(30, end) forwards,
-      glow 1s ease-in-out infinite alternate,
+      glow 1.5s ease-in-out infinite alternate,
       blink-caret 0.75s step-end infinite;
   }
 
@@ -89,7 +89,7 @@ html {
   .typing-glow-effect.animation-done {
     animation:
       typing 2.5s steps(30, end) forwards,
-      fade-out-glow 1s ease-out forwards;
+      fade-out-glow 0.5s ease-out forwards;
     border-right-color: transparent;
   }
 
@@ -115,27 +115,24 @@ html {
   @keyframes glow {
     from {
       text-shadow:
+        0 0 2px hsl(var(--primary)),
         0 0 5px hsl(var(--primary)),
-        0 0 10px hsl(var(--primary)),
-        0 0 20px hsl(var(--accent)),
-        0 0 30px hsl(var(--accent));
+        0 0 10px hsl(var(--accent));
     }
     to {
       text-shadow:
-        0 0 10px hsl(var(--primary)),
-        0 0 20px hsl(var(--accent)),
-        0 0 30px hsl(var(--accent)),
-        0 0 40px hsl(var(--accent));
+        0 0 5px hsl(var(--primary)),
+        0 0 10px hsl(var(--accent)),
+        0 0 15px hsl(var(--accent));
     }
   }
 
   @keyframes fade-out-glow {
     from {
       text-shadow:
-        0 0 10px hsl(var(--primary)),
-        0 0 20px hsl(var(--accent)),
-        0 0 30px hsl(var(--accent)),
-        0 0 40px hsl(var(--accent));
+        0 0 5px hsl(var(--primary)),
+        0 0 10px hsl(var(--accent)),
+        0 0 15px hsl(var(--accent));
     }
     to {
       text-shadow: none;
