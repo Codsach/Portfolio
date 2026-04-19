@@ -15,7 +15,7 @@ export const projects: Project[] = [
     description:
       'Secure digital evidence verification platform using blockchain anchoring and AI tamper detection. Leverages Polygon and IPFS for immutable record-keeping and audit-ready traceability.',
     techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB', 'IPFS', 'FastAPI'],
-    liveDemoUrl: '#',
+    liveDemoUrl: 'https://proofchain.vercel.app',
     sourceCodeUrl: 'https://github.com/Codsach/proofchain',
     imageId: 'project-1',
   },
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     description:
       'Real-time image processing platform utilizing wavelet packet decomposition and machine learning. Features interactive visualizations for advanced signal processing concepts.',
     techStack: ['Python', 'Machine Learning', 'Wavelet Transform','Image Processing','Web Interface(Scikit Learn,OpenCV,TensorflowLite)'],
-    liveDemoUrl: '#',
+    liveDemoUrl: 'https://wavelets2d.streamlit.app/',
     sourceCodeUrl: 'https://github.com/Codsach/wavelets',
     imageId: 'project-3',
   },
