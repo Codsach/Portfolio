@@ -9,7 +9,7 @@ const formSchema = z.object({
   message: z.string(),
 });
 
-type FormState = {
+export type FormState = {
   message: 'success' | 'error' | '';
   errors?: {
     isAppropriate?: string;
@@ -58,9 +58,9 @@ export async function submitContactForm(
 
     // Here you would typically save the data to a database like Firestore
     // For this example, we'll simulate a successful save.
-    console.log('Form data is valid and appropriate. Saving to database (simulated):', {
+    console.log(`Sending email to rsachinsachi@gmail.com...`, {
+      from: email,
       name,
-      email,
       message,
     });
     

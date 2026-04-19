@@ -1,29 +1,27 @@
 
-'use client';
-
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
-import { AnimationProvider, useAnimation } from '@/context/animation-context';
+import { Providers } from '@/components/layout/providers';
+import type { Metadata } from 'next';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 });
 
-const spaceGrotesk = Space_Grotesk({
+const headlineFont = Outfit({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-outfit',
 });
 
-function SiteWrapper({ children }: { children: React.ReactNode }) {
-  const { isHeroAnimationDone } = useAnimation();
-
-  return <>{children}</>;
-}
+export const metadata: Metadata = {
+  title: 'Sachin R | Portfolio',
+  description: 'Personal portfolio of Sachin R',
+  icons: {
+    icon: '/icon.png',
+  },
+};
 
 export default function RootLayout({
   children,
@@ -31,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark !scroll-smooth">
+    <html lang="en" className="dark scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -40,7 +38,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@500;700&family=Great+Vibes&display=swap"
           rel="stylesheet"
         />
       </head>
@@ -48,17 +46,10 @@ export default function RootLayout({
         className={cn(
           'min-h-screen bg-background font-body antialiased',
           inter.variable,
-          spaceGrotesk.variable
+          headlineFont.variable
         )}
       >
-        <AnimationProvider>
-          <SiteWrapper>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </SiteWrapper>
-        </AnimationProvider>
-        <Toaster />
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

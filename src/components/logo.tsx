@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Code2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Logo({ className }: { className?: string }) {
@@ -7,12 +6,11 @@ export default function Logo({ className }: { className?: string }) {
     <Link
       href="/"
       className={cn(
-        'flex items-center gap-2 text-xl font-bold font-headline text-primary',
+        'text-lg font-medium tracking-wider text-white',
         className
       )}
     >
-      <Code2 className="h-6 w-6 text-accent" />
-      <span>Portfolio</span>
+      Sachin R
     </Link>
   );
 }

@@ -2,215 +2,103 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, FileText, Download, Forward } from 'lucide-react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { useAnimation } from '@/context/animation-context';
-
-const WaveBackground = () => {
-  return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
-      <div className="absolute bottom-0 left-0 right-0 h-full w-full">
-        <svg
-          className="h-full w-full"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          viewBox="0 24 150 28"
-          preserveAspectRatio="none"
-          shapeRendering="auto"
-        >
-          <defs>
-            <path
-              id="gentle-wave"
-              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
-            />
-          </defs>
-          <g className="parallax">
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="0"
-              className="fill-primary/5"
-              style={{ animation: 'wave 45s linear infinite' }}
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="3"
-              className="fill-primary/5"
-              style={{ animation: 'wave 38s linear infinite reverse' }}
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="5"
-              className="fill-accent/5"
-              style={{ animation: 'wave 32s linear infinite' }}
-            />
-            <use
-              xlinkHref="#gentle-wave"
-              x="48"
-              y="7"
-              className="fill-accent/5"
-              style={{ animation: 'wave 27s linear infinite' }}
-            />
-          </g>
-        </svg>
-      </div>
-      <style jsx>{`
-        @keyframes wave {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-176px);
-          }
-        }
-        .parallax > use {
-          animation-delay: -2s;
-        }
-      `}</style>
-    </div>
-  );
-};
+import { motion } from 'framer-motion';
+import { BackgroundPaths } from '@/components/ui/background-paths';
 
 export default function HeroSection({ id }: { id: string }) {
-  const [isMounted, setIsMounted] = useState(false);
   const { isHeroAnimationDone, setHeroAnimationDone } = useAnimation();
-  const [isTypingDone, setIsTypingDone] = useState(false);
-  
-  const typingTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const fullAnimationTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Skip animations if they are already marked as done
-    if (isHeroAnimationDone) {
-      setIsTypingDone(true);
-      return;
-    }
-
-    setIsMounted(true);
-    typingTimerRef.current = setTimeout(() => {
-      setIsTypingDone(true);
-    }, 2500); // Typing animation duration
-
-    fullAnimationTimerRef.current = setTimeout(() => {
+    // Set animation as done after a reasonable delay for other components to sync
+    const timer = setTimeout(() => {
       setHeroAnimationDone(true);
-    }, 4500); // Full animation (typing + glow)
+    }, 800);
 
-    return () => {
-      if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
-      if (fullAnimationTimerRef.current) clearTimeout(fullAnimationTimerRef.current);
-    };
-  }, [setHeroAnimationDone, isHeroAnimationDone]);
-
-  const handleSkipAnimation = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (typingTimerRef.current) clearTimeout(typingTimerRef.current);
-    if (fullAnimationTimerRef.current) clearTimeout(fullAnimationTimerRef.current);
-    setIsTypingDone(true);
-    setHeroAnimationDone(true);
-  };
+    return () => clearTimeout(timer);
+  }, [setHeroAnimationDone]);
 
   return (
     <section
       id={id}
-      className={cn(
-        'relative flex items-center min-h-screen overflow-hidden transition-colors duration-1000',
-        isHeroAnimationDone ? 'bg-transparent' : 'bg-black'
-      )}
+      className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-black text-white px-6 pt-24"
     >
-      {isMounted && !isHeroAnimationDone && (
-        <div className="absolute top-4 right-4 z-50">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-white/50 hover:text-white hover:bg-white/10"
-            onClick={handleSkipAnimation}
-          >
-            Skip Animation <Forward className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
-      )}
+      {/* Dynamic Background Paths */}
+      <div className="absolute inset-0 opacity-[0.4] pointer-events-none">
+        <BackgroundPaths />
+      </div>
 
-      <div className="container mx-auto">
-        <div className="relative z-10 text-center">
-          <div className="space-y-6">
-            {isMounted && (
-              <>
-                <div className="inline-block">
-                  <h1
-                    className={cn(
-                      'text-5xl md:text-8xl font-headline font-bold tracking-tighter text-gradient',
-                      !isTypingDone && 'typing-glow-effect',
-                      isTypingDone && 'typing-glow-effect animation-done'
-                    )}
-                  >
-                    Hi, I’m Sachin R
-                  </h1>
-                </div>
-                <div
-                  className={cn(
-                    'transition-opacity duration-1000',
-                    isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
-                  )}
-                  style={{transitionDelay: '200ms'}}
-                >
-                  <p className="text-lg md:text-xl font-medium text-accent">
-                    I design & build modern web experiences
-                  </p>
-                </div>
-                <div
-                  className={cn(
-                    'transition-opacity duration-1000',
-                    isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
-                  )}
-                  style={{transitionDelay: '400ms'}}
-                >
-                  <p className="text-md md:text-xl text-muted-foreground max-w-lg mx-auto">
-                    A passionate developer and designer creating beautiful,
-                    functional, and user-centered digital products.
-                  </p>
-                </div>
-                <div
-                  className={cn(
-                    'flex flex-wrap gap-4 justify-center transition-opacity duration-1000',
-                    isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
-                  )}
-                   style={{transitionDelay: '600ms'}}
-                >
-                  <Button asChild size="lg">
-                    <Link href="#projects">
-                      View My Work <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg">
-                    <Link href="/resume.pdf" target="_blank">
-                      View Resume <FileText className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg">
-                    <a href="/resume.pdf" download>
-                      Download Resume <Download className="ml-2 h-5 w-5" />
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" size="lg">
-                    <Link href="#contact">Contact Me</Link>
-                  </Button>
-                </div>
-              </>
-            )}
-          </div>
+      {/* Subtle Depth Overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+      
+      <div className="container max-w-4xl mx-auto z-10 relative">
+        <div className="flex flex-col items-center text-center space-y-8">
+          
+          {/* Headline - Primary Focus */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-[1.1]"
+          >
+            Engineering premium digital experiences.
+          </motion.h1>
+
+          {/* Muted Subtext */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto font-normal leading-relaxed"
+          >
+            Full-stack developer focused on creating smooth, high-impact products
+            that blend robust engineering with minimalist design.
+          </motion.p>
+
+          {/* Buttons CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="flex flex-wrap gap-4 justify-center mt-8"
+          >
+            <Button 
+              variant="outline"
+              size="lg" 
+              className="rounded-full px-8 h-14 border-white/10 bg-transparent hover:bg-white/5 hover:text-white transition-all duration-300 hover:scale-105 hover:opacity-90 active:scale-[0.98] text-white font-medium text-base hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              onClick={() => {
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              View Projects 
+            </Button>
+            
+            <Button 
+              asChild 
+              size="lg" 
+              className="rounded-full px-8 h-14 bg-white text-black hover:bg-white/90 transition-all duration-300 hover:scale-105 active:scale-[0.98] font-medium text-base hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] shadow-md"
+            >
+              <Link href="/resume.pdf" target="_blank">
+                Resume
+              </Link>
+            </Button>
+          </motion.div>
         </div>
       </div>
-      <div
-        className={cn(
-          'transition-opacity duration-1000',
-          isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
-        )}
+
+      {/* Apple-style subtle scroll indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={isHeroAnimationDone ? { opacity: 0.4 } : { opacity: 0 }}
+        transition={{ delay: 1.8, duration: 1.5 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       >
-        <WaveBackground />
-      </div>
+        <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-zinc-500 to-transparent" />
+      </motion.div>
     </section>
   );
 }
