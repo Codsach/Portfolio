@@ -11,29 +11,29 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: 'Project Alpha',
+    title: 'ProofChain — Blockchain-Based Digital Evidence Verification with AI Tamper Detection',
     description:
-      'A modern e-commerce platform with a focus on user experience and performance.',
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe'],
+      'Secure digital evidence verification platform using blockchain anchoring and AI tamper detection. Leverages Polygon and IPFS for immutable record-keeping and audit-ready traceability.',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'MongoDB', 'IPFS', 'FastAPI'],
     liveDemoUrl: '#',
-    sourceCodeUrl: '#',
+    sourceCodeUrl: 'https://github.com/Codsach/proofchain',
     imageId: 'project-1',
   },
   {
-    title: 'Project Beta',
-    description: 'A collaborative task management application for small teams.',
-    techStack: ['React', 'Firebase', 'Shadcn/UI', 'Zustand'],
-    liveDemoUrl: '#',
-    sourceCodeUrl: '#',
+    title: 'CodSach — Student Resource Platform',
+    description: 'A GitHub-powered student resource hub for academic collaboration. Simplifies sharing and managing learning materials through a responsive interface and version-controlled backend.',
+    techStack: ['Next.js', 'Tailwind CSS', 'Typescript','GitHub API'],
+    liveDemoUrl: 'https://codsach.vercel.app',
+    sourceCodeUrl: 'https://github.com/Codsach/codsach-student-hub',
     imageId: 'project-2',
   },
   {
-    title: 'Project Gamma',
+    title: 'Wavelet-Based Image Processing using Machine Learning',
     description:
-      'A data visualization dashboard for tracking key business metrics.',
-    techStack: ['SvelteKit', 'D3.js', 'PostgreSQL', 'Auth.js'],
+      'Real-time image processing platform utilizing wavelet packet decomposition and machine learning. Features interactive visualizations for advanced signal processing concepts.',
+    techStack: ['Python', 'Machine Learning', 'Wavelet Transform','Image Processing','Web Interface(Scikit Learn,OpenCV,TensorflowLite)'],
     liveDemoUrl: '#',
-    sourceCodeUrl: '#',
+    sourceCodeUrl: 'https://github.com/Codsach/wavelets',
     imageId: 'project-3',
   },
 ];
@@ -56,6 +56,7 @@ export const skills: SkillCategory[] = [
       'React',
       'Next.js',
       'Tailwind CSS',
+      'Flutter',
     ],
   },
   {
@@ -64,15 +65,15 @@ export const skills: SkillCategory[] = [
     technologies: [
       'Node.js',
       'Express',
-      'Firebase',
+      'MangoDB',
       'PostgreSQL',
+      'MySQL',
       'REST APIs',
-      'GraphQL',
     ],
   },
   {
     title: 'Tools',
     icon: Wrench,
-    technologies: ['Git & GitHub', 'Docker', 'Figma', 'VS Code', 'pnpm', 'Vercel'],
+    technologies: ['Git & GitHub', 'Docker', 'Google Colab', 'VS Code', 'Vercel'],
   },
 ];

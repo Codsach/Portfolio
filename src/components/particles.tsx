@@ -20,7 +20,7 @@ export function Particles({ count = 5000 }) {
       vertex.toArray(pos, i3);
       
       const color = new THREE.Color();
-      color.setHSL(0.6, 0.7, Math.random() * 0.5 + 0.2); // Electric blue hues
+      color.setHSL(0, 0, Math.random() * 0.4 + 0.4); // Monochromatic zinc/white hues
       color.toArray(col, i3);
     }
     return [pos, col];

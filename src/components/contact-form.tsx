@@ -17,7 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { submitContactForm } from '@/app/actions';
+import { submitContactForm, type FormState } from '@/app/actions';
 import { Loader2 } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 
@@ -35,12 +35,8 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const initialState = {
+const initialState: FormState = {
   message: '',
-  errors: {
-    isAppropriate: '',
-    reason: '',
-  },
 };
 
 export function ContactForm() {
@@ -98,7 +94,7 @@ export function ContactForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="your.email@example.com" {...field} />
+                    <Input placeholder="your.name@email.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
