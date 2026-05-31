@@ -65,7 +65,7 @@ export const skills: SkillCategory[] = [
     technologies: [
       'Node.js',
       'Express',
-      'MangoDB',
+      'MongoDB',
       'PostgreSQL',
       'MySQL',
       'REST APIs',

@@ -1,0 +1,232 @@
+First Fix: 60 : 30 : 10 Color Ratio
+60% → Background
+
+Keep:
+
+#050505
+#0A0A0A
+
+Deep black is fine.
+
+30% → Secondary
+
+Use a premium dark blue:
+
+#0F172A
+#1E293B
+
+This should appear in:
+
+cards
+borders
+gradients
+section dividers
+10% → Accent
+
+Choose ONE accent.
+
+Option A (Best for developer portfolio)
+#00F5FF
+
+Cyber cyan
+
+Option B
+#7C3AED
+
+Purple
+
+Option C
+#22C55E
+
+Tech green
+
+I would choose cyan.
+
+Hero Layout Upgrade
+
+Current:
+
+Heading
+Text
+Buttons
+
+Too simple.
+
+Instead:
+
+----------------------------------
+Left                     Right
+
+Name                     Animated
+Title                    3D blob
+Stats                    Floating cards
+
+Buttons                  Tech stack
+
+----------------------------------
+
+Example:
+
+Sachin R.
+
+Full Stack Developer
+Blockchain Engineer
+
+Building scalable web apps,
+AI integrations and blockchain solutions.
+
+[ Hire Me ]
+[ View Projects ]
+
+4+
+Projects
+
+1+
+Years
+
+100%
+Passion
+Change Headline
+
+Current:
+
+Engineering premium
+digital experiences.
+
+Sounds like every portfolio on the internet.
+
+Use:
+
+Option 1
+Building software
+that solves real problems.
+Option 2
+Full Stack Developer.
+Blockchain Builder.
+Problem Solver.
+Option 3
+Turning ideas into
+production-ready products.
+
+This matches your actual experience much better.
+
+Add Animated Background
+
+Instead of empty black:
+
+Use:
+
+Grid
+opacity: 0.15
+Floating Particles
+
+or
+
+Aurora Gradient
+
+Like:
+
+cyan
+blue
+purple
+
+blurred behind content.
+
+Think:
+
+Vercel
+Linear
+Stripe
+
+style.
+
+Add Trust Elements
+
+Under buttons:
+
+✓ Blockchain Projects
+✓ AI Integration
+✓ Full Stack Development
+✓ Open Source Ready
+
+or
+
+Next.js
+TypeScript
+Node.js
+MongoDB
+
+small pills.
+
+Add a Visual Element
+
+Right side:
+
+Animated card:
+
+┌────────────────────┐
+│ ProofChain         │
+│ Blockchain Verify  │
+│ Status: Live       │
+└────────────────────┘
+
+Floating.
+
+or
+
+Code snippet:
+
+const developer = {
+  name: "Sachin",
+  role: "Full Stack Developer",
+  passion: "Building Products"
+}
+
+Looks much cooler than empty space.
+
+Improve Navbar
+
+Current navbar disappears into background.
+
+Make it:
+
+backdrop-filter: blur(12px);
+background: rgba(5,5,5,0.7);
+border-bottom: 1px solid #1E293B;
+
+Sticky.
+
+Add a Personal Tagline
+
+Above heading:
+
+🚀 Available For Full-Time Opportunities
+
+or
+
+FULL STACK • BLOCKCHAIN • AI
+
+Small uppercase text.
+
+My recommended hero for you
+FULL STACK • BLOCKCHAIN • AI
+
+Building software
+that solves real problems.
+
+I develop scalable web applications,
+blockchain systems and AI-powered products
+focused on performance and usability.
+
+[ View Projects ]
+[ Resume ]
+
+4+ Projects
+Blockchain Developer
+Open To Work
+
+Colors:
+
+60%  #050505
+30%  #0F172A
+10%  #00F5FF

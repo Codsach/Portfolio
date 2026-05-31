@@ -1,8 +1,9 @@
 
-import { Inter, Outfit } from 'next/font/google';
+import { Inter, Outfit, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Providers } from '@/components/layout/providers';
+import { AmbientLight } from '@/components/ui/ambient-light';
 import type { Metadata } from 'next';
 
 const inter = Inter({
@@ -13,6 +14,11 @@ const inter = Inter({
 const headlineFont = Outfit({
   subsets: ['latin'],
   variable: '--font-outfit',
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-plus-jakarta-sans',
 });
 
 export const metadata: Metadata = {
@@ -38,18 +44,25 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@500;700&family=Great+Vibes&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Outfit:wght@500;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Great+Vibes&display=swap"
           rel="stylesheet"
         />
       </head>
       <body
         className={cn(
-          'min-h-screen bg-background font-body antialiased',
+          'min-h-screen bg-background font-body antialiased relative',
           inter.variable,
-          headlineFont.variable
+          headlineFont.variable,
+          plusJakartaSans.variable
         )}
       >
-        <Providers>{children}</Providers>
+        {/* Ambient atmospheric lighting — sits behind everything */}
+        <AmbientLight />
+
+        {/* Page content stack sits above ambient lighting */}
+        <div className="relative z-10">
+          <Providers>{children}</Providers>
+        </div>
       </body>
     </html>
   );

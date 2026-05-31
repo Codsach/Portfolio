@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import Logo from '@/components/logo';
 import { useAnimation } from '@/context/animation-context';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navItems = [
   { href: '#home', label: 'Home' },
@@ -20,6 +21,7 @@ const navItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const { isHeroAnimationDone } = useAnimation();
   const [isClient, setIsClient] = useState(false);
 
@@ -35,43 +37,90 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLinkClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
+  // Active section detection via IntersectionObserver
+  useEffect(() => {
+    if (!isClient) return;
+    const sectionIds = navItems.map((item) => item.href.replace('#', ''));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach((obs) => obs.disconnect());
+  }, [isClient]);
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+    const id = href.replace('#', '');
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setIsMobileMenuOpen(false);
   };
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -80, opacity: 0 }}
+      animate={isHeroAnimationDone ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
+      transition={{ type: 'spring', stiffness: 120, damping: 22, delay: 0.1 }}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         isScrolled
-          ? 'bg-black/80 border-b border-white/10 shadow-md backdrop-blur-md'
-          : 'bg-black/40 backdrop-blur-sm border-b border-transparent',
-        isHeroAnimationDone ? 'opacity-100' : 'opacity-0'
+          ? 'border-b border-white/[0.06] shadow-navbar backdrop-blur-2xl'
+          : 'border-b border-transparent backdrop-blur-md'
       )}
-      style={{ transitionDelay: isHeroAnimationDone ? '0s' : '0ms' }}
+      style={{
+        background: isScrolled
+          ? 'rgba(12, 12, 17, 0.88)'
+          : 'rgba(12, 12, 17, 0.45)',
+      }}
     >
       <div className="container mx-auto flex h-16 items-center justify-between">
         <Logo />
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <Button key={item.label} variant="ghost" asChild>
-              <Link
-                href={item.href}
-                onClick={(e) => handleLinkClick(e, item.href)}
-                className="group text-sm font-medium"
-              >
-                {item.label}
-                <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-primary"></span>
-              </Link>
-            </Button>
-          ))}
+        <nav className="hidden md:flex items-center gap-1 relative">
+          {navItems.map((item) => {
+            const sectionId = item.href.replace('#', '');
+            const isActive = activeSection === sectionId;
+            return (
+              <div key={item.label} className="relative">
+                <Button variant="ghost" asChild>
+                  <Link
+                    href={item.href}
+                    onClick={(e) => handleLinkClick(e, item.href)}
+                    className={cn(
+                      'text-sm font-medium transition-colors duration-200 px-4',
+                      isActive ? 'text-zinc-50' : 'text-zinc-400 hover:text-zinc-50'
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </Button>
+                {/* Active underline indicator */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      layoutId="nav-indicator"
+                      className="absolute bottom-0 inset-x-4 h-px bg-gradient-to-r from-[#00F5FF] to-transparent rounded-full"
+                      initial={{ opacity: 0, scaleX: 0 }}
+                      animate={{ opacity: 1, scaleX: 1 }}
+                      exit={{ opacity: 0, scaleX: 0 }}
+                      transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+                    />
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </nav>
 
         {/* Mobile Navigation */}
@@ -84,9 +133,13 @@ export default function Header() {
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px]">
+              <SheetContent
+                side="right"
+                className="w-[280px]"
+                style={{ background: 'rgba(12, 12, 17, 0.97)', borderLeft: '1px solid rgba(255,255,255,0.07)' }}
+              >
                 <div className="p-4">
-                  <div className="flex justify-between items-center mb-6">
+                  <div className="flex justify-between items-center mb-8">
                     <Logo />
                     <Button
                       variant="ghost"
@@ -97,17 +150,32 @@ export default function Header() {
                       <span className="sr-only">Close menu</span>
                     </Button>
                   </div>
-                  <nav className="flex flex-col gap-4">
-                    {navItems.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={(e) => handleLinkClick(e, item.href)}
-                        className="text-lg font-medium text-foreground hover:text-primary"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
+                  <nav className="flex flex-col gap-2">
+                    {navItems.map((item, i) => {
+                      const sectionId = item.href.replace('#', '');
+                      const isActive = activeSection === sectionId;
+                      return (
+                        <motion.div
+                          key={item.label}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.06 }}
+                        >
+                          <Link
+                            href={item.href}
+                            onClick={(e) => handleLinkClick(e, item.href)}
+                            className={cn(
+                              'block py-3 px-4 rounded-xl text-base font-medium transition-all duration-200',
+                              isActive
+                                ? 'bg-[#00F5FF]/10 text-[#00F5FF] border border-[#00F5FF]/20'
+                                : 'text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05]'
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
                   </nav>
                 </div>
               </SheetContent>
@@ -115,6 +183,6 @@ export default function Header() {
           )}
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

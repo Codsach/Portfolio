@@ -1,61 +1,187 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ProjectCard } from '../project-card';
-import { ScrollReveal } from '../scroll-reveal';
+import { ParallaxElement } from '../parallax-element';
 import { projects } from '@/lib/data';
 import { Sparkles } from 'lucide-react';
+import { useRef } from 'react';
+
+// 3D tilt wrapper
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springX = useSpring(rotateX, { stiffness: 180, damping: 22 });
+  const springY = useSpring(rotateY, { stiffness: 180, damping: 22 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    rotateX.set(((e.clientY - cy) / (rect.height / 2)) * -6);
+    rotateY.set(((e.clientX - cx) / (rect.width / 2)) * 6);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ rotateX: springX, rotateY: springY, transformPerspective: 900 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => { rotateX.set(0); rotateY.set(0); }}
+      className="flex w-full h-full"
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Marquee of tech terms
+const marqueeItems = [
+  'Next.js', 'React', 'TypeScript', 'Node.js', 'MongoDB', 'Solidity',
+  'Tailwind CSS', 'Framer Motion', 'Web3.js', 'Firebase', 'REST APIs', 'Git',
+  'Next.js', 'React', 'TypeScript', 'Node.js', 'MongoDB', 'Solidity',
+  'Tailwind CSS', 'Framer Motion', 'Web3.js', 'Firebase', 'REST APIs', 'Git',
+];
 
 const containerVariants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.09,
+      delayChildren: 0.1,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 36, scale: 0.94 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: 'spring' as const, stiffness: 110, damping: 20 },
+  },
 };
 
 export default function ProjectsSection({ id }: { id: string }) {
   return (
-    <section id={id} className="relative py-24 md:py-40 bg-black overflow-hidden px-6">
-      {/* Background radial glows */}
-      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-zinc-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-zinc-500/5 blur-[120px] pointer-events-none" />
+    <section
+      id={id}
+      className="relative overflow-hidden px-6 py-28 md:py-44"
+      style={{ background: '#0C0C11' }}
+    >
+      {/* ─── Background Glows ─── */}
+      <ParallaxElement
+        className="absolute top-0 left-0 w-[600px] h-[600px] pointer-events-none"
+        speed={0.2}
+      >
+        <div
+          className="w-full h-full animate-pulse-glow"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.07) 0%, transparent 70%)',
+            filter: 'blur(100px)',
+          }}
+        />
+      </ParallaxElement>
 
-      <div className="container mx-auto max-w-6xl relative z-10">
-        <ScrollReveal className="max-w-2xl mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6 font-medium text-xs text-zinc-400 uppercase tracking-widest">
-            <Sparkles className="w-3 h-3 text-zinc-400" />
+      <ParallaxElement
+        className="absolute bottom-0 right-1/4 w-[500px] h-[500px] pointer-events-none"
+        speed={0.12}
+      >
+        <div
+          className="w-full h-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(20,184,166,0.05) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+        />
+      </ParallaxElement>
+
+      {/* Watermark */}
+      <ParallaxElement
+        className="absolute -left-16 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block"
+        speed={0.26}
+      >
+        <span className="text-[18rem] font-black text-white/[0.018] leading-none select-none">
+          02
+        </span>
+      </ParallaxElement>
+
+      <div className="absolute top-0 inset-x-0 separator-fade" />
+
+      <div className="container mx-auto max-w-6xl relative z-10 w-full">
+        {/* Section Header */}
+        <div className="max-w-2xl mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-white/[0.08] mb-6 font-medium text-xs text-zinc-400 uppercase tracking-widest"
+          >
+            <Sparkles className="w-3 h-3 text-cyan-400/70" />
             <span>Portfolio</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            Selected <span className="text-zinc-500">Works.</span>
-          </h2>
-          <p className="text-xl text-zinc-400 leading-relaxed">
-            A collection of high-impact digital products I&apos;ve engineered, 
-            focusing on clean code and exceptional user experiences.
-          </p>
-        </ScrollReveal>
+          </motion.div>
 
-        <motion.div 
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, delay: 0.08 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-50 mb-6 leading-tight"
+          >
+            Selected{' '}
+            <span className="text-shimmer">Works.</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5, delay: 0.18 }}
+            className="text-xl text-zinc-400 leading-relaxed"
+          >
+            A collection of high-impact digital products I&apos;ve engineered,
+            focusing on clean code and exceptional user experiences.
+          </motion.p>
+        </div>
+
+        {/* Scrolling tech marquee */}
+        <div className="relative overflow-hidden mb-12 py-3">
+          <div className="flex gap-6 animate-scroll-marquee w-max">
+            {marqueeItems.map((item, i) => (
+              <span
+                key={i}
+                className="flex-shrink-0 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 bg-[#18181F]/60 border border-white/[0.05] px-4 py-2 rounded-full hover:border-[#00F5FF]/18 hover:bg-[#00F5FF]/[0.06] hover:text-zinc-300 transition-all duration-300"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+          {/* Fade edges */}
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0C0C11] to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0C0C11] to-transparent pointer-events-none" />
+        </div>
+
+        {/* Project Cards Grid */}
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-80px' }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {projects.map((project, index) => (
-            <motion.div 
-              key={project.imageId || index} 
+            <motion.div
+              key={project.imageId || index}
               variants={itemVariants}
               className="flex"
             >
-              <ProjectCard project={project} />
+              <TiltCard>
+                <ProjectCard project={project} />
+              </TiltCard>
             </motion.div>
           ))}
         </motion.div>
@@ -63,4 +189,3 @@ export default function ProjectsSection({ id }: { id: string }) {
     </section>
   );
 }
-
