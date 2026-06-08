@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 type SectionStackProps = {
@@ -16,8 +15,9 @@ type SectionStackProps = {
 /**
  * SectionStack — scroll-reveal section wrapper.
  *
- * Each section fades and slides up into view as the user scrolls.
- * No h-screen clipping — sections render at their full natural height.
+ * Each section fades and slides up into view when it enters the viewport.
+ * We use 'whileInView' for high-performance scroll reveal rather than 
+ * physics-based continuous scroll tracking.
  */
 export function SectionStack({
   children,
@@ -25,36 +25,24 @@ export function SectionStack({
   id,
   index = 0,
 }: SectionStackProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'start 0.2'],
-  });
-
-  const springCfg = { stiffness: 80, damping: 24, mass: 0.6 };
-
-  const rawOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const opacity = useSpring(rawOpacity, springCfg);
-
-  const rawY = useTransform(scrollYProgress, [0, 1], [60, 0]);
-  const y = useSpring(rawY, springCfg);
-
   const stackZIndex = index + 1;
 
   return (
-    <div
-      ref={ref}
+    <motion.div
       id={id}
       className={cn('relative w-full', className)}
       style={{ zIndex: stackZIndex }}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-10%' }}
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.16, 1, 0.3, 1], // Custom ease-out
+      }}
     >
-      <motion.div
-        style={{ opacity, y }}
-        className="w-full"
-      >
+      <div className="w-full">
         {children}
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 }
