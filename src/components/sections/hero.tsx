@@ -130,7 +130,7 @@ export default function HeroSection({ id }: { id: string }) {
       <div
         className="absolute inset-0 opacity-100 pointer-events-none -z-20"
         style={{
-          background: 'linear-gradient(135deg, rgba(0,245,255,0.05) 0%, rgba(99,102,241,0.06) 25%, rgba(20,184,166,0.04) 50%, rgba(99,102,241,0.05) 75%, rgba(0,245,255,0.05) 100%)',
+          background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(99,102,241,0.06) 25%, rgba(20,184,166,0.04) 50%, rgba(99,102,241,0.05) 75%, rgba(16,185,129,0.05) 100%)',
           backgroundSize: '400% 400%',
           animation: 'aurora 14s ease infinite',
         }}
@@ -139,7 +139,7 @@ export default function HeroSection({ id }: { id: string }) {
       {/* Grid overlay */}
       <div className="absolute inset-0 bg-grid opacity-[0.08] pointer-events-none -z-20" />
 
-      {/* Top cyan bloom */}
+      {/* Top emerald bloom */}
       <ParallaxElement
         className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[700px] pointer-events-none"
         speed={0.2}
@@ -147,7 +147,7 @@ export default function HeroSection({ id }: { id: string }) {
         <div
           className="w-full h-full animate-pulse-glow"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(0,245,255,0.09) 0%, rgba(99,102,241,0.06) 40%, transparent 65%)',
+            background: 'radial-gradient(ellipse at center, rgba(16,185,129,0.09) 0%, rgba(99,102,241,0.06) 40%, transparent 65%)',
             filter: 'blur(80px)',
           }}
         />
@@ -198,7 +198,7 @@ export default function HeroSection({ id }: { id: string }) {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full glass border border-white/[0.08] text-[10px] font-jakarta font-bold uppercase tracking-[0.25em] text-zinc-400 self-center lg:self-start"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00F5FF] animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
               Full Stack • Blockchain • AI
             </motion.div>
 
@@ -212,7 +212,7 @@ export default function HeroSection({ id }: { id: string }) {
               Building software{' '}
               <br className="hidden sm:block" />
               that{' '}
-              <span className="text-gradient-cyan">solves real</span>
+              <span className="text-gradient-emerald">solves real</span>
               <br />
               problems.
             </motion.h1>
@@ -224,9 +224,9 @@ export default function HeroSection({ id }: { id: string }) {
               transition={{ type: 'spring', stiffness: 90, damping: 22, delay: 0.18 }}
               className="flex items-center gap-2 justify-center lg:justify-start"
             >
-              <span className="text-lg md:text-xl font-jakarta font-semibold text-[#00F5FF]">
+              <span className="text-lg md:text-xl font-jakarta font-semibold text-[#10B981]">
                 {typedRole}
-                <span className="animate-blink-cursor border-r-2 border-[#00F5FF] ml-0.5">&nbsp;</span>
+                <span className="animate-blink-cursor border-r-2 border-[#10B981] ml-0.5">&nbsp;</span>
               </span>
             </motion.div>
 
@@ -259,7 +259,7 @@ export default function HeroSection({ id }: { id: string }) {
               </LiquidButton>
 
               <LiquidButton
-                className="text-[#00F5FF] border border-[#00F5FF]/20 rounded-full hover:scale-105 duration-300 transition backdrop-blur-sm font-bold shadow-glow"
+                className="text-[#10B981] border border-[#10B981]/20 rounded-full hover:scale-105 duration-300 transition backdrop-blur-sm font-bold shadow-glow"
                 size="xl"
                 onClick={() => {
                   window.open('/resume.pdf', '_blank');
@@ -281,7 +281,7 @@ export default function HeroSection({ id }: { id: string }) {
                   <div className="text-center lg:text-left">
                     <div className="text-2xl font-jakarta font-black text-zinc-50">
                       {counts[i]}
-                      <span className="text-[#00F5FF]">{stat.suffix}</span>
+                      <span className="text-[#10B981]">{stat.suffix}</span>
                     </div>
                     <div className="text-[10px] font-jakarta font-bold uppercase tracking-[0.2em] text-zinc-500">
                       {stat.label}
@@ -305,13 +305,13 @@ export default function HeroSection({ id }: { id: string }) {
             <TiltCard>
               <div className="relative group">
                 {/* Glow behind card */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-[#00F5FF]/8 via-transparent to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
+                <div className="absolute -inset-4 bg-gradient-to-br from-[#10B981]/8 via-transparent to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
 
                 {/* Floating code card */}
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-                  className="relative glass-strong rounded-2xl border border-white/[0.10] hover:border-[#00F5FF]/25 p-8 transition-all duration-500 hover:shadow-glow max-w-sm"
+                  className="relative glass-strong rounded-2xl border border-white/[0.10] hover:border-[#10B981]/25 p-8 transition-all duration-500 hover:shadow-glow max-w-sm"
                 >
                   {/* Window chrome */}
                   <div className="flex items-center gap-2 mb-6">
@@ -326,7 +326,7 @@ export default function HeroSection({ id }: { id: string }) {
                   {/* Code content */}
                   <pre className="text-sm font-mono leading-relaxed">
                     <code>
-                      <span className="text-[#00F5FF]/80">const</span>{' '}
+                      <span className="text-[#10B981]/80">const</span>{' '}
                       <span className="text-zinc-200">developer</span>{' '}
                       <span className="text-zinc-500">=</span>{' '}
                       <span className="text-zinc-500">{'{'}</span>
@@ -348,12 +348,12 @@ export default function HeroSection({ id }: { id: string }) {
                       {'\n'}
                       {'  '}<span className="text-indigo-300/80">available</span>
                       <span className="text-zinc-500">:</span>{' '}
-                      <span className="text-[#00F5FF]/80">true</span>
+                      <span className="text-[#10B981]/80">true</span>
                       <span className="text-zinc-600">,</span>
                       {'\n'}
                       <span className="text-zinc-500">{'}'}</span>
                       <span className="text-zinc-600">;</span>
-                      <span className="animate-blink-cursor border-r-2 border-[#00F5FF] ml-1">&nbsp;</span>
+                      <span className="animate-blink-cursor border-r-2 border-[#10B981] ml-1">&nbsp;</span>
                     </code>
                   </pre>
 
@@ -375,10 +375,10 @@ export default function HeroSection({ id }: { id: string }) {
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                  className="absolute -bottom-8 -left-14 glass rounded-xl border border-[#00F5FF]/15 px-4 py-3 hidden xl:block"
+                  className="absolute -bottom-8 -left-14 glass rounded-xl border border-[#10B981]/15 px-4 py-3 hidden xl:block"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-[#00F5FF]" />
+                    <div className="w-2 h-2 rounded-full bg-[#10B981]" />
                     <span className="text-xs font-semibold text-zinc-300">ProofChain</span>
                   </div>
                   <div className="text-[9px] text-zinc-500 mt-1">Blockchain Verified ✓</div>
@@ -409,7 +409,7 @@ export default function HeroSection({ id }: { id: string }) {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       >
         <span className="text-[9px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-[#00F5FF]/40 to-transparent" />
+        <div className="w-px h-10 bg-gradient-to-b from-[#10B981]/40 to-transparent" />
       </motion.div>
     </section>
   );

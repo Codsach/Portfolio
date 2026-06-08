@@ -110,7 +110,7 @@ export default function Header() {
                   {isActive && (
                     <motion.div
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 inset-x-4 h-px bg-gradient-to-r from-[#00F5FF] to-transparent rounded-full"
+                      className="absolute bottom-0 inset-x-4 h-px bg-gradient-to-r from-[#10B981] to-transparent rounded-full"
                       initial={{ opacity: 0, scaleX: 0 }}
                       animate={{ opacity: 1, scaleX: 1 }}
                       exit={{ opacity: 0, scaleX: 0 }}
@@ -167,7 +167,7 @@ export default function Header() {
                             className={cn(
                               'block py-3 px-4 rounded-xl text-base font-medium transition-all duration-200',
                               isActive
-                                ? 'bg-[#00F5FF]/10 text-[#00F5FF] border border-[#00F5FF]/20'
+                                ? 'bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/20'
                                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.05]'
                             )}
                           >

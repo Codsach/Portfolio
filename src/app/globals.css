@@ -58,8 +58,8 @@ html {
     --muted: 240 13% 13%;
     --muted-foreground: 240 5% 64.9%;
 
-    /* 10% — Accent: Cyber Cyan #00F5FF */
-    --accent: 183 100% 50%;
+    /* 10% — Accent: Emerald #10B981 */
+    --accent: 160 84% 39%;
     --accent-foreground: 240 17% 6%;
 
     --destructive: 0 62.8% 30.6%;
@@ -67,7 +67,7 @@ html {
 
     --border: 240 13% 12%;
     --input: 240 13% 10%;
-    --ring: 183 100% 50%;
+    --ring: 160 84% 39%;
 
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -75,7 +75,7 @@ html {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
 
-    --glow-cyan: 183 100% 50%;
+    --glow-emerald: 160 84% 39%;
     --glow-indigo: 245 80% 65%;
     --glow-teal: 168 70% 40%;
   }
@@ -179,11 +179,11 @@ html, body {
   .aurora-bg {
     background: linear-gradient(
       135deg,
-      rgba(0, 245, 255, 0.05) 0%,
+      rgba(16, 185, 129, 0.05) 0%,
       rgba(99, 102, 241, 0.06) 25%,
       rgba(20, 184, 166, 0.04) 50%,
       rgba(99, 102, 241, 0.05) 75%,
-      rgba(0, 245, 255, 0.05) 100%
+      rgba(16, 185, 129, 0.05) 100%
     );
     background-size: 400% 400%;
     animation: aurora 14s ease infinite;
@@ -195,10 +195,10 @@ html, body {
       90deg,
       #a1a1aa 0%,
       #ffffff 20%,
-      #00F5FF 40%,
+      #10B981 40%,
       #ffffff 60%,
       #a1a1aa 80%,
-      #00F5FF 100%
+      #10B981 100%
     );
     background-size: 200% auto;
     -webkit-background-clip: text;
@@ -216,9 +216,9 @@ html, body {
     color: transparent;
   }
 
-  /* Cyber cyan gradient text */
-  .text-gradient-cyan {
-    background: linear-gradient(135deg, #00F5FF, #22d3ee, #818cf8);
+  /* Emerald gradient text */
+  .text-gradient-emerald {
+    background: linear-gradient(135deg, #10B981, #34d399, #818cf8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -241,12 +241,12 @@ html, body {
   }
 
   /* Glow ring utilities */
-  .glow-cyan {
-    box-shadow: 0 0 20px rgba(0, 245, 255, 0.15), 0 0 60px rgba(0, 245, 255, 0.05);
+  .glow-emerald {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15), 0 0 60px rgba(16, 185, 129, 0.05);
   }
 
-  .glow-cyan-strong {
-    box-shadow: 0 0 30px rgba(0, 245, 255, 0.25), 0 0 80px rgba(0, 245, 255, 0.10);
+  .glow-emerald-strong {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.25), 0 0 80px rgba(16, 185, 129, 0.10);
   }
 
   /* Animated border using gradient */
@@ -258,7 +258,7 @@ html, body {
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    background: linear-gradient(90deg, #00F5FF, #6366f1, #14b8a6, #00F5FF);
+    background: linear-gradient(90deg, #10B981, #6366f1, #14b8a6, #10B981);
     background-size: 300% 100%;
     animation: gradient-border 4s linear infinite;
     z-index: -1;
@@ -277,7 +277,7 @@ html, body {
 
   /* Focus ring using accent color */
   .focus-accent:focus-visible {
-    outline: 2px solid #00F5FF;
+    outline: 2px solid #10B981;
     outline-offset: 2px;
   }
 

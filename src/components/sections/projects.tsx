@@ -114,16 +114,7 @@ export default function ProjectsSection({ id }: { id: string }) {
       <div className="container mx-auto max-w-6xl relative z-10 w-full">
         {/* Section Header */}
         <div className="max-w-2xl mb-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-white/[0.08] mb-6 font-medium text-xs text-zinc-400 uppercase tracking-widest"
-          >
-            <Sparkles className="w-3 h-3 text-cyan-400/70" />
-            <span>Portfolio</span>
-          </motion.div>
+
 
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
@@ -154,7 +145,7 @@ export default function ProjectsSection({ id }: { id: string }) {
             {marqueeItems.map((item, i) => (
               <span
                 key={i}
-                className="flex-shrink-0 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 bg-[#18181F]/60 border border-white/[0.05] px-4 py-2 rounded-full hover:border-[#00F5FF]/18 hover:bg-[#00F5FF]/[0.06] hover:text-zinc-300 transition-all duration-300"
+                className="flex-shrink-0 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 bg-[#18181F]/60 border border-white/[0.05] px-4 py-2 rounded-full hover:border-[#10B981]/18 hover:bg-[#10B981]/[0.06] hover:text-zinc-300 transition-all duration-300"
               >
                 {item}
               </span>

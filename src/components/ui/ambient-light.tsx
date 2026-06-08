@@ -30,7 +30,7 @@ export function AmbientLight() {
         className="absolute -top-[10%] right-[5%] h-[55vh] w-[45vw] rounded-full animate-ambient-pulse"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(0, 245, 255, 0.05) 0%, transparent 70%)',
+            'radial-gradient(ellipse at center, rgba(16, 185, 129, 0.05) 0%, transparent 70%)',
           filter: 'blur(100px)',
           animationDelay: '3s',
         }}
@@ -41,7 +41,7 @@ export function AmbientLight() {
         className="absolute top-[30%] left-1/2 -translate-x-1/2 h-[40vh] w-[50vw] rounded-full animate-ambient-pulse"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(0, 245, 255, 0.035) 0%, transparent 70%)',
+            'radial-gradient(ellipse at center, rgba(16, 185, 129, 0.035) 0%, transparent 70%)',
           filter: 'blur(120px)',
           animationDelay: '6s',
         }}

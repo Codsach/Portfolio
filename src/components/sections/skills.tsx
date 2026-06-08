@@ -123,16 +123,7 @@ export default function SkillsSection({ id }: { id: string }) {
       <div className="container mx-auto max-w-6xl relative z-10 w-full">
         {/* Section Header */}
         <div className="max-w-2xl mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-white/[0.08] mb-6 font-medium text-xs text-zinc-400 uppercase tracking-widest"
-          >
-            <Sparkles className="w-3 h-3 text-cyan-400/70" />
-            <span>Expertise</span>
-          </motion.div>
+
 
           <motion.h2
             initial={{ opacity: 0, y: 28 }}
@@ -168,19 +159,19 @@ export default function SkillsSection({ id }: { id: string }) {
           {skills.map((category) => (
             <motion.div key={category.title} variants={cardVariants}>
               <TiltCard>
-                <Card className="h-full glass border-white/[0.06] hover:border-[#00F5FF]/20 hover:bg-white/[0.03] transition-all duration-500 shadow-card-float hover:shadow-glow group">
+                <Card className="h-full glass border-white/[0.06] hover:border-[#10B981]/20 hover:bg-white/[0.03] transition-all duration-500 shadow-card-float hover:shadow-glow group">
                   <CardContent className="p-8">
                     <div className="mb-8">
                       {/* Category icon — spins on hover */}
                       <motion.div
-                        className="w-14 h-14 rounded-2xl glass-strong border border-white/10 hover:border-cyan-400/25 flex items-center justify-center mb-6 transition-all duration-300 group-hover:shadow-glow-sm cursor-default"
+                        className="w-14 h-14 rounded-2xl glass-strong border border-white/10 hover:border-emerald-400/25 flex items-center justify-center mb-6 transition-all duration-300 group-hover:shadow-glow-sm cursor-default"
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.6, ease: 'easeInOut' }}
                       >
-                        <category.icon className="h-7 w-7 text-zinc-300 group-hover:text-[#00F5FF] transition-colors duration-300" />
+                        <category.icon className="h-7 w-7 text-zinc-300 group-hover:text-[#10B981] transition-colors duration-300" />
                       </motion.div>
                       <h3 className="text-2xl font-bold text-zinc-50 mb-2">{category.title}</h3>
-                      <div className="h-px w-10 bg-gradient-to-r from-cyan-400/60 to-transparent rounded-full" />
+                      <div className="h-px w-10 bg-gradient-to-r from-emerald-400/60 to-transparent rounded-full" />
                     </div>
 
                     {/* Tech tags */}
@@ -197,11 +188,11 @@ export default function SkillsSection({ id }: { id: string }) {
                           <motion.div
                             key={tech}
                             variants={techItemVariants}
-                            className="flex items-center gap-2 bg-[#18181F]/60 border border-white/[0.05] hover:border-cyan-400/25 hover:bg-[#00F5FF]/[0.06] rounded-xl px-4 py-2 transition-all duration-300 group/tech cursor-default hover:shadow-glow-sm"
+                            className="flex items-center gap-2 bg-[#18181F]/60 border border-white/[0.05] hover:border-emerald-400/25 hover:bg-[#10B981]/[0.06] rounded-xl px-4 py-2 transition-all duration-300 group/tech cursor-default hover:shadow-glow-sm"
                             whileHover={{ scale: 1.08, y: -2 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 18 }}
                           >
-                            {Icon && <Icon className="h-4 w-4 text-zinc-500 group-hover/tech:text-[#00F5FF] transition-colors duration-300" />}
+                            {Icon && <Icon className="h-4 w-4 text-zinc-500 group-hover/tech:text-[#10B981] transition-colors duration-300" />}
                             <span className="text-sm font-medium text-zinc-400 group-hover/tech:text-zinc-200 transition-colors duration-300">
                               {tech}
                             </span>
@@ -224,9 +215,9 @@ export default function SkillsSection({ id }: { id: string }) {
               return (
                 <div
                   key={i}
-                  className="flex-shrink-0 flex items-center gap-2 bg-[#18181F]/60 border border-white/[0.05] hover:border-cyan-400/20 hover:bg-cyan-400/[0.05] px-5 py-2.5 rounded-full transition-all duration-300 cursor-default group"
+                  className="flex-shrink-0 flex items-center gap-2 bg-[#18181F]/60 border border-white/[0.05] hover:border-emerald-400/20 hover:bg-emerald-400/[0.05] px-5 py-2.5 rounded-full transition-all duration-300 cursor-default group"
                 >
-                  {Icon && <Icon className="h-4 w-4 text-zinc-500 group-hover:text-[#00F5FF] transition-colors duration-200" />}
+                  {Icon && <Icon className="h-4 w-4 text-zinc-500 group-hover:text-[#10B981] transition-colors duration-200" />}
                   <span className="text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-zinc-300 transition-colors duration-200">
                     {tech}
                   </span>

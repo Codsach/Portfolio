@@ -24,7 +24,7 @@ export function ProjectCard({ project }: { project: Project }) {
   const imageUrl = projectImage ? `${projectImage.imageUrl}?v=1` : '';
 
   return (
-    <Card className="group overflow-hidden glass border-white/[0.06] hover:border-cyan-400/20 transition-all duration-500 flex flex-col h-full shadow-card-float hover:shadow-card-float-hover hover:-translate-y-2">
+    <Card className="group overflow-hidden glass border-white/[0.06] hover:border-emerald-400/20 transition-all duration-500 flex flex-col h-full shadow-card-float hover:shadow-card-float-hover hover:-translate-y-2">
       {/* Image */}
       <div className="relative overflow-hidden aspect-[16/10] bg-zinc-900/80">
         {projectImage && !imageError ? (
@@ -46,8 +46,8 @@ export function ProjectCard({ project }: { project: Project }) {
           </div>
         )}
 
-        {/* Cyan glow accent on hover — top edge */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Emerald glow accent on hover — top edge */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
       <CardHeader className="space-y-4 flex-grow">
@@ -65,7 +65,7 @@ export function ProjectCard({ project }: { project: Project }) {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 bg-white/[0.04] hover:bg-cyan-400/10 hover:text-cyan-300 hover:border-cyan-400/20 px-2.5 py-1 rounded-full border border-white/[0.07] transition-all duration-300 cursor-default"
+              className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 bg-white/[0.04] hover:bg-emerald-400/10 hover:text-emerald-300 hover:border-emerald-400/20 px-2.5 py-1 rounded-full border border-white/[0.07] transition-all duration-300 cursor-default"
             >
               {tech}
             </span>
@@ -77,7 +77,7 @@ export function ProjectCard({ project }: { project: Project }) {
         <Button
           asChild
           variant="link"
-          className="px-0 text-zinc-400 hover:text-cyan-400 gap-2 group/btn font-bold uppercase tracking-widest text-[10px] transition-colors duration-300"
+          className="px-0 text-zinc-400 hover:text-emerald-400 gap-2 group/btn font-bold uppercase tracking-widest text-[10px] transition-colors duration-300"
         >
           <Link href={project.liveDemoUrl} target="_blank">
             Live Preview{' '}
@@ -88,10 +88,10 @@ export function ProjectCard({ project }: { project: Project }) {
           asChild
           variant="ghost"
           size="icon"
-          className="ml-auto rounded-full w-9 h-9 hover:bg-white/[0.08] hover:text-cyan-400 transition-all duration-300 border border-transparent hover:border-white/10"
+          className="ml-auto rounded-full w-9 h-9 hover:bg-white/[0.08] hover:text-emerald-400 transition-all duration-300 border border-transparent hover:border-white/10"
         >
           <Link href={project.sourceCodeUrl} target="_blank">
-            <Github className="h-4 w-4 text-zinc-500 group-hover:text-cyan-400 transition-colors" />
+            <Github className="h-4 w-4 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
           </Link>
         </Button>
       </CardFooter>

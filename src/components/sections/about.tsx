@@ -69,7 +69,7 @@ export default function AboutSection({ id }: { id: string }) {
         <div
           className="w-full h-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(0,245,255,0.05) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(16,185,129,0.05) 0%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />
@@ -108,16 +108,7 @@ export default function AboutSection({ id }: { id: string }) {
 
           {/* Left Column: Title */}
           <div className="lg:col-span-5 space-y-8">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-white/[0.08] font-jakarta font-bold text-xs text-zinc-400 uppercase tracking-widest"
-            >
-              <Sparkles className="w-3 h-3 text-cyan-400/70" />
-              <span>About Me</span>
-            </motion.div>
+
 
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-jakarta font-extrabold text-zinc-50 leading-tight">
               <WordReveal text="Sachin R." />
@@ -133,7 +124,7 @@ export default function AboutSection({ id }: { id: string }) {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="h-px w-24 bg-gradient-to-r from-[#00F5FF] to-transparent rounded-full"
+              className="h-px w-24 bg-gradient-to-r from-[#10B981] to-transparent rounded-full"
             />
           </div>
 
@@ -145,7 +136,7 @@ export default function AboutSection({ id }: { id: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-lg md:text-xl text-zinc-300 leading-relaxed font-jakarta"
+                className="text-lg md:text-xl text-zinc-300 leading-relaxed"
               >
                 I am a Full-Stack Developer focused on building reliable web applications.
                 My work covers everything from developing user-facing interfaces to setting up
@@ -157,7 +148,7 @@ export default function AboutSection({ id }: { id: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.6, delay: 0.22 }}
-                className="text-lg md:text-xl text-zinc-400 leading-relaxed font-jakarta"
+                className="text-lg md:text-xl text-zinc-400 leading-relaxed"
               >
                 I value clear code and practical solutions. My goal is to engineer tools that
                 work well, are easy to maintain, and solve actual problems for users.
@@ -180,7 +171,7 @@ export default function AboutSection({ id }: { id: string }) {
                     border: '1px solid rgba(255,255,255,0.06)',
                   }}
                 >
-                  <div className="text-lg sm:text-2xl font-bold text-zinc-50 mb-1 group-hover:text-gradient-cyan transition-all duration-300 font-jakarta">
+                  <div className="text-lg sm:text-2xl font-bold text-zinc-50 mb-1 group-hover:text-gradient-emerald transition-all duration-300 font-jakarta">
                     {label}
                   </div>
                   <div className="text-[10px] sm:text-xs uppercase tracking-widest text-zinc-500 font-bold font-jakarta">{sub}</div>

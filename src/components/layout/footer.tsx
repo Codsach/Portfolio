@@ -73,7 +73,7 @@ export default function Footer() {
       <motion.div
         className="absolute bottom-0 right-1/4 w-[450px] h-[200px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(0, 245, 255, 0.02) 0%, rgba(99, 102, 241, 0.005) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.02) 0%, rgba(99, 102, 241, 0.005) 50%, transparent 70%)',
           filter: 'blur(70px)',
         }}
         animate={{
@@ -91,7 +91,7 @@ export default function Footer() {
       {/* Monochromatic & Cyber Shimmer Top Border */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
       <motion.div
-        className="absolute top-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent w-1/3 pointer-events-none"
+        className="absolute top-0 h-[1.5px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent w-1/3 pointer-events-none"
         animate={{
           left: ["-35%", "105%"],
         }}
@@ -106,7 +106,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           {/* Brand Column */}
           <div className="md:col-span-2 space-y-6">
-            <Logo className="text-2xl font-bold tracking-widest hover:text-[#00F5FF] transition-colors duration-300" />
+            <Logo className="text-2xl font-bold tracking-widest hover:text-[#10B981] transition-colors duration-300" />
             <p className="text-zinc-400 max-w-sm text-base leading-relaxed font-light">
               Building scalable web applications, blockchain systems and
               AI-powered products focused on performance and usability.
@@ -136,7 +136,7 @@ export default function Footer() {
                     href={item.href}
                     className="group relative flex items-center gap-2 text-zinc-400 hover:text-white transition-colors duration-300 text-sm font-medium py-1"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00F5FF] scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 origin-center" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 origin-center" />
                     <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1.5">
                       {item.label}
                     </span>
@@ -160,7 +160,7 @@ export default function Footer() {
                   whileHover={{ x: 4 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 18 }}
                 >
-                  <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-white/[0.02] border border-white/[0.05] group-hover:bg-[#00F5FF]/10 group-hover:border-[#00F5FF]/30 group-hover:text-[#00F5FF] transition-all duration-300 shadow-sm">
+                  <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-white/[0.02] border border-white/[0.05] group-hover:bg-[#10B981]/10 group-hover:border-[#10B981]/30 group-hover:text-[#10B981] transition-all duration-300 shadow-sm">
                     <link.icon className="h-5 w-5" />
                   </div>
                   <span className="text-sm font-medium tracking-wide">{link.label}</span>
@@ -182,7 +182,7 @@ export default function Footer() {
             variant="ghost"
             size="sm"
             onClick={scrollToTop}
-            className="text-zinc-400 hover:text-[#00F5FF] gap-2 transition-all duration-300 group border border-white/[0.02] hover:border-cyan-500/20 bg-white/[0.01] hover:bg-cyan-500/[0.02] rounded-full px-5 py-2.5 h-auto shadow-sm"
+            className="text-zinc-400 hover:text-[#10B981] gap-2 transition-all duration-300 group border border-white/[0.02] hover:border-emerald-500/20 bg-white/[0.01] hover:bg-emerald-500/[0.02] rounded-full px-5 py-2.5 h-auto shadow-sm"
           >
             <span className="text-xs uppercase tracking-widest font-bold">Back to top</span>
             <motion.div

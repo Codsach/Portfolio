@@ -44,7 +44,7 @@ export default function ContactSection({ id }: { id: string }) {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 60%, rgba(0,245,255,0.05) 0%, rgba(99,102,241,0.06) 30%, transparent 65%)',
+          background: 'radial-gradient(ellipse at 50% 60%, rgba(16,185,129,0.05) 0%, rgba(99,102,241,0.06) 30%, transparent 65%)',
           animation: 'pulse-glow 7s ease-in-out infinite',
         }}
       />
@@ -67,7 +67,7 @@ export default function ContactSection({ id }: { id: string }) {
         <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(99,102,241,0.08) 0%, transparent 70%)', filter: 'blur(60px)' }} />
       </ParallaxElement>
       <ParallaxElement className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none" speed={0.12}>
-        <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(0,245,255,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+        <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(16,185,129,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }} />
       </ParallaxElement>
 
       {/* Watermark */}
@@ -99,17 +99,7 @@ export default function ContactSection({ id }: { id: string }) {
             </span>
           </motion.div>
 
-          {/* Header chip */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5, delay: 0.06 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-white/[0.08] mb-8 font-medium text-xs text-zinc-400 uppercase tracking-widest"
-          >
-            <Sparkles className="w-3 h-3 text-cyan-400/70" />
-            <span>Get in Touch</span>
-          </motion.div>
+
 
           {/* Headline — two-line staggered */}
           <div className="mb-8">
@@ -162,12 +152,12 @@ export default function ContactSection({ id }: { id: string }) {
                   style={{ transition: 'box-shadow 0.3s ease' }}
                   className={`group relative flex flex-col items-center p-8 rounded-3xl transition-all duration-500 overflow-hidden cursor-pointer z-20 ${
                     isEmail
-                      ? 'glass-strong border border-[#00F5FF]/15 hover:border-[#00F5FF]/35 shadow-card-float hover:shadow-glow'
+                      ? 'glass-strong border border-[#10B981]/15 hover:border-[#10B981]/35 shadow-card-float hover:shadow-glow'
                       : 'glass border border-white/[0.06] hover:border-white/[0.15] hover:bg-white/[0.04] shadow-card-float'
                   }`}
                 >
                   {isEmail && (
-                    <div className="absolute top-4 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-[#00F5FF]/10 border border-[#00F5FF]/20 text-[8px] font-bold uppercase tracking-widest text-[#00F5FF]/80">
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 text-[8px] font-bold uppercase tracking-widest text-[#10B981]/80">
                       Best way to reach me
                     </div>
                   )}
@@ -177,21 +167,21 @@ export default function ContactSection({ id }: { id: string }) {
                     <div
                       className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                       style={{
-                        background: 'linear-gradient(135deg, rgba(0,245,255,0.06) 0%, rgba(99,102,241,0.06) 100%)',
+                        background: 'linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(99,102,241,0.06) 100%)',
                       }}
                     />
                   )}
 
                   {/* Top accent glow */}
-                  <div className={`absolute top-0 right-0 w-28 h-28 blur-3xl transition-colors duration-500 ${isEmail ? 'bg-[#00F5FF]/[0.08] group-hover:bg-[#00F5FF]/[0.16]' : 'bg-white/[0.02] group-hover:bg-white/[0.05]'}`} />
+                  <div className={`absolute top-0 right-0 w-28 h-28 blur-3xl transition-colors duration-500 ${isEmail ? 'bg-[#10B981]/[0.08] group-hover:bg-[#10B981]/[0.16]' : 'bg-white/[0.02] group-hover:bg-white/[0.05]'}`} />
 
                   <div className="relative z-10 flex flex-col items-center">
                     <motion.div
-                      className={`w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 transition-all duration-500 ${isEmail ? 'bg-[#00F5FF]/10 border-[#00F5FF]/20 group-hover:border-[#00F5FF]/50 group-hover:bg-[#00F5FF]/15 group-hover:shadow-glow-sm' : 'glass border-white/10 group-hover:border-white/20'}`}
+                      className={`w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 transition-all duration-500 ${isEmail ? 'bg-[#10B981]/10 border-[#10B981]/20 group-hover:border-[#10B981]/50 group-hover:bg-[#10B981]/15 group-hover:shadow-glow-sm' : 'glass border-white/10 group-hover:border-white/20'}`}
                       whileHover={{ scale: 1.14, rotate: 6 }}
                       transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                     >
-                      <connector.icon className={`w-5 h-5 transition-colors duration-300 ${isEmail ? 'text-[#00F5FF]' : 'text-zinc-400 group-hover:text-zinc-200'}`} />
+                      <connector.icon className={`w-5 h-5 transition-colors duration-300 ${isEmail ? 'text-[#10B981]' : 'text-zinc-400 group-hover:text-zinc-200'}`} />
                     </motion.div>
 
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-2 text-center">
@@ -201,7 +191,7 @@ export default function ContactSection({ id }: { id: string }) {
                       {connector.value}
                     </p>
 
-                    <div className={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${isEmail ? 'text-[#00F5FF]/60 group-hover:text-[#00F5FF]' : 'text-zinc-600 group-hover:text-zinc-200'}`}>
+                    <div className={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${isEmail ? 'text-[#10B981]/60 group-hover:text-[#10B981]' : 'text-zinc-600 group-hover:text-zinc-200'}`}>
                       {connector.cta}{' '}
                       <motion.span
                         className="inline-block"
