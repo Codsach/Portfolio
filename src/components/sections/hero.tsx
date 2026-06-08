@@ -94,8 +94,8 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 }
 
 const stats = [
-  { value: 4, suffix: '+', label: 'Projects' },
-  { value: 1, suffix: '+', label: 'Years Exp.' },
+  { value: 10, suffix: '+', label: 'Projects' },
+  { value: 2, suffix: '+', label: 'Years Exp.' },
   { value: 100, suffix: '%', label: 'Passion' },
 ];
 
