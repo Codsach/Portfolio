@@ -2,7 +2,6 @@
 
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Card, CardContent } from '../ui/card';
-import { ParallaxElement } from '../parallax-element';
 import { skills } from '@/lib/data';
 import { getIconForTechnology } from '@/components/brand-icons';
 import { Sparkles } from 'lucide-react';
@@ -82,9 +81,8 @@ export default function SkillsSection({ id }: { id: string }) {
       style={{ background: '#0F0F16' }}
     >
       {/* ─── Background Glows ─── */}
-      <ParallaxElement
+      <div
         className="absolute top-1/2 left-0 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
-        speed={0.16}
       >
         <div
           className="w-full h-full animate-pulse-glow"
@@ -93,11 +91,10 @@ export default function SkillsSection({ id }: { id: string }) {
             filter: 'blur(100px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
-      <ParallaxElement
+      <div
         className="absolute bottom-0 right-0 w-[500px] h-[500px] pointer-events-none"
-        speed={0.08}
       >
         <div
           className="w-full h-full"
@@ -106,17 +103,16 @@ export default function SkillsSection({ id }: { id: string }) {
             filter: 'blur(80px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
       {/* Watermark */}
-      <ParallaxElement
+      <div
         className="absolute -right-8 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block"
-        speed={0.22}
       >
         <span className="text-[18rem] font-black text-white/[0.018] leading-none select-none">
           03
         </span>
-      </ParallaxElement>
+      </div>
 
       <div className="absolute top-0 inset-x-0 separator-fade" />
 

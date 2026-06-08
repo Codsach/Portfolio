@@ -1,6 +1,5 @@
 'use client';
 
-import { ParallaxElement } from '../parallax-element';
 import { Mail, MapPin, Sparkles, ArrowRight } from 'lucide-react';
 import { IconBrandGithub, IconBrandLinkedin } from '@/components/icons';
 import Link from 'next/link';
@@ -49,9 +48,8 @@ export default function ContactSection({ id }: { id: string }) {
         }}
       />
 
-      <ParallaxElement
+      <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] pointer-events-none"
-        speed={0.08}
       >
         <div
           className="w-full h-full"
@@ -60,25 +58,24 @@ export default function ContactSection({ id }: { id: string }) {
             filter: 'blur(80px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
       {/* Corner glows */}
-      <ParallaxElement className="absolute top-0 left-0 w-64 h-64 pointer-events-none" speed={0.18}>
+      <div className="absolute top-0 left-0 w-64 h-64 pointer-events-none">
         <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(99,102,241,0.08) 0%, transparent 70%)', filter: 'blur(60px)' }} />
-      </ParallaxElement>
-      <ParallaxElement className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none" speed={0.12}>
+      </div>
+      <div className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none">
         <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(16,185,129,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }} />
-      </ParallaxElement>
+      </div>
 
       {/* Watermark */}
-      <ParallaxElement
+      <div
         className="absolute -left-12 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block"
-        speed={0.2}
       >
         <span className="text-[18rem] font-black text-white/[0.018] leading-none select-none">
           04
         </span>
-      </ParallaxElement>
+      </div>
 
       <div className="absolute top-0 inset-x-0 separator-fade" />
 

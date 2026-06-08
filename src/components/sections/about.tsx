@@ -1,6 +1,5 @@
 'use client';
 
-import { ParallaxElement } from '../parallax-element';
 import { Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -49,9 +48,8 @@ export default function AboutSection({ id }: { id: string }) {
       style={{ background: '#0E0E14' }}
     >
       {/* ─── Background Glows ─── */}
-      <ParallaxElement
+      <div
         className="absolute top-1/4 right-0 w-[550px] h-[550px] pointer-events-none"
-        speed={0.18}
       >
         <div
           className="w-full h-full animate-pulse-glow"
@@ -60,11 +58,10 @@ export default function AboutSection({ id }: { id: string }) {
             filter: 'blur(80px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
-      <ParallaxElement
+      <div
         className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] pointer-events-none"
-        speed={0.1}
       >
         <div
           className="w-full h-full"
@@ -73,7 +70,7 @@ export default function AboutSection({ id }: { id: string }) {
             filter: 'blur(80px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
       {/* Decorative rotating ring watermark */}
       <div className="absolute -right-20 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block">
@@ -90,15 +87,13 @@ export default function AboutSection({ id }: { id: string }) {
       </div>
 
       {/* Large watermark number */}
-      <ParallaxElement
+      <div
         className="absolute -right-4 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block"
-        speed={0.25}
-        rotate
       >
         <span className="text-[18rem] font-black text-white/[0.018] leading-none select-none">
           01
         </span>
-      </ParallaxElement>
+      </div>
 
       {/* Top separator */}
       <div className="absolute top-0 inset-x-0 separator-fade" />

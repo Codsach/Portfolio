@@ -2,41 +2,10 @@
 
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ProjectCard } from '../project-card';
-import { ParallaxElement } from '../parallax-element';
 import { projects } from '@/lib/data';
 import { Sparkles } from 'lucide-react';
 import { useRef } from 'react';
 import { getIconForTechnology } from '@/components/brand-icons';
-
-// 3D tilt wrapper
-function TiltCard({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const rotateX = useMotionValue(0);
-  const rotateY = useMotionValue(0);
-  const springX = useSpring(rotateX, { stiffness: 180, damping: 22 });
-  const springY = useSpring(rotateY, { stiffness: 180, damping: 22 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    rotateX.set(((e.clientY - cy) / (rect.height / 2)) * -6);
-    rotateY.set(((e.clientX - cx) / (rect.width / 2)) * 6);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ rotateX: springX, rotateY: springY, transformPerspective: 900 }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => { rotateX.set(0); rotateY.set(0); }}
-      className="flex w-full h-full"
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 // Marquee of tech terms
 const marqueeItems = [
@@ -74,9 +43,8 @@ export default function ProjectsSection({ id }: { id: string }) {
       style={{ background: '#0C0C11' }}
     >
       {/* ─── Background Glows ─── */}
-      <ParallaxElement
+      <div
         className="absolute top-0 left-0 w-[600px] h-[600px] pointer-events-none"
-        speed={0.2}
       >
         <div
           className="w-full h-full animate-pulse-glow"
@@ -85,11 +53,10 @@ export default function ProjectsSection({ id }: { id: string }) {
             filter: 'blur(100px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
-      <ParallaxElement
+      <div
         className="absolute bottom-0 right-1/4 w-[500px] h-[500px] pointer-events-none"
-        speed={0.12}
       >
         <div
           className="w-full h-full"
@@ -98,17 +65,16 @@ export default function ProjectsSection({ id }: { id: string }) {
             filter: 'blur(80px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
       {/* Watermark */}
-      <ParallaxElement
+      <div
         className="absolute -left-16 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block"
-        speed={0.26}
       >
         <span className="text-[18rem] font-black text-white/[0.018] leading-none select-none">
           02
         </span>
-      </ParallaxElement>
+      </div>
 
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
@@ -177,9 +143,9 @@ export default function ProjectsSection({ id }: { id: string }) {
               variants={itemVariants}
               className="flex"
             >
-              <TiltCard>
+              <div className="flex w-full h-full">
                 <ProjectCard project={project} />
-              </TiltCard>
+              </div>
             </motion.div>
           ))}
         </motion.div>

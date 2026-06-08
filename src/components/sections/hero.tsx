@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { useEffect, useState, useRef } from 'react';
 import { useAnimation } from '@/context/animation-context';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { ParallaxElement } from '@/components/parallax-element';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
 import { LiquidButton, MetalButton } from '@/components/ui/liquid-glass-button';
 
@@ -140,9 +139,8 @@ export default function HeroSection({ id }: { id: string }) {
       <div className="absolute inset-0 bg-grid opacity-[0.08] pointer-events-none -z-20" />
 
       {/* Top emerald bloom */}
-      <ParallaxElement
+      <div
         className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[700px] pointer-events-none"
-        speed={0.2}
       >
         <div
           className="w-full h-full animate-pulse-glow"
@@ -151,12 +149,11 @@ export default function HeroSection({ id }: { id: string }) {
             filter: 'blur(80px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
       {/* Bottom-left teal glow */}
-      <ParallaxElement
+      <div
         className="absolute bottom-0 left-1/4 w-[600px] h-[500px] pointer-events-none"
-        speed={0.1}
       >
         <div
           className="w-full h-full"
@@ -165,24 +162,20 @@ export default function HeroSection({ id }: { id: string }) {
             filter: 'blur(100px)',
           }}
         />
-      </ParallaxElement>
+      </div>
 
       {/* Decorative floating orbs */}
-      <ParallaxElement
+      <div
         className="absolute top-1/3 right-8 w-56 h-56 pointer-events-none hidden lg:block"
-        speed={-0.1}
-        rotate
       >
         <div className="w-full h-full rounded-full border border-white/[0.025] bg-white/[0.015] animate-spin-slow" />
-      </ParallaxElement>
+      </div>
 
-      <ParallaxElement
+      <div
         className="absolute bottom-1/4 left-10 w-28 h-28 pointer-events-none hidden lg:block"
-        speed={-0.06}
-        rotate
       >
         <div className="w-full h-full rounded-full border border-white/[0.025] bg-white/[0.015] animate-float-medium" />
-      </ParallaxElement>
+      </div>
 
       {/* ─── Main Content ─── */}
       <div className="container max-w-6xl mx-auto z-10 relative">
