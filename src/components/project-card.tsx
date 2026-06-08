@@ -14,6 +14,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import type { Project } from '@/lib/data';
 import { ArrowUpRight, Github } from 'lucide-react';
 import { useState } from 'react';
+import { getIconForTechnology } from '@/components/brand-icons';
 
 export function ProjectCard({ project }: { project: Project }) {
   const [imageError, setImageError] = useState(false);
@@ -62,14 +63,20 @@ export function ProjectCard({ project }: { project: Project }) {
 
         {/* Tech stack chips */}
         <div className="flex flex-wrap gap-2 pt-1">
-          {project.techStack.map((tech) => (
-            <span
-              key={tech}
-              className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 bg-white/[0.04] hover:bg-emerald-400/10 hover:text-emerald-300 hover:border-emerald-400/20 px-2.5 py-1 rounded-full border border-white/[0.07] transition-all duration-300 cursor-default"
-            >
-              {tech}
-            </span>
-          ))}
+          {project.techStack.map((tech) => {
+            const Icon = getIconForTechnology(tech);
+            return (
+              <div
+                key={tech}
+                className="flex items-center gap-1.5 bg-white/[0.04] hover:bg-emerald-400/10 hover:border-emerald-400/20 px-2.5 py-1 rounded-full border border-white/[0.07] transition-all duration-300 cursor-default group/chip"
+              >
+                {Icon && <Icon className="h-3 w-3" />}
+                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 group-hover/chip:text-emerald-300 transition-colors duration-300">
+                  {tech}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </CardHeader>
 

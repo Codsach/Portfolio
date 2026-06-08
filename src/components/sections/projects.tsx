@@ -6,6 +6,7 @@ import { ParallaxElement } from '../parallax-element';
 import { projects } from '@/lib/data';
 import { Sparkles } from 'lucide-react';
 import { useRef } from 'react';
+import { getIconForTechnology } from '@/components/brand-icons';
 
 // 3D tilt wrapper
 function TiltCard({ children }: { children: React.ReactNode }) {
@@ -142,14 +143,20 @@ export default function ProjectsSection({ id }: { id: string }) {
         {/* Scrolling tech marquee */}
         <div className="relative overflow-hidden mb-12 py-3">
           <div className="flex gap-6 animate-scroll-marquee w-max">
-            {marqueeItems.map((item, i) => (
-              <span
-                key={i}
-                className="flex-shrink-0 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 bg-[#18181F]/60 border border-white/[0.05] px-4 py-2 rounded-full hover:border-[#10B981]/18 hover:bg-[#10B981]/[0.06] hover:text-zinc-300 transition-all duration-300"
-              >
-                {item}
-              </span>
-            ))}
+            {marqueeItems.map((item, i) => {
+              const Icon = getIconForTechnology(item);
+              return (
+                <div
+                  key={i}
+                  className="flex-shrink-0 flex items-center gap-2 bg-[#18181F]/60 border border-white/[0.05] hover:border-[#10B981]/18 hover:bg-[#10B981]/[0.06] px-4 py-2 rounded-full transition-all duration-300 cursor-default group"
+                >
+                  {Icon && <Icon className="h-4 w-4" />}
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 group-hover:text-zinc-300 transition-colors duration-300">
+                    {item}
+                  </span>
+                </div>
+              );
+            })}
           </div>
           {/* Fade edges */}
           <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0C0C11] to-transparent pointer-events-none" />

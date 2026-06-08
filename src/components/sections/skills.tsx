@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Card, CardContent } from '../ui/card';
 import { ParallaxElement } from '../parallax-element';
 import { skills } from '@/lib/data';
-import { getIconForTechnology } from '@/components/icons';
+import { getIconForTechnology } from '@/components/brand-icons';
 import { Sparkles } from 'lucide-react';
 import { useRef } from 'react';
 
