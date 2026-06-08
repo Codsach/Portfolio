@@ -194,9 +194,9 @@ export default function HeroSection({ id }: { id: string }) {
             {/* Tagline chip */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 0, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full glass border border-white/[0.08] text-[10px] font-jakarta font-bold uppercase tracking-[0.25em] text-zinc-400 self-center lg:self-start"
+              className="invisible pointer-events-none inline-flex items-center gap-3 px-4 py-1.5 rounded-full glass border border-white/[0.08] text-[10px] font-jakarta font-bold uppercase tracking-[0.25em] text-zinc-400 self-center lg:self-start"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
               Full Stack • Blockchain • AI
