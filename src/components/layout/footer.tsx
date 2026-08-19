@@ -40,7 +40,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative pt-24 pb-12 overflow-hidden bg-gradient-to-b from-[#0C0C11] via-[#08080C] to-[#040406]"
+      className="relative pt-24 pb-12 overflow-hidden bg-gradient-to-b from-[#060A14] via-[#040710] to-[#030508]"
     >
       {/* Vercel-style subtle grid overlay with fade mask */}
       <div 
@@ -73,7 +73,7 @@ export default function Footer() {
       <motion.div
         className="absolute bottom-0 right-1/4 w-[450px] h-[200px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.02) 0%, rgba(99, 102, 241, 0.005) 50%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.02) 0%, rgba(139, 92, 246, 0.005) 50%, transparent 70%)',
           filter: 'blur(70px)',
         }}
         animate={{
@@ -91,7 +91,7 @@ export default function Footer() {
       {/* Monochromatic & Cyber Shimmer Top Border */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
       <motion.div
-        className="absolute top-0 h-[1.5px] bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent w-1/3 pointer-events-none"
+        className="absolute top-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent w-1/3 pointer-events-none"
         animate={{
           left: ["-35%", "105%"],
         }}

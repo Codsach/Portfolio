@@ -4,7 +4,6 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Card, CardContent } from '../ui/card';
 import { skills } from '@/lib/data';
 import { getIconForTechnology } from '@/components/brand-icons';
-import { Sparkles } from 'lucide-react';
 import { useRef } from 'react';
 
 // 3D tilt card wrapper
@@ -37,14 +36,41 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   );
 }
 
-// All technologies flattened for the bottom marquee
 const allTechs = [
-  'Next.js', 'React', 'TypeScript', 'Node.js', 'Express', 'MongoDB',
-  'Solidity', 'Web3.js', 'Tailwind CSS', 'Framer Motion', 'Firebase',
-  'REST APIs', 'Git', 'Vercel', 'PostgreSQL', 'GraphQL', 'Docker',
-  'Next.js', 'React', 'TypeScript', 'Node.js', 'Express', 'MongoDB',
-  'Solidity', 'Web3.js', 'Tailwind CSS', 'Framer Motion', 'Firebase',
-  'REST APIs', 'Git', 'Vercel', 'PostgreSQL', 'GraphQL', 'Docker',
+  'Next.js',
+  'React',
+  'TypeScript',
+  'Node.js',
+  'Express',
+  'MongoDB',
+  'Solidity',
+  'Web3.js',
+  'Tailwind CSS',
+  'Framer Motion',
+  'Firebase',
+  'REST APIs',
+  'Git',
+  'Vercel',
+  'PostgreSQL',
+  'GraphQL',
+  'Docker',
+  'Next.js',
+  'React',
+  'TypeScript',
+  'Node.js',
+  'Express',
+  'MongoDB',
+  'Solidity',
+  'Web3.js',
+  'Tailwind CSS',
+  'Framer Motion',
+  'Firebase',
+  'REST APIs',
+  'Git',
+  'Vercel',
+  'PostgreSQL',
+  'GraphQL',
+  'Docker',
 ];
 
 const containerVariants = {
@@ -78,7 +104,7 @@ export default function SkillsSection({ id }: { id: string }) {
     <section
       id={id}
       className="relative overflow-hidden px-6 py-28 md:py-44"
-      style={{ background: '#0F0F16' }}
+      style={{ background: '#060A14' }}
     >
       {/* ─── Background Glows ─── */}
       <div
@@ -87,7 +113,7 @@ export default function SkillsSection({ id }: { id: string }) {
         <div
           className="w-full h-full animate-pulse-glow"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(20,184,166,0.05) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(6,182,212,0.05) 0%, transparent 70%)',
             filter: 'blur(100px)',
           }}
         />
@@ -99,7 +125,7 @@ export default function SkillsSection({ id }: { id: string }) {
         <div
           className="w-full h-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.06) 0%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />
@@ -119,7 +145,6 @@ export default function SkillsSection({ id }: { id: string }) {
       <div className="container mx-auto max-w-6xl relative z-10 w-full">
         {/* Section Header */}
         <div className="max-w-2xl mb-16">
-
 
           <motion.h2
             initial={{ opacity: 0, y: 28 }}
@@ -150,12 +175,12 @@ export default function SkillsSection({ id }: { id: string }) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-80px' }}
-          className="grid md:grid-cols-3 gap-6 mb-16"
+          className="grid md:grid-cols-3 gap-6"
         >
           {skills.map((category) => (
             <motion.div key={category.title} variants={cardVariants}>
               <TiltCard>
-                <Card className="h-full glass border-white/[0.06] hover:border-[#10B981]/20 hover:bg-white/[0.03] transition-all duration-500 shadow-card-float hover:shadow-glow group">
+                <Card className="h-full glass border-white/[0.06] hover:border-emerald-400/20 hover:bg-white/[0.03] transition-all duration-500 shadow-card-float hover:shadow-glow group">
                   <CardContent className="p-8">
                     <div className="mb-8">
                       {/* Category icon — spins on hover */}
@@ -184,7 +209,7 @@ export default function SkillsSection({ id }: { id: string }) {
                           <motion.div
                             key={tech}
                             variants={techItemVariants}
-                            className="flex items-center gap-2 bg-[#18181F]/60 border border-white/[0.05] hover:border-emerald-400/25 hover:bg-[#10B981]/[0.06] rounded-xl px-4 py-2 transition-all duration-300 group/tech cursor-default hover:shadow-glow-sm"
+                            className="flex items-center gap-2 bg-[#0A0F1E]/60 border border-white/[0.05] hover:border-emerald-400/25 hover:bg-[#10B981]/[0.06] rounded-xl px-4 py-2 transition-all duration-300 group/tech cursor-default hover:shadow-glow-sm"
                             whileHover={{ scale: 1.08, y: -2 }}
                             transition={{ type: 'spring', stiffness: 300, damping: 18 }}
                           >
@@ -204,14 +229,14 @@ export default function SkillsSection({ id }: { id: string }) {
         </motion.div>
 
         {/* Bottom infinite marquee */}
-        <div className="relative overflow-hidden py-4">
+        <div className="relative overflow-hidden py-4 mt-20">
           <div className="flex gap-5 animate-scroll-marquee w-max">
             {allTechs.map((tech, i) => {
               const Icon = getIconForTechnology(tech);
               return (
                 <div
                   key={i}
-                  className="flex-shrink-0 flex items-center gap-2 bg-[#18181F]/60 border border-white/[0.05] hover:border-emerald-400/20 hover:bg-emerald-400/[0.05] px-5 py-2.5 rounded-full transition-all duration-300 cursor-default group"
+                  className="flex-shrink-0 flex items-center gap-2 bg-[#0A0F1E]/60 border border-white/[0.05] hover:border-emerald-400/20 hover:bg-emerald-400/[0.05] px-5 py-2.5 rounded-full transition-all duration-300 cursor-default group"
                 >
                   {Icon && <Icon className="h-4 w-4 text-zinc-500 group-hover:text-[#10B981] transition-colors duration-200" />}
                   <span className="text-xs font-bold uppercase tracking-widest text-zinc-500 group-hover:text-zinc-300 transition-colors duration-200">
@@ -221,8 +246,8 @@ export default function SkillsSection({ id }: { id: string }) {
               );
             })}
           </div>
-          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#0F0F16] to-transparent pointer-events-none" />
-          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#0F0F16] to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#060A14] to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#060A14] to-transparent pointer-events-none" />
         </div>
       </div>
     </section>

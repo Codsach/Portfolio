@@ -37,13 +37,13 @@ export default function ContactSection({ id }: { id: string }) {
     <section
       id={id}
       className="relative overflow-hidden px-6 py-28 md:py-52"
-      style={{ background: '#0C0C11' }}
+      style={{ background: '#050810' }}
     >
       {/* ─── Aurora center glow ─── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 60%, rgba(16,185,129,0.05) 0%, rgba(99,102,241,0.06) 30%, transparent 65%)',
+          background: 'radial-gradient(ellipse at 50% 60%, rgba(6,182,212,0.05) 0%, rgba(139,92,246,0.06) 30%, transparent 65%)',
           animation: 'pulse-glow 7s ease-in-out infinite',
         }}
       />
@@ -54,7 +54,7 @@ export default function ContactSection({ id }: { id: string }) {
         <div
           className="w-full h-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.07) 0%, rgba(20,184,166,0.04) 50%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.07) 0%, rgba(6,182,212,0.04) 50%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />
@@ -62,10 +62,10 @@ export default function ContactSection({ id }: { id: string }) {
 
       {/* Corner glows */}
       <div className="absolute top-0 left-0 w-64 h-64 pointer-events-none">
-        <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(99,102,241,0.08) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+        <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(139,92,246,0.08) 0%, transparent 70%)', filter: 'blur(60px)' }} />
       </div>
       <div className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none">
-        <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(16,185,129,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }} />
+        <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(6,182,212,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }} />
       </div>
 
       {/* Watermark */}

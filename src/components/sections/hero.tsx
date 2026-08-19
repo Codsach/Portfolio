@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useAnimation } from '@/context/animation-context';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { WebGLShader } from '@/components/ui/web-gl-shader';
@@ -11,21 +11,43 @@ import { LiquidButton, MetalButton } from '@/components/ui/liquid-glass-button';
 // Cycling titles that type in and out
 const roles = ['Full Stack Developer', 'Blockchain Engineer', 'Problem Solver', 'AI Integrator'];
 
-// Counter hook — animates a number from 0 to target
-function useCounter(target: number, duration = 1800, startOn = false) {
+// Counter hook — uses IntersectionObserver, re-triggers on scroll, fast animation
+function useCounter(target: number, duration = 1200) {
   const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const hasAnimated = useRef(false);
+
   useEffect(() => {
-    if (!startOn) return;
-    let start = 0;
-    const step = target / (duration / 16);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) { setCount(target); clearInterval(timer); }
-      else setCount(Math.floor(start));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [target, duration, startOn]);
-  return count;
+    if (!ref.current) return;
+    const el = ref.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          // Animate with requestAnimationFrame for smooth 60fps
+          const startTime = performance.now();
+          const animate = (now: number) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic for snappy feel
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.round(eased * target));
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target, duration]);
+
+  return { count, ref };
 }
 
 // Typing animation hook
@@ -100,17 +122,17 @@ const stats = [
 
 export default function HeroSection({ id }: { id: string }) {
   const { setHeroAnimationDone } = useAnimation();
-  const [started, setStarted] = useState(false);
   const typedRole = useTypingText(roles);
-  const count0 = useCounter(stats[0].value, 1600, started);
-  const count1 = useCounter(stats[1].value, 1200, started);
-  const count2 = useCounter(stats[2].value, 2000, started);
-  const counts = [count0, count1, count2];
+
+  // Each counter uses IntersectionObserver independently
+  const counter0 = useCounter(stats[0].value, 1200);
+  const counter1 = useCounter(stats[1].value, 1000);
+  const counter2 = useCounter(stats[2].value, 1400);
+  const counters = [counter0, counter1, counter2];
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setHeroAnimationDone(true);
-      setStarted(true);
     }, 600);
     return () => clearTimeout(timer);
   }, [setHeroAnimationDone]);
@@ -121,7 +143,7 @@ export default function HeroSection({ id }: { id: string }) {
       className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden px-6 pt-24 pb-16"
     >
       {/* Base Solid Background Color */}
-      <div className="absolute inset-0 bg-[#0C0C11] -z-30 pointer-events-none" />
+      <div className="absolute inset-0 bg-[#050810] -z-30 pointer-events-none" />
 
       <WebGLShader />
 
@@ -129,36 +151,36 @@ export default function HeroSection({ id }: { id: string }) {
       <div
         className="absolute inset-0 opacity-100 pointer-events-none -z-20"
         style={{
-          background: 'linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(99,102,241,0.06) 25%, rgba(20,184,166,0.04) 50%, rgba(99,102,241,0.05) 75%, rgba(16,185,129,0.05) 100%)',
+          background: 'linear-gradient(135deg, rgba(6,182,212,0.05) 0%, rgba(139,92,246,0.06) 25%, rgba(6,182,212,0.04) 50%, rgba(139,92,246,0.05) 75%, rgba(6,182,212,0.05) 100%)',
           backgroundSize: '400% 400%',
           animation: 'aurora 14s ease infinite',
         }}
       />
 
       {/* Grid overlay */}
-      <div className="absolute inset-0 bg-grid opacity-[0.08] pointer-events-none -z-20" />
+      <div className="absolute inset-0 bg-grid opacity-[0.06] pointer-events-none -z-20" />
 
-      {/* Top emerald bloom */}
+      {/* Top cyan bloom */}
       <div
         className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[700px] pointer-events-none"
       >
         <div
           className="w-full h-full animate-pulse-glow"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(16,185,129,0.09) 0%, rgba(99,102,241,0.06) 40%, transparent 65%)',
+            background: 'radial-gradient(ellipse at center, rgba(6,182,212,0.09) 0%, rgba(139,92,246,0.06) 40%, transparent 65%)',
             filter: 'blur(80px)',
           }}
         />
       </div>
 
-      {/* Bottom-left teal glow */}
+      {/* Bottom-left violet glow */}
       <div
         className="absolute bottom-0 left-1/4 w-[600px] h-[500px] pointer-events-none"
       >
         <div
           className="w-full h-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(20,184,166,0.06) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.06) 0%, transparent 70%)',
             filter: 'blur(100px)',
           }}
         />
@@ -262,7 +284,7 @@ export default function HeroSection({ id }: { id: string }) {
               </LiquidButton>
             </motion.div>
 
-            {/* Stats Row */}
+            {/* Stats Row — with IntersectionObserver */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -271,9 +293,9 @@ export default function HeroSection({ id }: { id: string }) {
             >
               {stats.map((stat, i) => (
                 <div key={stat.label} className="flex items-center gap-6">
-                  <div className="text-center lg:text-left">
+                  <div className="text-center lg:text-left" ref={counters[i].ref}>
                     <div className="text-2xl font-jakarta font-black text-zinc-50">
-                      {counts[i]}
+                      {counters[i].count}
                       <span className="text-[#10B981]">{stat.suffix}</span>
                     </div>
                     <div className="text-[10px] font-jakarta font-bold uppercase tracking-[0.2em] text-zinc-500">
@@ -298,13 +320,13 @@ export default function HeroSection({ id }: { id: string }) {
             <TiltCard>
               <div className="relative group">
                 {/* Glow behind card */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-[#10B981]/8 via-transparent to-transparent rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
+                <div className="absolute -inset-4 bg-gradient-to-br from-[#06B6D4]/8 via-transparent to-[#8B5CF6]/5 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
 
                 {/* Floating code card */}
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-                  className="relative glass-strong rounded-2xl border border-white/[0.10] hover:border-[#10B981]/25 p-8 transition-all duration-500 hover:shadow-glow max-w-sm"
+                  className="relative glass-strong rounded-2xl border border-white/[0.10] hover:border-[#06B6D4]/25 p-8 transition-all duration-500 hover:shadow-glow max-w-sm"
                 >
                   {/* Window chrome */}
                   <div className="flex items-center gap-2 mb-6">
@@ -324,22 +346,22 @@ export default function HeroSection({ id }: { id: string }) {
                       <span className="text-zinc-500">=</span>{' '}
                       <span className="text-zinc-500">{'{'}</span>
                       {'\n'}
-                      {'  '}<span className="text-indigo-300/80">name</span>
+                      {'  '}<span className="text-[#8B5CF6]/80">name</span>
                       <span className="text-zinc-500">:</span>{' '}
                       <span className="text-emerald-400/90">&quot;Sachin R&quot;</span>
                       <span className="text-zinc-600">,</span>
                       {'\n'}
-                      {'  '}<span className="text-indigo-300/80">role</span>
+                      {'  '}<span className="text-[#8B5CF6]/80">role</span>
                       <span className="text-zinc-500">:</span>{' '}
                       <span className="text-emerald-400/90">&quot;Full Stack Dev&quot;</span>
                       <span className="text-zinc-600">,</span>
                       {'\n'}
-                      {'  '}<span className="text-indigo-300/80">passion</span>
+                      {'  '}<span className="text-[#8B5CF6]/80">passion</span>
                       <span className="text-zinc-500">:</span>{' '}
                       <span className="text-emerald-400/90">&quot;Building Products&quot;</span>
                       <span className="text-zinc-600">,</span>
                       {'\n'}
-                      {'  '}<span className="text-indigo-300/80">available</span>
+                      {'  '}<span className="text-[#8B5CF6]/80">available</span>
                       <span className="text-zinc-500">:</span>{' '}
                       <span className="text-[#10B981]/80">true</span>
                       <span className="text-zinc-600">,</span>
@@ -353,7 +375,7 @@ export default function HeroSection({ id }: { id: string }) {
                   {/* Status bar */}
                   <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
                       <span className="text-[10px] font-jakarta font-bold uppercase tracking-[0.2em] text-zinc-400">
                         Available for hire
                       </span>
@@ -368,10 +390,10 @@ export default function HeroSection({ id }: { id: string }) {
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                  className="absolute -bottom-8 -left-14 glass rounded-xl border border-[#10B981]/15 px-4 py-3 hidden xl:block"
+                  className="absolute -bottom-8 -left-14 glass rounded-xl border border-[#8B5CF6]/15 px-4 py-3 hidden xl:block"
                 >
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-[#10B981]" />
+                    <div className="w-2 h-2 rounded-full bg-[#8B5CF6]" />
                     <span className="text-xs font-semibold text-zinc-300">ProofChain</span>
                   </div>
                   <div className="text-[9px] text-zinc-500 mt-1">Blockchain Verified ✓</div>
@@ -384,7 +406,7 @@ export default function HeroSection({ id }: { id: string }) {
                   className="absolute -top-6 -right-10 glass rounded-xl border border-white/[0.08] px-3 py-2 hidden xl:block"
                 >
                   <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-zinc-400" />
+                    <div className="w-2 h-2 rounded-full bg-[#10B981]" />
                     <span className="text-[10px] font-bold text-zinc-300">Next.js 15</span>
                   </div>
                 </motion.div>
@@ -402,7 +424,7 @@ export default function HeroSection({ id }: { id: string }) {
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       >
         <span className="text-[9px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-[#10B981]/40 to-transparent" />
+        <div className="w-px h-10 bg-gradient-to-b from-[#06B6D4]/40 to-transparent" />
       </motion.div>
     </section>
   );

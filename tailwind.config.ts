@@ -72,8 +72,9 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
-        // Navy scale — the new 60% base
+        // Navy scale — the 60% base
         navy: {
+          950: '#030508',
           900: '#050810',
           800: '#0A0F1E',
           700: '#0D1526',
@@ -109,10 +110,11 @@ export default {
         'glow-sm': '0 0 15px rgba(16, 185, 129, 0.12)',
         'glow': '0 0 25px rgba(16, 185, 129, 0.18), 0 0 60px rgba(16, 185, 129, 0.07)',
         'glow-lg': '0 0 40px rgba(16, 185, 129, 0.25), 0 0 100px rgba(16, 185, 129, 0.10)',
+        'glow-violet': '0 0 25px rgba(139, 92, 246, 0.18), 0 0 60px rgba(139, 92, 246, 0.07)',
         'card-float': '0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3)',
         'card-float-hover': '0 20px 60px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4)',
-        'navbar': '0 1px 40px rgba(0, 0, 0, 0.7)',
-        'navy-glow': '0 0 30px rgba(10, 15, 30, 0.8)',
+        'navbar': '0 1px 40px rgba(5, 8, 16, 0.8)',
+        'navy-glow': '0 0 30px rgba(5, 8, 16, 0.8)',
       },
       keyframes: {
         'accordion-down': {

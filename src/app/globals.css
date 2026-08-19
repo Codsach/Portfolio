@@ -38,45 +38,44 @@ html {
   }
 
   .dark {
-    /* 60% — Deep charcoal base #0C0C11 */
-    --background: 240 17% 6%;
-    --foreground: 240 5% 96%;
+    /* Deep charcoal/navy base */
+    --background: 225 50% 3%;
+    --foreground: 220 10% 96%;
 
-    /* 30% — Elevated charcoal-slate surfaces #18181F */
-    --card: 240 13% 11%;
-    --card-foreground: 240 5% 96%;
-    --popover: 240 13% 10%;
-    --popover-foreground: 240 5% 96%;
+    /* Elevated surfaces */
+    --card: 222 35% 7%;
+    --card-foreground: 220 10% 96%;
+    --popover: 222 35% 6%;
+    --popover-foreground: 220 10% 96%;
 
-    --primary: 240 5% 96%;
-    --primary-foreground: 240 17% 6%;
+    --primary: 220 10% 96%;
+    --primary-foreground: 225 50% 3%;
 
-    /* Secondary surfaces */
-    --secondary: 240 13% 13%;
-    --secondary-foreground: 240 5% 96%;
+    --secondary: 222 30% 9%;
+    --secondary-foreground: 220 10% 96%;
 
-    --muted: 240 13% 13%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 222 30% 9%;
+    --muted-foreground: 220 10% 64.9%;
 
-    /* 10% — Accent: Emerald #10B981 */
-    --accent: 160 84% 39%;
-    --accent-foreground: 240 17% 6%;
+    /* Emerald Accent #10B981 */
+    --accent: 158 64% 52%;
+    --accent-foreground: 225 50% 3%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 240 5% 96%;
+    --destructive-foreground: 220 10% 96%;
 
-    --border: 240 13% 12%;
-    --input: 240 13% 10%;
-    --ring: 160 84% 39%;
+    --border: 222 30% 9%;
+    --input: 222 35% 7%;
+    --ring: 158 64% 52%;
 
     --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
+    --chart-2: 158 64% 52%;
     --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
+    --chart-4: 258 90% 66%;
     --chart-5: 340 75% 55%;
 
-    --glow-emerald: 160 84% 39%;
-    --glow-indigo: 245 80% 65%;
+    --glow-emerald: 158 64% 52%;
+    --glow-indigo: 238 84% 67%;
     --glow-teal: 168 70% 40%;
   }
 }
@@ -89,9 +88,8 @@ html {
     @apply bg-background text-foreground;
   }
 
-  /* Deep charcoal base — not black */
   .dark body {
-    background-color: #0C0C11;
+    background-color: #050810;
   }
 
   /* SVG noise film grain overlay */
@@ -112,7 +110,7 @@ html {
 
 /* ── Layout ────────────────────────────────────────────────────────── */
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ── Keyframes ─────────────────────────────────────────────────────── */
@@ -173,15 +171,21 @@ html, body {
   100% { background-position: 0% 50%; }
 }
 
+@keyframes mesh-breathe {
+  0%, 100% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+  33%      { opacity: 0.5; transform: scale(1.05) rotate(1deg); }
+  66%      { opacity: 0.4; transform: scale(0.98) rotate(-1deg); }
+}
+
 /* ── Utilities ─────────────────────────────────────────────────────── */
 @layer utilities {
-  /* Aurora animated background */
+  /* Aurora background with emerald tones */
   .aurora-bg {
     background: linear-gradient(
       135deg,
       rgba(16, 185, 129, 0.05) 0%,
-      rgba(99, 102, 241, 0.06) 25%,
-      rgba(20, 184, 166, 0.04) 50%,
+      rgba(99, 102, 241, 0.05) 25%,
+      rgba(16, 185, 129, 0.04) 50%,
       rgba(99, 102, 241, 0.05) 75%,
       rgba(16, 185, 129, 0.05) 100%
     );
@@ -189,15 +193,16 @@ html, body {
     animation: aurora 14s ease infinite;
   }
 
-  /* Animated shimmer gradient text */
+  /* Original Emerald Shimmer Text */
   .text-shimmer {
     background: linear-gradient(
       90deg,
       #a1a1aa 0%,
       #ffffff 20%,
       #10B981 40%,
-      #ffffff 60%,
-      #a1a1aa 80%,
+      #34d399 55%,
+      #ffffff 70%,
+      #a1a1aa 85%,
       #10B981 100%
     );
     background-size: 200% auto;
@@ -216,9 +221,17 @@ html, body {
     color: transparent;
   }
 
-  /* Emerald gradient text */
+  /* Original Emerald Gradient Text */
   .text-gradient-emerald {
-    background: linear-gradient(135deg, #10B981, #34d399, #818cf8);
+    background: linear-gradient(135deg, #10B981, #34d399, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-cyan {
+    background: linear-gradient(135deg, #10B981, #34d399, #059669);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -227,29 +240,29 @@ html, body {
 
   /* Glassmorphism surface */
   .glass {
-    background: rgba(24, 24, 31, 0.55);
+    background: rgba(10, 15, 30, 0.55);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .glass-strong {
-    background: rgba(24, 24, 31, 0.75);
+    background: rgba(10, 15, 30, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* Glow ring utilities */
-  .glow-emerald {
+  /* Emerald Glow utilities */
+  .glow-cyan {
     box-shadow: 0 0 20px rgba(16, 185, 129, 0.15), 0 0 60px rgba(16, 185, 129, 0.05);
   }
 
-  .glow-emerald-strong {
+  .glow-cyan-strong {
     box-shadow: 0 0 30px rgba(16, 185, 129, 0.25), 0 0 80px rgba(16, 185, 129, 0.10);
   }
 
-  /* Animated border using gradient */
+  /* Animated border using emerald gradient */
   .animated-border {
     position: relative;
   }
@@ -258,7 +271,7 @@ html, body {
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    background: linear-gradient(90deg, #10B981, #6366f1, #14b8a6, #10B981);
+    background: linear-gradient(90deg, #10B981, #34d399, #10B981);
     background-size: 300% 100%;
     animation: gradient-border 4s linear infinite;
     z-index: -1;
@@ -269,27 +282,23 @@ html, body {
     opacity: 1;
   }
 
-  /* Separator fade line */
   .separator-fade {
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
     height: 1px;
   }
 
-  /* Focus ring using accent color */
   .focus-accent:focus-visible {
     outline: 2px solid #10B981;
     outline-offset: 2px;
   }
 
-  /* Subtle grid overlay — Vercel/Linear style */
   .bg-grid {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
-  /* Floating animations */
   .animate-float-slow {
     animation: float-slow 8s ease-in-out infinite;
   }
@@ -307,5 +316,8 @@ html, body {
   }
   .animate-spin-slow {
     animation: spin-slow 20s linear infinite;
+  }
+  .animate-mesh-breathe {
+    animation: mesh-breathe 12s ease-in-out infinite;
   }
 }

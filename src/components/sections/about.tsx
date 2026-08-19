@@ -45,7 +45,7 @@ export default function AboutSection({ id }: { id: string }) {
     <section
       id={id}
       className="relative flex items-center overflow-hidden px-6 py-28 md:py-44"
-      style={{ background: '#0E0E14' }}
+      style={{ background: '#060A14' }}
     >
       {/* ─── Background Glows ─── */}
       <div
@@ -54,7 +54,7 @@ export default function AboutSection({ id }: { id: string }) {
         <div
           className="w-full h-full animate-pulse-glow"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(16,185,129,0.08) 0%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />
@@ -66,7 +66,7 @@ export default function AboutSection({ id }: { id: string }) {
         <div
           className="w-full h-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(16,185,129,0.05) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(99,102,241,0.05) 0%, transparent 70%)',
             filter: 'blur(80px)',
           }}
         />
@@ -103,8 +103,6 @@ export default function AboutSection({ id }: { id: string }) {
 
           {/* Left Column: Title */}
           <div className="lg:col-span-5 space-y-8">
-
-
             <h2 className="text-4xl md:text-5xl lg:text-7xl font-jakarta font-extrabold text-zinc-50 leading-tight">
               <WordReveal text="Sachin R." />
               <br />
@@ -113,7 +111,7 @@ export default function AboutSection({ id }: { id: string }) {
               </span>
             </h2>
 
-            {/* Decorative cyan line */}
+            {/* Decorative emerald line */}
             <motion.div
               initial={{ scaleX: 0, originX: 0 }}
               whileInView={{ scaleX: 1 }}
@@ -150,26 +148,22 @@ export default function AboutSection({ id }: { id: string }) {
               </motion.p>
             </div>
 
-            {/* Stats grid */}
+            {/* Stats grid — with emerald glow border hover effect */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-white/[0.06] pt-12 max-w-xl w-full">
               {stats.map(({ label, sub }, i) => (
                 <motion.div
                   key={label}
-                  className="group cursor-default animated-border rounded-2xl p-4 sm:p-5"
+                  className="group cursor-default glass rounded-2xl p-4 sm:p-5 border border-white/[0.06] hover:border-emerald-400/40 hover:bg-emerald-500/[0.05] hover:shadow-[0_0_30px_rgba(16,185,129,0.18)] transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
                   whileHover={{ y: -6, scale: 1.03 }}
-                  style={{
-                    background: 'rgba(24, 24, 31, 0.50)',
-                    border: '1px solid rgba(255,255,255,0.06)',
-                  }}
                 >
-                  <div className="text-lg sm:text-2xl font-bold text-zinc-50 mb-1 group-hover:text-gradient-emerald transition-all duration-300 font-jakarta">
+                  <div className="text-lg sm:text-2xl font-bold text-zinc-50 mb-1 group-hover:text-[#10B981] transition-all duration-300 font-jakarta">
                     {label}
                   </div>
-                  <div className="text-[10px] sm:text-xs uppercase tracking-widest text-zinc-500 font-bold font-jakarta">{sub}</div>
+                  <div className="text-[10px] sm:text-xs uppercase tracking-widest text-zinc-500 font-bold font-jakarta group-hover:text-emerald-400/90 transition-colors duration-300">{sub}</div>
                 </motion.div>
               ))}
             </div>

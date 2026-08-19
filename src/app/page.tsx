@@ -5,15 +5,6 @@ import HeroSection from '@/components/sections/hero';
 import ProjectsSection from '@/components/sections/projects';
 import SkillsSection from '@/components/sections/skills';
 
-/**
- * Home page — cinematic stacked sticky scroll architecture.
- *
- * Each SectionStack wraps a major section inside a sticky container.
- * As the user scrolls, each section scales down and dims while the next
- * one slides above it, creating a premium layered, cinematic transition.
- *
- * z-index increases with each section so later sections appear on top.
- */
 export default function Home() {
   return (
     <div className="relative">
@@ -25,15 +16,15 @@ export default function Home() {
         <AboutSection id="about-content" />
       </SectionStack>
 
-      <SectionStack id="projects" index={2} total={5} scalesDown>
+      {/* Projects section rendered directly without parent CSS transform to allow window sticky stacking */}
+      <div id="projects" className="relative z-30">
         <ProjectsSection id="projects-content" />
-      </SectionStack>
+      </div>
 
       <SectionStack id="skills" index={3} total={5} scalesDown>
         <SkillsSection id="skills-content" />
       </SectionStack>
 
-      {/* Last section — no scale-down since nothing follows it */}
       <SectionStack id="contact" index={4} total={5} scalesDown={false}>
         <ContactSection id="contact-content" />
       </SectionStack>

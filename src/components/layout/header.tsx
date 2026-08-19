@@ -79,8 +79,8 @@ export default function Header() {
       )}
       style={{
         background: isScrolled
-          ? 'rgba(12, 12, 17, 0.88)'
-          : 'rgba(12, 12, 17, 0.45)',
+          ? 'rgba(5, 8, 16, 0.92)'
+          : 'rgba(5, 8, 16, 0.40)',
       }}
     >
       <div className="container mx-auto flex h-16 items-center justify-between">
@@ -136,7 +136,7 @@ export default function Header() {
               <SheetContent
                 side="right"
                 className="w-[280px]"
-                style={{ background: 'rgba(12, 12, 17, 0.97)', borderLeft: '1px solid rgba(255,255,255,0.07)' }}
+                style={{ background: 'rgba(5, 8, 16, 0.97)', borderLeft: '1px solid rgba(255,255,255,0.07)' }}
               >
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="p-4">
