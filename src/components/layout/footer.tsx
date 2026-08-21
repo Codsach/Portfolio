@@ -23,7 +23,7 @@ const socialLinks = [
     hoverClass: 'group-hover:bg-zinc-200 group-hover:text-zinc-900 group-hover:border-zinc-300',
   },
   {
-    href: 'https://linkedin.com/in/sachin-r-b737a7393',
+    href: 'https://www.linkedin.com/in/sachinr-dev/',
     icon: IconBrandLinkedin,
     label: 'LinkedIn',
     hoverClass: 'group-hover:bg-zinc-200 group-hover:text-zinc-900 group-hover:border-zinc-300',

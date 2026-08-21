@@ -17,7 +17,7 @@ const connectors = [
   {
     label: 'LinkedIn',
     value: 'Sachin R',
-    href: 'https://linkedin.com/in/sachin-r-b737a7393',
+    href: 'https://www.linkedin.com/in/sachinr-dev/',
     icon: IconBrandLinkedin,
     featured: false,
     cta: 'Connect on LinkedIn',
