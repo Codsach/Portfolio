@@ -16,22 +16,22 @@ function StackingCardItem({
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Track scroll progress of this card relative to the window viewport
+  // Track scroll progress with extended range for cinematic smooth stacking
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ['start start', 'end start'],
   });
 
-  // Scale down as the next card stacks on top of this one
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.93]);
+  // Smooth scale down as next card slides over (solid 100% opacity throughout)
+  const scale = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.98, 0.95]);
 
-  // Staggered sticky top offsets for tab deck look
-  const stickyTop = 96 + index * 28;
+  // Uniform sticky top offset for complete 100% card-over-card alignment
+  const stickyTop = 80;
 
   return (
     <div
       ref={cardRef}
-      className="sticky mb-16 lg:mb-24 last:mb-0"
+      className="sticky pb-[35vh] sm:pb-[45vh] lg:pb-[50vh] last:pb-0"
       style={{
         top: `${stickyTop}px`,
         zIndex: (index + 1) * 10,
@@ -39,10 +39,10 @@ function StackingCardItem({
     >
       <motion.div
         style={{
-          scale: index === total - 1 ? 1 : scale,
+          scale,
           transformOrigin: 'top center',
         }}
-        className="will-change-transform"
+        className="relative will-change-transform"
       >
         <ProjectCard project={project} index={index} />
       </motion.div>
@@ -54,68 +54,37 @@ export default function ProjectsSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative px-6 py-24 pb-48 min-h-screen"
-      style={{ background: '#070B15' }}
+      className="relative px-6 py-20 pb-20 bg-[#F8F9FA] -mb-[35vh] sm:-mb-[45vh] lg:-mb-[50vh]"
     >
-      {/* ─── Background Glows ─── */}
-      <div className="absolute top-0 left-0 w-[600px] h-[600px] pointer-events-none">
-        <div
-          className="w-full h-full animate-pulse-glow"
-          style={{
-            background:
-              'radial-gradient(ellipse at center, rgba(139,92,246,0.07) 0%, transparent 70%)',
-            filter: 'blur(100px)',
-          }}
-        />
-      </div>
-
-      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] pointer-events-none">
-        <div
-          className="w-full h-full"
-          style={{
-            background:
-              'radial-gradient(ellipse at center, rgba(6,182,212,0.05) 0%, transparent 70%)',
-            filter: 'blur(80px)',
-          }}
-        />
-      </div>
-
-      {/* Watermark */}
-      <div className="absolute -left-16 top-1/3 pointer-events-none hidden xl:block">
-        <span className="text-[18rem] font-black text-white/[0.018] leading-none select-none">
-          02
-        </span>
-      </div>
-
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
       <div className="container mx-auto max-w-5xl relative z-10 w-full">
         {/* Section Header */}
-        <div className="max-w-2xl mb-16">
+        <div className="max-w-2xl mb-14 sm:mb-18">
           <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-50 mb-6 leading-tight"
-          >
-            Selected <span className="text-shimmer">Works.</span>
-          </motion.h2>
-
-          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-xl text-zinc-400 leading-relaxed"
+            transition={{ duration: 0.5 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 mb-4 font-jakarta tracking-tight leading-tight"
           >
-            A collection of high-impact digital products I&apos;ve engineered,
-            focusing on clean code and exceptional user experiences.
+            Selected <span className="text-amber-600">Works.</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-base sm:text-lg text-zinc-600 leading-relaxed font-normal"
+          >
+            A curated selection of web and mobile applications engineered with clean architecture,
+            robust backends, and responsive user experience.
           </motion.p>
         </div>
 
         {/* Sticky Stacking Deck of Cards */}
-        <div className="relative flex flex-col pb-16">
+        <div className="relative flex flex-col">
           {projects.map((project, index) => (
             <StackingCardItem
               key={project.title}
@@ -124,8 +93,11 @@ export default function ProjectsSection({ id }: { id: string }) {
               total={projects.length}
             />
           ))}
+          {/* Spacer: gives the last sticky card enough scroll runway to fully overlap the previous card */}
+          <div className="h-[35vh] sm:h-[45vh] lg:h-[50vh]" aria-hidden="true" />
         </div>
       </div>
     </section>
   );
 }
+

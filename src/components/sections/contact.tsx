@@ -1,6 +1,6 @@
 'use client';
 
-import { Mail, MapPin, Sparkles, ArrowRight } from 'lucide-react';
+import { Mail, MapPin, Sparkles, ArrowRight, MessageSquare } from 'lucide-react';
 import { IconBrandGithub, IconBrandLinkedin } from '@/components/icons';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -9,10 +9,10 @@ const connectors = [
   {
     label: 'Email',
     value: 'rsachinsachi@gmail.com',
-    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=rsachinsachi@gmail.com&su=Opportunity%20Discussion',
+    href: 'mailto:rsachinsachi@gmail.com?subject=Opportunity%20Discussion',
     icon: Mail,
     featured: true,
-    cta: 'Send Email',
+    cta: 'Send Direct Email',
   },
   {
     label: 'LinkedIn',
@@ -20,7 +20,7 @@ const connectors = [
     href: 'https://linkedin.com/in/sachin-r-b737a7393',
     icon: IconBrandLinkedin,
     featured: false,
-    cta: 'Connect',
+    cta: 'Connect on LinkedIn',
   },
   {
     label: 'GitHub',
@@ -28,7 +28,7 @@ const connectors = [
     href: 'https://github.com/Codsach',
     icon: IconBrandGithub,
     featured: false,
-    cta: 'View Profile',
+    cta: 'Explore Repositories',
   },
 ];
 
@@ -36,47 +36,8 @@ export default function ContactSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative overflow-hidden px-6 py-28 md:py-52"
-      style={{ background: '#050810' }}
+      className="relative overflow-hidden px-6 py-24 md:py-32 bg-[#F8F9FA]"
     >
-      {/* ─── Aurora center glow ─── */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 50% 60%, rgba(6,182,212,0.05) 0%, rgba(139,92,246,0.06) 30%, transparent 65%)',
-          animation: 'pulse-glow 7s ease-in-out infinite',
-        }}
-      />
-
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] pointer-events-none"
-      >
-        <div
-          className="w-full h-full"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.07) 0%, rgba(6,182,212,0.04) 50%, transparent 70%)',
-            filter: 'blur(80px)',
-          }}
-        />
-      </div>
-
-      {/* Corner glows */}
-      <div className="absolute top-0 left-0 w-64 h-64 pointer-events-none">
-        <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(139,92,246,0.08) 0%, transparent 70%)', filter: 'blur(60px)' }} />
-      </div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 pointer-events-none">
-        <div className="w-full h-full" style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(6,182,212,0.06) 0%, transparent 70%)', filter: 'blur(60px)' }} />
-      </div>
-
-      {/* Watermark */}
-      <div
-        className="absolute -left-12 top-1/2 -translate-y-1/2 pointer-events-none hidden xl:block"
-      >
-        <span className="text-[18rem] font-black text-white/[0.018] leading-none select-none">
-          04
-        </span>
-      </div>
-
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
       <div className="container mx-auto max-w-4xl relative z-10 w-full">
@@ -84,55 +45,45 @@ export default function ContactSection({ id }: { id: string }) {
 
           {/* Availability badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-emerald-500/20 mb-8"
+            transition={{ duration: 0.4 }}
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-md bg-zinc-100 border border-zinc-200 mb-6"
           >
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400">
-              Open To Work — Full-Time &amp; Freelance
+            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-800 font-jakarta">
+              Open To Opportunities — Full-Time &amp; Contracts
             </span>
           </motion.div>
 
-
-
-          {/* Headline — two-line staggered */}
-          <div className="mb-8">
+          {/* Headline - Solid High-Craft Typography, NO duplicate gradient */}
+          <div className="mb-5">
             <motion.h2
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.65, delay: 0.1 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-zinc-50 leading-tight"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 font-jakarta tracking-tight leading-tight"
             >
-              Ready to start your
-            </motion.h2>
-            <motion.h2
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.65, delay: 0.22 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight"
-            >
-              <span className="text-shimmer">next big project?</span>
+              Ready to start your <br className="hidden sm:inline" />
+              <span className="text-amber-600">next big project?</span>
             </motion.h2>
           </div>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-16"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-base sm:text-lg text-zinc-600 max-w-xl mx-auto leading-relaxed mb-12 font-normal"
           >
-            I&apos;m currently available for freelance work and full-time positions.
-            Let&apos;s talk about how I can help your team succeed.
+            I am available for engineering roles and select client builds.
+            Feel free to email me directly or connect through LinkedIn.
           </motion.p>
 
-          {/* Contact Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+          {/* Contact Cards - Solid Terracotta Email card + clean neutral cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
             {connectors.map((connector, index) => {
               const isEmail = connector.featured;
               return (
@@ -141,62 +92,49 @@ export default function ContactSection({ id }: { id: string }) {
                   href={connector.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.5, delay: 0.35 + index * 0.1 }}
-                  whileHover={{ y: -12, scale: 1.02 }}
-                  style={{ transition: 'box-shadow 0.3s ease' }}
-                  className={`group relative flex flex-col items-center p-8 rounded-3xl transition-all duration-500 overflow-hidden cursor-pointer z-20 ${
+                  transition={{ duration: 0.4, delay: 0.25 + index * 0.08 }}
+                  whileHover={{ y: -4 }}
+                  className={`group relative flex flex-col items-center p-6 sm:p-8 rounded-2xl transition-all duration-200 cursor-pointer ${
                     isEmail
-                      ? 'glass-strong border border-[#10B981]/15 hover:border-[#10B981]/35 shadow-card-float hover:shadow-glow'
-                      : 'glass border border-white/[0.06] hover:border-white/[0.15] hover:bg-white/[0.04] shadow-card-float'
+                      ? 'bg-amber-600 text-white shadow-md hover:bg-amber-700 hover:scale-102 border border-amber-600'
+                      : 'bg-white border border-zinc-200 hover:border-zinc-300 hover:scale-102 shadow-sm hover:shadow-md'
                   }`}
                 >
                   {isEmail && (
-                    <div className="absolute top-4 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 text-[8px] font-bold uppercase tracking-widest text-[#10B981]/80">
-                      Best way to reach me
+                    <div className="absolute top-3.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-black/15 text-[10px] font-bold uppercase tracking-widest text-white">
+                      Primary Contact
                     </div>
                   )}
 
-                  {/* Animated gradient border on email card */}
-                  {isEmail && (
+                  <div className="relative z-10 flex flex-col items-center w-full mt-2">
                     <div
-                      className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(16,185,129,0.06) 0%, rgba(99,102,241,0.06) 100%)',
-                      }}
-                    />
-                  )}
-
-                  {/* Top accent glow */}
-                  <div className={`absolute top-0 right-0 w-28 h-28 blur-3xl transition-colors duration-500 ${isEmail ? 'bg-[#10B981]/[0.08] group-hover:bg-[#10B981]/[0.16]' : 'bg-white/[0.02] group-hover:bg-white/[0.05]'}`} />
-
-                  <div className="relative z-10 flex flex-col items-center">
-                    <motion.div
-                      className={`w-14 h-14 rounded-2xl border flex items-center justify-center mb-6 transition-all duration-500 ${isEmail ? 'bg-[#10B981]/10 border-[#10B981]/20 group-hover:border-[#10B981]/50 group-hover:bg-[#10B981]/15 group-hover:shadow-glow-sm' : 'glass border-white/10 group-hover:border-white/20'}`}
-                      whileHover={{ scale: 1.14, rotate: 6 }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                      className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-200 group-hover:scale-105 shadow-2xs ${
+                        isEmail
+                          ? 'bg-white/20 text-white'
+                          : connector.label === 'LinkedIn'
+                          ? 'bg-blue-50 text-blue-600 border border-blue-100'
+                          : 'bg-zinc-100 text-zinc-900 border border-zinc-200'
+                      }`}
                     >
-                      <connector.icon className={`w-5 h-5 transition-colors duration-300 ${isEmail ? 'text-[#10B981]' : 'text-zinc-400 group-hover:text-zinc-200'}`} />
-                    </motion.div>
+                      <connector.icon className="w-5 h-5" />
+                    </div>
 
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-2 text-center">
+                    <p className={`text-xs font-semibold uppercase tracking-wider mb-1 text-center font-jakarta ${isEmail ? 'text-white/80' : 'text-zinc-500'}`}>
                       {connector.label}
                     </p>
-                    <p className="text-sm font-medium text-zinc-300 mb-6 text-center">
+                    
+                    <p className={`text-sm sm:text-base font-bold mb-6 text-center break-all font-jakarta ${isEmail ? 'text-white' : 'text-zinc-900'}`}>
                       {connector.value}
                     </p>
 
-                    <div className={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-colors duration-300 ${isEmail ? 'text-[#10B981]/60 group-hover:text-[#10B981]' : 'text-zinc-600 group-hover:text-zinc-200'}`}>
-                      {connector.cta}{' '}
-                      <motion.span
-                        className="inline-block"
-                        whileHover={{ x: 4 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-                      >
-                        <ArrowRight className="w-3 h-3" />
-                      </motion.span>
+                    <div className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors duration-150 mt-auto ${
+                      isEmail ? 'text-white' : 'text-amber-600 group-hover:text-amber-700'
+                    }`}>
+                      <span>{connector.cta}</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-150" />
                     </div>
                   </div>
                 </motion.a>
@@ -208,3 +146,4 @@ export default function ContactSection({ id }: { id: string }) {
     </section>
   );
 }
+

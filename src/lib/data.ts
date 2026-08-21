@@ -30,10 +30,10 @@ export const projects: Project[] = [
       'AI-powered tamper detection via Gemini',
       'Pinata IPFS for decentralized storage',
     ],
-    liveDemoUrl: 'https://proofchain.vercel.app',
+    liveDemoUrl: 'https://proofchain-web.vercel.app',
     sourceCodeUrl: 'https://github.com/Codsach/proofchain',
     imageId: 'project-1',
-    accentColor: '#8B5CF6',
+    accentColor: '#C2410C',
   },
   {
     title: 'CodSach',
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     liveDemoUrl: 'https://codsach.vercel.app',
     sourceCodeUrl: 'https://github.com/Codsach/codsach-student-hub',
     imageId: 'project-2',
-    accentColor: '#06B6D4',
+    accentColor: '#0F766E',
   },
   {
     title: 'TaskManager',
@@ -70,10 +70,10 @@ export const projects: Project[] = [
       'MongoDB-backed task persistence',
       'TypeScript end-to-end type safety',
     ],
-    liveDemoUrl: 'https://github.com/Codsach/TaskManager-',
+    liveDemoUrl: 'https://task-manager-livid-pi-19.vercel.app',
     sourceCodeUrl: 'https://github.com/Codsach/TaskManager-',
     imageId: 'project-3',
-    accentColor: '#10B981',
+    accentColor: '#334155',
   },
 ];
 

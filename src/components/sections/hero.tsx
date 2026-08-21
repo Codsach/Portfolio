@@ -2,14 +2,13 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useAnimation } from '@/context/animation-context';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { WebGLShader } from '@/components/ui/web-gl-shader';
-import { LiquidButton, MetalButton } from '@/components/ui/liquid-glass-button';
+import { ArrowRight, FileText, Sparkles, Code2 } from 'lucide-react';
 
 // Cycling titles that type in and out
-const roles = ['Full Stack Developer', 'Blockchain Engineer', 'Problem Solver', 'AI Integrator'];
+const roles = ['Full Stack Developer', 'Flutter & Mobile Builder', 'Web App Builder', 'Creative Problem Solver'];
 
 // Counter hook — uses IntersectionObserver, re-triggers on scroll, fast animation
 function useCounter(target: number, duration = 1200) {
@@ -25,12 +24,10 @@ function useCounter(target: number, duration = 1200) {
       ([entry]) => {
         if (entry.isIntersecting && !hasAnimated.current) {
           hasAnimated.current = true;
-          // Animate with requestAnimationFrame for smooth 60fps
           const startTime = performance.now();
           const animate = (now: number) => {
             const elapsed = now - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic for snappy feel
             const eased = 1 - Math.pow(1 - progress, 3);
             setCount(Math.round(eased * target));
             if (progress < 1) {
@@ -115,16 +112,15 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 }
 
 const stats = [
-  { value: 10, suffix: '+', label: 'Projects' },
-  { value: 2, suffix: '+', label: 'Years Exp.' },
-  { value: 100, suffix: '%', label: 'Passion' },
+  { value: 10, suffix: '+', label: 'Projects Built' },
+  { value: 2, suffix: '+', label: 'Years Experience' },
+  { value: 100, suffix: '%', label: 'Client Dedication' },
 ];
 
 export default function HeroSection({ id }: { id: string }) {
   const { setHeroAnimationDone } = useAnimation();
   const typedRole = useTypingText(roles);
 
-  // Each counter uses IntersectionObserver independently
   const counter0 = useCounter(stats[0].value, 1200);
   const counter1 = useCounter(stats[1].value, 1000);
   const counter2 = useCounter(stats[2].value, 1400);
@@ -140,274 +136,212 @@ export default function HeroSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden px-6 pt-24 pb-16"
+      className="relative flex flex-col items-center justify-center min-h-[90vh] overflow-hidden px-6 pt-32 pb-20 bg-[#FAFAFA]"
     >
-      {/* Base Solid Background Color */}
-      <div className="absolute inset-0 bg-[#050810] -z-30 pointer-events-none" />
+      {/* Subtle architectural grid */}
+      <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none -z-20" />
 
-      <WebGLShader />
-
-      {/* ─── Aurora animated background ─── */}
-      <div
-        className="absolute inset-0 opacity-100 pointer-events-none -z-20"
-        style={{
-          background: 'linear-gradient(135deg, rgba(6,182,212,0.05) 0%, rgba(139,92,246,0.06) 25%, rgba(6,182,212,0.04) 50%, rgba(139,92,246,0.05) 75%, rgba(6,182,212,0.05) 100%)',
-          backgroundSize: '400% 400%',
-          animation: 'aurora 14s ease infinite',
-        }}
-      />
-
-      {/* Grid overlay */}
-      <div className="absolute inset-0 bg-grid opacity-[0.06] pointer-events-none -z-20" />
-
-      {/* Top cyan bloom */}
-      <div
-        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[700px] pointer-events-none"
-      >
+      {/* Subtle warm ambient illumination */}
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[600px] h-[350px] pointer-events-none -z-10 opacity-30">
         <div
           className="w-full h-full animate-pulse-glow"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(6,182,212,0.09) 0%, rgba(139,92,246,0.06) 40%, transparent 65%)',
-            filter: 'blur(80px)',
+            background: 'radial-gradient(ellipse at center, rgba(234,88,12,0.12) 0%, transparent 70%)',
+            filter: 'blur(60px)',
           }}
         />
-      </div>
-
-      {/* Bottom-left violet glow */}
-      <div
-        className="absolute bottom-0 left-1/4 w-[600px] h-[500px] pointer-events-none"
-      >
-        <div
-          className="w-full h-full"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(139,92,246,0.06) 0%, transparent 70%)',
-            filter: 'blur(100px)',
-          }}
-        />
-      </div>
-
-      {/* Decorative floating orbs */}
-      <div
-        className="absolute top-1/3 right-8 w-56 h-56 pointer-events-none hidden lg:block"
-      >
-        <div className="w-full h-full rounded-full border border-white/[0.025] bg-white/[0.015] animate-spin-slow" />
-      </div>
-
-      <div
-        className="absolute bottom-1/4 left-10 w-28 h-28 pointer-events-none hidden lg:block"
-      >
-        <div className="w-full h-full rounded-full border border-white/[0.025] bg-white/[0.015] animate-float-medium" />
       </div>
 
       {/* ─── Main Content ─── */}
       <div className="container max-w-6xl mx-auto z-10 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
 
-          {/* Left Column */}
-          <div className="flex flex-col space-y-8 text-center lg:text-left">
+          {/* Left Column (Span 7) */}
+          <div className="lg:col-span-7 flex flex-col space-y-7 text-center lg:text-left">
 
             {/* Tagline chip */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 0, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="invisible pointer-events-none inline-flex items-center gap-3 px-4 py-1.5 rounded-full glass border border-white/[0.08] text-[10px] font-jakarta font-bold uppercase tracking-[0.25em] text-zinc-400 self-center lg:self-start"
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-md bg-zinc-100 border border-zinc-200 text-xs font-jakarta font-semibold tracking-wide text-zinc-800 self-center lg:self-start"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-              Full Stack • Blockchain • AI
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Full Stack • Blockchain • AI Systems</span>
             </motion.div>
 
             {/* Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 100, damping: 20, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-jakarta font-extrabold tracking-tight text-zinc-50 leading-[1.05]"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-[3.75rem] font-jakarta font-extrabold tracking-tight text-zinc-950 leading-[1.1]"
             >
               Building software{' '}
               <br className="hidden sm:block" />
               that{' '}
-              <span className="text-gradient-emerald">solves real</span>
+              <span className="text-shimmer-amber font-extrabold">
+                solves real
+              </span>
               <br />
               problems.
             </motion.h1>
 
             {/* Typing role */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 90, damping: 22, delay: 0.18 }}
               className="flex items-center gap-2 justify-center lg:justify-start"
             >
-              <span className="text-lg md:text-xl font-jakarta font-semibold text-[#10B981]">
+              <span className="text-base md:text-xl font-jakarta font-semibold text-zinc-700 bg-zinc-100/90 px-3 py-1 rounded-xl border border-zinc-200/80">
                 {typedRole}
-                <span className="animate-blink-cursor border-r-2 border-[#10B981] ml-0.5">&nbsp;</span>
+                <span className="animate-blink-cursor border-r-2 border-amber-600 ml-1">&nbsp;</span>
               </span>
             </motion.div>
 
             {/* Subtext */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 90, damping: 22, delay: 0.26 }}
-              className="text-lg md:text-xl text-zinc-400 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed"
+              transition={{ type: 'spring', stiffness: 90, damping: 22, delay: 0.24 }}
+              className="text-base sm:text-lg text-zinc-600 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed"
             >
-              I develop scalable web applications, blockchain systems and
-              AI-powered products focused on performance and usability.
+              I develop scalable web applications, responsive websites, and
+              cross-platform mobile apps with Flutter, focusing on clean architecture and high craft.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Restored rounded-2xl smooth squircle shape with highlighted Resume */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 90, damping: 22, delay: 0.36 }}
-              className="flex flex-wrap gap-4 items-center justify-center lg:justify-start"
+              transition={{ type: 'spring', stiffness: 90, damping: 22, delay: 0.32 }}
+              className="flex flex-wrap gap-4 items-center justify-center lg:justify-start pt-1"
             >
-              <LiquidButton
-                className="text-white border border-white/15 rounded-full hover:scale-105 duration-300 transition backdrop-blur-sm"
-                size="xl"
+              <Button
+                size="lg"
                 onClick={() => {
                   document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                 }}
+                className="rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm tracking-wide px-7 py-6 shadow-sm hover:shadow-md hover:scale-102 transition-all duration-200 gap-2"
               >
-                View Projects
-              </LiquidButton>
+                <span>View Selected Work</span>
+                <ArrowRight className="w-4 h-4" />
+              </Button>
 
-              <LiquidButton
-                className="text-[#10B981] border border-[#10B981]/20 rounded-full hover:scale-105 duration-300 transition backdrop-blur-sm font-bold shadow-glow"
-                size="xl"
+              <Button
+                size="lg"
+                variant="outline"
                 onClick={() => {
                   window.open('/resume.pdf', '_blank');
                 }}
+                className="button-shimmer relative rounded-2xl bg-white hover:bg-amber-50/60 border border-amber-300 hover:border-amber-500 text-zinc-900 hover:text-zinc-950 font-bold text-sm tracking-wide px-7 py-6 shadow-2xs hover:shadow-xs hover:scale-102 transition-all duration-200 gap-2.5 group"
               >
-                Resume
-              </LiquidButton>
+                <FileText className="w-4 h-4 text-amber-600 group-hover:scale-110 transition-transform duration-200" />
+                <span className="text-zinc-900 group-hover:text-zinc-950">Resume</span>
+                <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-100 border border-amber-200/80 px-1.5 py-0.5 rounded-md ml-0.5 shadow-2xs">
+                  PDF
+                </span>
+              </Button>
             </motion.div>
 
-            {/* Stats Row — with IntersectionObserver */}
+            {/* Unified Horizontal Stats Row */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.48 }}
-              className="flex items-center gap-6 justify-center lg:justify-start pt-4"
+              transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.42 }}
+              className="pt-4"
             >
-              {stats.map((stat, i) => (
-                <div key={stat.label} className="flex items-center gap-6">
-                  <div className="text-center lg:text-left" ref={counters[i].ref}>
-                    <div className="text-2xl font-jakarta font-black text-zinc-50">
+              <div className="inline-flex items-center divide-x divide-zinc-200 border-y border-zinc-200 py-3.5 self-center lg:self-start">
+                {stats.map((stat, i) => (
+                  <div
+                    key={stat.label}
+                    ref={counters[i].ref}
+                    className="px-4 sm:px-6 first:pl-0 last:pr-0 text-left"
+                  >
+                    <div className="text-2xl sm:text-3xl font-jakarta font-extrabold text-zinc-900 leading-none">
                       {counters[i].count}
-                      <span className="text-[#10B981]">{stat.suffix}</span>
+                      <span className="text-amber-600">{stat.suffix}</span>
                     </div>
-                    <div className="text-[10px] font-jakarta font-bold uppercase tracking-[0.2em] text-zinc-500">
+                    <div className="text-[11px] font-jakarta font-medium uppercase tracking-wider text-zinc-500 mt-1">
                       {stat.label}
                     </div>
                   </div>
-                  {i < stats.length - 1 && (
-                    <div className="w-px h-8 bg-gradient-to-b from-transparent via-zinc-600 to-transparent" />
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </motion.div>
           </div>
 
-          {/* Right Column: 3D Tilt Code Card */}
+          {/* Right Column: Interactive 3D Magnetic Container (Slightly Bigger, Perfect Fill) */}
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 80, damping: 22, delay: 0.4 }}
-            className="hidden lg:flex items-center justify-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 80, damping: 22, delay: 0.35 }}
+            className="lg:col-span-5 flex items-center justify-center w-full"
           >
             <TiltCard>
-              <div className="relative group">
-                {/* Glow behind card */}
-                <div className="absolute -inset-4 bg-gradient-to-br from-[#06B6D4]/8 via-transparent to-[#8B5CF6]/5 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition-opacity duration-700" />
-
+              <div className="relative w-full flex justify-center">
                 {/* Floating code card */}
                 <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-                  className="relative glass-strong rounded-2xl border border-white/[0.10] hover:border-[#06B6D4]/25 p-8 transition-all duration-500 hover:shadow-glow max-w-sm"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  className="relative bg-white/95 backdrop-blur-xl rounded-2xl border border-zinc-200/90 p-7 sm:p-8 shadow-md hover:shadow-lg transition-all duration-300 w-full max-w-lg lg:max-w-xl"
                 >
-                  {/* Window chrome */}
-                  <div className="flex items-center gap-2 mb-6">
-                    <div className="w-3 h-3 rounded-full bg-red-500/60" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500/60" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-500/60" />
-                    <span className="ml-3 text-[10px] font-jakarta font-bold uppercase tracking-[0.2em] text-zinc-500">
-                      developer.ts
-                    </span>
+                  {/* Apple macOS Traffic Light Window Chrome */}
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-100">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3.5 h-3.5 rounded-full bg-rose-500/85 shadow-2xs" />
+                      <div className="w-3.5 h-3.5 rounded-full bg-amber-500/85 shadow-2xs" />
+                      <div className="w-3.5 h-3.5 rounded-full bg-emerald-500/85 shadow-2xs" />
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500 bg-zinc-50 px-3 py-1 rounded-md border border-zinc-200/70">
+                      <Code2 className="w-3.5 h-3.5 text-amber-600" />
+                      <span>developer.ts</span>
+                    </div>
                   </div>
 
-                  {/* Code content */}
-                  <pre className="text-sm font-mono leading-relaxed">
+                  {/* Code Content - Slightly larger, legible sizing */}
+                  <pre className="text-sm sm:text-[15px] font-mono leading-relaxed bg-zinc-50/90 p-5 sm:p-6 rounded-xl border border-zinc-100 overflow-x-auto text-zinc-800">
                     <code>
-                      <span className="text-[#10B981]/80">const</span>{' '}
-                      <span className="text-zinc-200">developer</span>{' '}
-                      <span className="text-zinc-500">=</span>{' '}
-                      <span className="text-zinc-500">{'{'}</span>
+                      <span className="text-purple-600 font-bold">const</span>{' '}
+                      <span className="text-indigo-600 font-semibold">developer</span>{' '}
+                      <span className="text-zinc-400">=</span>{' '}
+                      <span className="text-zinc-700">{'{'}</span>
                       {'\n'}
-                      {'  '}<span className="text-[#8B5CF6]/80">name</span>
-                      <span className="text-zinc-500">:</span>{' '}
-                      <span className="text-emerald-400/90">&quot;Sachin R&quot;</span>
-                      <span className="text-zinc-600">,</span>
+                      {'  '}<span className="text-rose-600 font-medium">name</span>
+                      <span className="text-zinc-400">:</span>{' '}
+                      <span className="text-emerald-600 font-medium">&quot;Sachin R&quot;</span>
+                      <span className="text-zinc-400">,</span>
                       {'\n'}
-                      {'  '}<span className="text-[#8B5CF6]/80">role</span>
-                      <span className="text-zinc-500">:</span>{' '}
-                      <span className="text-emerald-400/90">&quot;Full Stack Dev&quot;</span>
-                      <span className="text-zinc-600">,</span>
+                      {'  '}<span className="text-rose-600 font-medium">role</span>
+                      <span className="text-zinc-400">:</span>{' '}
+                      <span className="text-emerald-600 font-medium">&quot;Full Stack Dev&quot;</span>
+                      <span className="text-zinc-400">,</span>
                       {'\n'}
-                      {'  '}<span className="text-[#8B5CF6]/80">passion</span>
-                      <span className="text-zinc-500">:</span>{' '}
-                      <span className="text-emerald-400/90">&quot;Building Products&quot;</span>
-                      <span className="text-zinc-600">,</span>
+                      {'  '}<span className="text-rose-600 font-medium">passion</span>
+                      <span className="text-zinc-400">:</span>{' '}
+                      <span className="text-emerald-600 font-medium">&quot;Building Products&quot;</span>
+                      <span className="text-zinc-400">,</span>
                       {'\n'}
-                      {'  '}<span className="text-[#8B5CF6]/80">available</span>
-                      <span className="text-zinc-500">:</span>{' '}
-                      <span className="text-[#10B981]/80">true</span>
-                      <span className="text-zinc-600">,</span>
+                      {'  '}<span className="text-rose-600 font-medium">available</span>
+                      <span className="text-zinc-400">:</span>{' '}
+                      <span className="text-amber-600 font-bold">true</span>
+                      <span className="text-zinc-400">,</span>
                       {'\n'}
-                      <span className="text-zinc-500">{'}'}</span>
-                      <span className="text-zinc-600">;</span>
-                      <span className="animate-blink-cursor border-r-2 border-[#10B981] ml-1">&nbsp;</span>
+                      <span className="text-zinc-700">{'}'}</span>
+                      <span className="text-zinc-400">;</span>
+                      <span className="animate-blink-cursor border-r-2 border-amber-600 ml-1">&nbsp;</span>
                     </code>
                   </pre>
 
                   {/* Status bar */}
-                  <div className="mt-6 pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                  <div className="mt-5 pt-4 border-t border-zinc-100 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-                      <span className="text-[10px] font-jakarta font-bold uppercase tracking-[0.2em] text-zinc-400">
+                      <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-xs sm:text-sm font-jakarta font-semibold text-zinc-700">
                         Available for hire
                       </span>
                     </div>
-                    <span className="text-[10px] font-jakarta font-bold uppercase tracking-[0.2em] text-zinc-600">
-                      TypeScript
-                    </span>
-                  </div>
-                </motion.div>
-
-                {/* Floating mini badge: ProofChain */}
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                  className="absolute -bottom-8 -left-14 glass rounded-xl border border-[#8B5CF6]/15 px-4 py-3 hidden xl:block"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-[#8B5CF6]" />
-                    <span className="text-xs font-semibold text-zinc-300">ProofChain</span>
-                  </div>
-                  <div className="text-[9px] text-zinc-500 mt-1">Blockchain Verified ✓</div>
-                </motion.div>
-
-                {/* Floating mini badge: Next.js */}
-                <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                  className="absolute -top-6 -right-10 glass rounded-xl border border-white/[0.08] px-3 py-2 hidden xl:block"
-                >
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-[#10B981]" />
-                    <span className="text-[10px] font-bold text-zinc-300">Next.js 15</span>
                   </div>
                 </motion.div>
               </div>
@@ -415,17 +349,7 @@ export default function HeroSection({ id }: { id: string }) {
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 2.2, duration: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-      >
-        <span className="text-[9px] uppercase tracking-[0.3em] text-zinc-500 font-bold">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-[#06B6D4]/40 to-transparent" />
-      </motion.div>
     </section>
   );
 }
+

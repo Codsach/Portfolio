@@ -17,7 +17,7 @@ export default function Home() {
       </SectionStack>
 
       {/* Projects section rendered directly without parent CSS transform to allow window sticky stacking */}
-      <div id="projects" className="relative z-30">
+      <div id="projects" className="relative z-[3]">
         <ProjectsSection id="projects-content" />
       </div>
 
