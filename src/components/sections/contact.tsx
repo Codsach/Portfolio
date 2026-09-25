@@ -1,8 +1,7 @@
 'use client';
 
-import { Mail, MapPin, Sparkles, ArrowRight, MessageSquare } from 'lucide-react';
+import { Mail, ArrowRight } from 'lucide-react';
 import { IconBrandGithub, IconBrandLinkedin } from '@/components/icons';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 const connectors = [
@@ -13,6 +12,11 @@ const connectors = [
     icon: Mail,
     featured: true,
     cta: 'Send Direct Email',
+    brandBg: '#d97706',
+    brandBorder: '#d97706',
+    iconDefaultBg: 'bg-amber-50',
+    iconDefaultText: 'text-amber-600',
+    iconDefaultBorder: 'border border-amber-100',
   },
   {
     label: 'LinkedIn',
@@ -21,6 +25,11 @@ const connectors = [
     icon: IconBrandLinkedin,
     featured: false,
     cta: 'Connect on LinkedIn',
+    brandBg: '#0A66C2',
+    brandBorder: '#0A66C2',
+    iconDefaultBg: 'bg-blue-50',
+    iconDefaultText: 'text-blue-600',
+    iconDefaultBorder: 'border border-blue-100',
   },
   {
     label: 'GitHub',
@@ -29,6 +38,11 @@ const connectors = [
     icon: IconBrandGithub,
     featured: false,
     cta: 'Explore Repositories',
+    brandBg: '#181717',
+    brandBorder: '#181717',
+    iconDefaultBg: 'bg-zinc-100',
+    iconDefaultText: 'text-zinc-900',
+    iconDefaultBorder: 'border border-zinc-200',
   },
 ];
 
@@ -82,68 +96,113 @@ export default function ContactSection({ id }: { id: string }) {
             Feel free to email me directly or connect through LinkedIn.
           </motion.p>
 
-          {/* Contact Cards - Solid Terracotta Email card + clean neutral cards */}
+          {/* Contact Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
-            {connectors.map((connector, index) => {
-              const isEmail = connector.featured;
-              return (
-                <motion.a
-                  key={connector.label}
-                  href={connector.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4, delay: 0.25 + index * 0.08 }}
-                  whileHover={{ y: -4 }}
-                  className={`group relative flex flex-col items-center p-6 sm:p-8 rounded-2xl transition-all duration-200 cursor-pointer ${
-                    isEmail
-                      ? 'bg-amber-600 text-white shadow-md hover:bg-amber-700 hover:scale-102 border border-amber-600'
-                      : 'bg-white border border-zinc-200 hover:border-zinc-300 hover:scale-102 shadow-sm hover:shadow-md'
-                  }`}
-                >
-                  {isEmail && (
-                    <div className="absolute top-3.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-black/15 text-[10px] font-bold uppercase tracking-widest text-white">
-                      Primary Contact
-                    </div>
-                  )}
-
-                  <div className="relative z-10 flex flex-col items-center w-full mt-2">
-                    <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-200 group-hover:scale-105 shadow-2xs ${
-                        isEmail
-                          ? 'bg-white/20 text-white'
-                          : connector.label === 'LinkedIn'
-                          ? 'bg-blue-50 text-blue-600 border border-blue-100'
-                          : 'bg-zinc-100 text-zinc-900 border border-zinc-200'
-                      }`}
-                    >
-                      <connector.icon className="w-5 h-5" />
-                    </div>
-
-                    <p className={`text-xs font-semibold uppercase tracking-wider mb-1 text-center font-jakarta ${isEmail ? 'text-white/80' : 'text-zinc-500'}`}>
-                      {connector.label}
-                    </p>
-                    
-                    <p className={`text-sm sm:text-base font-bold mb-6 text-center break-all font-jakarta ${isEmail ? 'text-white' : 'text-zinc-900'}`}>
-                      {connector.value}
-                    </p>
-
-                    <div className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider transition-colors duration-150 mt-auto ${
-                      isEmail ? 'text-white' : 'text-amber-600 group-hover:text-amber-700'
-                    }`}>
-                      <span>{connector.cta}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-150" />
-                    </div>
+            {connectors.map((connector, index) => (
+              <motion.a
+                key={connector.label}
+                href={connector.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.4, delay: 0.25 + index * 0.08 }}
+                whileHover={{ y: -4 }}
+                className="contact-card group relative flex flex-col items-center p-6 sm:p-8 rounded-2xl cursor-pointer"
+                style={
+                  {
+                    '--brand-bg': connector.brandBg,
+                    '--brand-border': connector.brandBorder,
+                  } as React.CSSProperties
+                }
+              >
+                {connector.featured && (
+                  <div className="contact-badge absolute top-3.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                    Primary Contact
                   </div>
-                </motion.a>
-              );
-            })}
+                )}
+
+                <div className="relative z-10 flex flex-col items-center w-full mt-2">
+                  <div
+                    className={`contact-icon-wrap w-12 h-12 rounded-xl flex items-center justify-center mb-4 shadow-2xs ${connector.iconDefaultBg} ${connector.iconDefaultText} ${connector.iconDefaultBorder}`}
+                  >
+                    <connector.icon className="w-5 h-5" />
+                  </div>
+
+                  <p className="contact-label text-xs font-semibold uppercase tracking-wider mb-1 text-center font-jakarta text-zinc-500">
+                    {connector.label}
+                  </p>
+
+                  <p className="contact-value text-sm sm:text-base font-bold mb-6 text-center break-all font-jakarta text-zinc-900">
+                    {connector.value}
+                  </p>
+
+                  <div className="contact-cta inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider mt-auto text-amber-600">
+                    <span>{connector.cta}</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-150" />
+                  </div>
+                </div>
+              </motion.a>
+            ))}
           </div>
         </div>
       </div>
+
+      <style>{`
+        .contact-card {
+          background-color: #ffffff;
+          border: 1px solid #e4e4e7;
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.06);
+          transition:
+            background-color 0.22s ease,
+            border-color     0.22s ease,
+            box-shadow       0.22s ease;
+        }
+        .contact-card:hover {
+          background-color: var(--brand-bg);
+          border-color:     var(--brand-border);
+          box-shadow: 0 10px 28px -6px rgba(0,0,0,0.22);
+        }
+        .contact-badge {
+          background-color: rgba(0,0,0,0.08);
+          color: #52525b;
+          transition: background-color 0.22s ease, color 0.22s ease;
+        }
+        .contact-card:hover .contact-badge {
+          background-color: rgba(255,255,255,0.18);
+          color: rgba(255,255,255,0.88);
+        }
+        .contact-icon-wrap {
+          transition:
+            background-color 0.22s ease,
+            border-color     0.22s ease,
+            color            0.22s ease;
+        }
+        .contact-card:hover .contact-icon-wrap {
+          background-color: rgba(255,255,255,0.20) !important;
+          border-color:     transparent            !important;
+          color:            #ffffff                !important;
+        }
+        .contact-label {
+          transition: color 0.22s ease;
+        }
+        .contact-card:hover .contact-label {
+          color: rgba(255,255,255,0.72);
+        }
+        .contact-value {
+          transition: color 0.22s ease;
+        }
+        .contact-card:hover .contact-value {
+          color: #ffffff;
+        }
+        .contact-cta {
+          transition: color 0.22s ease;
+        }
+        .contact-card:hover .contact-cta {
+          color: rgba(255,255,255,0.90);
+        }
+      `}</style>
     </section>
   );
 }
-
