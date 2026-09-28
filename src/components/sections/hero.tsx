@@ -141,15 +141,12 @@ export default function HeroSection({ id }: { id: string }) {
       {/* Subtle architectural grid */}
       <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none -z-20" />
 
-      {/* Subtle warm ambient illumination */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[600px] h-[350px] pointer-events-none -z-10 opacity-30">
-        <div
-          className="w-full h-full animate-pulse-glow"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(234,88,12,0.12) 0%, transparent 70%)',
-            filter: 'blur(60px)',
-          }}
-        />
+      {/* Warm lamp glow — off-center right, bleeds around the code card like a desk lamp */}
+      <div
+        className="absolute pointer-events-none z-[1]"
+        style={{ top: '50%', right: '14%', transform: 'translate(0, -52%)' }}
+      >
+        <div className="hero-lamp-glow" />
       </div>
 
       {/* ─── Main Content ─── */}
@@ -349,6 +346,9 @@ export default function HeroSection({ id }: { id: string }) {
           </motion.div>
         </div>
       </div>
+
+      {/* Fine grain noise — hero only, 3% opacity, tactile texture */}
+      <div className="hero-grain-overlay" aria-hidden="true" />
     </section>
   );
 }
