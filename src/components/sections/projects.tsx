@@ -8,11 +8,9 @@ import { projects, type Project } from '@/lib/data';
 function StackingCardItem({
   project,
   index,
-  total,
 }: {
   project: Project;
   index: number;
-  total: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -90,7 +88,6 @@ export default function ProjectsSection({ id }: { id: string }) {
               key={project.title}
               project={project}
               index={index}
-              total={projects.length}
             />
           ))}
           {/* Spacer: gives the last sticky card enough scroll runway to fully overlap the previous card */}

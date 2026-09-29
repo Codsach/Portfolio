@@ -5,7 +5,7 @@ import { Card, CardContent } from '../ui/card';
 import { skills } from '@/lib/data';
 import { getIconForTechnology } from '@/components/brand-icons';
 import { useRef } from 'react';
-import { Wrench, Sparkles } from 'lucide-react';
+import { Wrench } from 'lucide-react';
 
 // 3D tilt card wrapper
 function TiltCard({ children }: { children: React.ReactNode }) {

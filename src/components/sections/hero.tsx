@@ -1,11 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState, useRef } from 'react';
 import { useAnimation } from '@/context/animation-context';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { ArrowRight, FileText, Sparkles, Code2 } from 'lucide-react';
+import { ArrowRight, FileText, Code2 } from 'lucide-react';
 
 // Cycling titles that type in and out
 const roles = ['Full Stack Developer', 'Flutter & Mobile Builder', 'Web App Builder', 'Creative Problem Solver'];
@@ -60,8 +59,10 @@ function useTypingText(texts: string[], speed = 70, pause = 2000) {
     if (!isDeleting && displayed === current) {
       timeout = setTimeout(() => setIsDeleting(true), pause);
     } else if (isDeleting && displayed === '') {
-      setIsDeleting(false);
-      setTextIndex((i) => (i + 1) % texts.length);
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setTextIndex((i) => (i + 1) % texts.length);
+      }, 0);
     } else {
       timeout = setTimeout(() => {
         setDisplayed(isDeleting

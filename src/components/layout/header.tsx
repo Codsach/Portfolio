@@ -1,14 +1,16 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useSyncExternalStore } from 'react';
 import Link from 'next/link';
-import { Menu, X, FileText } from 'lucide-react';
+import { Menu, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
 import Logo from '@/components/logo';
 import { useAnimation } from '@/context/animation-context';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const emptySubscribe = () => () => {};
 
 const navItems = [
   { href: '#home', label: 'Home' },
@@ -30,11 +32,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const { isHeroAnimationDone } = useAnimation();
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const isClient = useSyncExternalStore(emptySubscribe, () => true, () => false);
 
   useEffect(() => {
     const handleScroll = () => {

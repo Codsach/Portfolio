@@ -9,16 +9,13 @@ import { ArrowUpRight, Github, Lightbulb, Wrench, Trophy } from 'lucide-react';
 import { useState } from 'react';
 import { getIconForTechnology } from '@/components/brand-icons';
 
-export function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
+export function ProjectCard({ project }: { project: Project; index?: number }) {
   const [imageError, setImageError] = useState(false);
   const projectImage = PlaceHolderImages.find(
     (img) => img.id === project.imageId
   );
 
   const imageUrl = projectImage ? `${projectImage.imageUrl}?v=1` : '';
-  
-  // Layout variation: even cards = image left, odd cards = image right
-  const isImageRight = index % 2 === 1;
 
   // Extract clean domain from liveDemoUrl
   const displayDomain = (() => {
@@ -76,6 +73,7 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
         <div className="relative w-full overflow-hidden aspect-[16/9] sm:aspect-[2.4/1] lg:aspect-[2.8/1] max-h-[220px] sm:max-h-[250px] bg-zinc-100 border-b border-zinc-100">
           {projectImage && !imageError ? (
             <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={imageUrl}
                 alt={project.title}

@@ -4,10 +4,8 @@ import { AnimationProvider } from '@/context/animation-context';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import { useAnimation } from '@/context/animation-context';
 
 function SiteWrapper({ children }: { children: React.ReactNode }) {
-  const { isHeroAnimationDone } = useAnimation();
   return <>{children}</>;
 }
 
