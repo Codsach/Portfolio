@@ -1,0 +1,143 @@
+{
+  "about": {
+    "name": "Sachin R",
+    "role": "Software Development Engineer | Full-Stack Developer",
+    "location": "Mandya, Karnataka, India",
+    "summary": "Full-stack developer experienced in building production backend and full-stack systems with TypeScript, Next.js, Node.js/Express, Python (FastAPI), and PostgreSQL/MongoDB. Built ProofChain, a blockchain-based digital evidence platform with AI-powered tamper detection, and shipped reporting, bulk-ingestion, and certificate-generation systems for a live multi-tenant SaaS product during a full-stack internship. Prioritizes clean architecture and maintainable systems. Seeking a Software Development Engineer (SDE-1) role to build reliable, scalable systems.",
+    "focusAreas": [
+      "Full-Stack Apps (React, Next.js & Node.js)",
+      "Backend Systems (REST APIs, FastAPI & Relational Databases)",
+      "Blockchain & Decentralized Systems (Solidity, Polygon & IPFS)",
+      "AI Integrations (Vision Transformer, Gemini & Tamper-Detection Pipelines)"
+    ],
+    "tagline": "Building software that solves real problems."
+  },
+
+  "skills": {
+    "languages": ["TypeScript", "JavaScript", "Python", "Java", "SQL"],
+    "frontend": ["React", "Next.js", "Tailwind CSS"],
+    "backend": ["Node.js", "Express", "FastAPI", "REST APIs", "Prisma ORM", "JWT Authentication"],
+    "databases": ["PostgreSQL", "MongoDB"],
+    "tools": [
+      "Git & GitHub",
+      "GitHub Actions",
+      "CI/CD",
+      "Docker",
+      "AWS S3-compatible storage (Cloudflare R2)",
+      "Vercel"
+    ],
+    "coreConcepts": [
+      "Data Structures & Algorithms",
+      "OOP",
+      "DBMS",
+      "Operating Systems",
+      "Computer Networks"
+    ]
+  },
+
+  "experience": [
+    {
+      "role": "Full Stack Developer Intern",
+      "company": "Growify India",
+      "location": "Remote",
+      "period": "Apr 2026 – Jun 2026",
+      "technologies": ["Next.js", "Express", "Prisma ORM", "PostgreSQL", "Cloudflare R2", "Vitest"],
+      "highlights": [
+        "Engineered 7+ full-stack modules (inventory, live-class scheduling, teacher performance, reporting) as a core contributor on a 7-engineer team building a multi-tenant school-management SaaS.",
+        "Authored 120 commits (~15% of ~786 total) and 110K+ lines, building a transaction-safe inventory system with soft-delete architecture and an 8-report analytics engine with Vitest-tested Excel/PDF export pipelines.",
+        "Developed a cloud-integrated certificate issuance pipeline (Cloudflare R2, S3 API) with sequential numbering and bulk generation.",
+        "Built a live-class API for 4 user roles with conflict detection and UTC-safe attendance reporting."
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "ProofChain",
+      "description": "Blockchain-verified digital evidence management platform with AI tamper detection.",
+      "problem": "Digital evidence can be easily tampered with — courts and investigations need proof that a file hasn't been altered since submission.",
+      "approach": "Solely architected a publicly deployed forensic evidence platform (40 API endpoints, email-verified auth, 3 roles). An EVM smart contract (Solidity, Ethers.js) anchors SHA-256 hashes and IPFS CIDs on Polygon, with a zero-trust re-hashing verification API. A containerized FastAPI microservice runs a 12-signal composite tamper-scoring algorithm (Vision Transformer, Gemini Vision API, EXIF/MIME/PDF/video forensics).",
+      "result": "End-to-end tamper-proof evidence chain: upload → AI analysis → IPFS storage → blockchain anchoring → verifiable certificate. Secured with JWT (15-min access/7-day refresh), TOTP 2FA, brute-force lockout, and timing-attack mitigation; validated with 34 automated pytest test cases and a GitHub Actions CI/CD pipeline with automated Vercel deployment.",
+      "technologies": ["Next.js", "FastAPI", "Solidity", "Ethers.js", "MongoDB", "IPFS", "Polygon", "JWT/2FA"],
+      "highlights": [
+        "Polygon smart contract anchoring SHA-256 hashes and IPFS CIDs for immutable records",
+        "12-signal AI tamper-scoring (Vision Transformer, Gemini Vision, forensic analysis)",
+        "40 API endpoints with email-verified auth, 3 roles, JWT + TOTP 2FA",
+        "Fire-and-forget async pipelines for AI scoring and blockchain anchoring"
+      ],
+      "liveUrl": "https://proofchain-web.vercel.app",
+      "sourceUrl": "https://github.com/Codsach/proofchain"
+    },
+    {
+      "name": "CodSach Student Hub",
+      "description": "Academic resource platform for MCA students, built as a Git-backed headless CMS.",
+      "problem": "Academic materials were scattered across WhatsApp groups and random drives — no version control, search, or structure for MCA students.",
+      "approach": "Solely designed and built a Next.js + TypeScript platform that uses the GitHub REST API as a zero-cost database, serving 4 resource categories across 8 pages with recursive Git-tree traversal and parallel blob fetching. Type-safe server-side pipelines (Genkit flows, Zod validation) with tag-based cache invalidation for real-time updates.",
+      "result": "Centralized academic hub organized by category with search, multi-criteria filtering, and an admin panel with GitHub-token authentication; automated lint, typecheck, and build via GitHub Actions with Vercel deployment.",
+      "technologies": ["Next.js", "TypeScript", "GitHub API", "Zod", "Firebase Genkit", "Tailwind CSS", "Shadcn UI"],
+      "highlights": [
+        "Git-backed resource storage with version control",
+        "Genkit AI-powered backend flows with Zod validation",
+        "Admin panel with GitHub-token authentication and multi-criteria filtering"
+      ],
+      "liveUrl": "https://codsach.vercel.app",
+      "sourceUrl": "https://github.com/Codsach/codsach-student-hub"
+    },
+    {
+      "name": "TaskManager",
+      "description": "Full-stack task management app with ShadCN UI and MongoDB.",
+      "problem": "Most student task management tools rely on local storage or basic Firebase — needed a production-quality solution with proper database persistence.",
+      "approach": "Built with Next.js App Router, ShadCN UI for accessible components, full TypeScript coverage, and MongoDB for persistent CRUD operations.",
+      "result": "Production-ready task manager showcasing full-stack Next.js patterns with database integration and polished component design.",
+      "technologies": ["Next.js", "TypeScript", "ShadCN UI", "Tailwind CSS", "MongoDB"],
+      "highlights": [
+        "ShadCN UI component system",
+        "MongoDB-backed task persistence",
+        "TypeScript end-to-end type safety"
+      ],
+      "liveUrl": "https://task-manager-livid-pi-19.vercel.app",
+      "sourceUrl": "https://github.com/Codsach/TaskManager-"
+    }
+  ],
+
+  "education": [
+    {
+      "degree": "Master of Computer Applications (MCA)",
+      "institution": "St. Philomena's College (Autonomous), University of Mysore",
+      "period": "2024 – 2026",
+      "cgpa": "8.22"
+    },
+    {
+      "degree": "Bachelor of Computer Applications (BCA)",
+      "institution": "JSS College of Arts, Commerce & Science, University of Mysore",
+      "period": "2021 – 2024",
+      "cgpa": "7.68"
+    }
+  ],
+
+  "certifications": [
+    {
+      "name": "Introduction to Linux (LFS101)",
+      "issuer": "The Linux Foundation",
+      "year": "2026"
+    },
+    {
+      "name": "Gen AI Master Certificate",
+      "issuer": "Google Gen AI Academy, Cohort 3, Hack2skill",
+      "issued": "Sep 2026"
+    }
+  ],
+
+  "achievements": [
+    "Authored 120 commits (~15% of ~786 total) and 110K+ lines on a 7-engineer multi-tenant SaaS during internship at Growify India",
+    "Solely architected ProofChain: 40 API endpoints, 12-signal AI tamper scoring, and 34 automated pytest tests",
+    "Earned the Google Gen AI Master Certificate (Gen AI Academy, Cohort 3) in Sep 2026"
+  ],
+
+  "contact": {
+    "email": "rsachinsachi@gmail.com",
+    "github": "https://github.com/Codsach",
+    "linkedin": "https://www.linkedin.com/in/sachinr-dev/",
+    "portfolio": "https://sachinr.vercel.app"
+  }
+}

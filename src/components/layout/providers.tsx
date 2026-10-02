@@ -2,6 +2,7 @@
 
 import { AnimationProvider } from '@/context/animation-context';
 import { Toaster } from '@/components/ui/toaster';
+import { SelenaChat } from '@/components/selena/selena-chat';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 
@@ -18,6 +19,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <Footer />
       </SiteWrapper>
       <Toaster />
+      <SelenaChat />
     </AnimationProvider>
   );
 }
+
