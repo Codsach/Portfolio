@@ -1,6 +1,6 @@
 'use client';
 
-import { User, Layers, Server, Smartphone, Bot } from 'lucide-react';
+import { User, Layers, Server, Network, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const focusAreas = [
@@ -13,15 +13,15 @@ const focusAreas = [
   },
   {
     label: 'Backend Systems',
-    sub: 'APIs & Relational Databases',
+    sub: 'APIs, Databases & Microservices',
     icon: Server,
     theme: 'border-emerald-200/80 bg-emerald-50/70 hover:border-emerald-300 text-emerald-700',
     iconBg: 'bg-emerald-100 text-emerald-700',
   },
   {
-    label: 'Mobile & Flutter Apps',
-    sub: 'Cross-Platform iOS & Android',
-    icon: Smartphone,
+    label: 'Distributed Systems',
+    sub: 'Blockchain, IPFS & Smart Contracts',
+    icon: Network,
     theme: 'border-purple-200/80 bg-purple-50/70 hover:border-purple-300 text-purple-700',
     iconBg: 'bg-purple-100 text-purple-700',
   },
@@ -86,7 +86,7 @@ export default function AboutSection({ id }: { id: string }) {
               <WordReveal text="Sachin R." />
               <br />
               <span className="text-zinc-500 font-jakarta font-semibold italic text-2xl md:text-3xl lg:text-4xl block mt-2">
-                <WordReveal text="Builder. Problem Solver." delay={200} />
+                <WordReveal text="Builder. Engineer. Occasional Overbuilder." delay={200} />
               </span>
             </h2>
 
@@ -110,7 +110,7 @@ export default function AboutSection({ id }: { id: string }) {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-base sm:text-lg text-zinc-700 leading-relaxed font-normal"
               >
-                I am a <strong className="font-semibold text-zinc-950">Full-Stack Developer</strong> dedicated to building high-performance, accessible, and dependable web applications. My expertise spans responsive user interfaces, distributed backends, and decentralized systems.
+                I&apos;m a <strong className="font-semibold text-zinc-950">Software Engineer</strong> who builds things end-to-end — from database schema to the UI pixel. I&apos;ve worked across full-stack web apps, AI-integrated backends, and blockchain systems, and I care a lot about clean architecture.
               </motion.p>
 
               <motion.p

@@ -67,7 +67,7 @@ export default function ContactSection({ id }: { id: string }) {
           >
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-xs font-semibold uppercase tracking-wider text-zinc-800 font-jakarta">
-              Open To Opportunities — Full-Time &amp; Contracts
+              Open to Software Engineering Roles
             </span>
           </motion.div>
 
@@ -80,8 +80,8 @@ export default function ContactSection({ id }: { id: string }) {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 font-jakarta tracking-tight leading-tight"
             >
-              Ready to start your <br className="hidden sm:inline" />
-              <span className="text-amber-600">next big project?</span>
+              Let&apos;s build{' '}
+              <span className="text-amber-600">something.</span>
             </motion.h2>
           </div>
 
@@ -90,10 +90,11 @@ export default function ContactSection({ id }: { id: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base sm:text-lg text-zinc-600 max-w-xl mx-auto leading-relaxed mb-12 font-normal"
+            className="text-base sm:text-lg text-zinc-600 max-w-xl mx-auto leading-relaxed mb-12 font-normal text-center"
           >
-            I am available for engineering roles and select client builds.
-            Feel free to email me directly or connect through LinkedIn.
+            Currently looking for full-time roles in software engineering —
+            <br className="hidden sm:block" />
+            full-stack, backend, or product. Open to contracts on the side. Let&apos;s talk.
           </motion.p>
 
           {/* Contact Cards */}

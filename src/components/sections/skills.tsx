@@ -37,36 +37,9 @@ function TiltCard({ children }: { children: React.ReactNode }) {
   );
 }
 
-const allTechs = [
-  'Next.js',
-  'React',
-  'TypeScript',
-  'Node.js',
-  'Express',
-  'MongoDB',
-  'Solidity',
-  'Tailwind CSS',
-  'Framer Motion',
-  'PostgreSQL',
-  'Firebase',
-  'Docker',
-  'Git',
-  'GraphQL',
-  'Next.js',
-  'React',
-  'TypeScript',
-  'Node.js',
-  'Express',
-  'MongoDB',
-  'Solidity',
-  'Tailwind CSS',
-  'Framer Motion',
-  'PostgreSQL',
-  'Firebase',
-  'Docker',
-  'Git',
-  'GraphQL',
-];
+// Derive a clean, deduplicated marquee list from the skills data — duplicate once for seamless CSS loop
+const uniqueTechs = skills.flatMap((cat) => cat.technologies);
+const allTechs = [...uniqueTechs, ...uniqueTechs];
 
 const categoryThemes = [
   {

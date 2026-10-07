@@ -12,6 +12,7 @@ export type Project = {
   sourceCodeUrl: string;
   imageId: string;
   accentColor: string;
+  featured?: boolean;
 };
 
 export const projects: Project[] = [
@@ -34,6 +35,7 @@ export const projects: Project[] = [
     sourceCodeUrl: 'https://github.com/Codsach/proofchain',
     imageId: 'project-1',
     accentColor: '#C2410C',
+    featured: true,
   },
   {
     title: 'CodSach',
@@ -85,34 +87,43 @@ export type SkillCategory = {
 
 export const skills: SkillCategory[] = [
   {
-    title: 'Frontend',
+    title: 'Languages & Frontend',
     icon: Code,
     technologies: [
-      'HTML5',
-      'CSS3',
-      'JavaScript',
       'TypeScript',
+      'JavaScript',
+      'Python',
       'React',
       'Next.js',
       'Tailwind CSS',
-      'Flutter',
+      'HTML5',
+      'CSS3',
     ],
   },
   {
-    title: 'Backend',
+    title: 'Backend & Databases',
     icon: Database,
     technologies: [
       'Node.js',
       'Express',
-      'MongoDB',
+      'FastAPI',
       'PostgreSQL',
+      'MongoDB',
       'MySQL',
       'REST APIs',
     ],
   },
   {
-    title: 'Tools',
+    title: 'Infrastructure & Other',
     icon: Wrench,
-    technologies: ['Git & GitHub', 'Docker', 'Google Colab', 'VS Code', 'Vercel'],
+    technologies: [
+      'Docker',
+      'Git',
+      'GitHub',
+      'Vercel',
+      'Solidity',
+      'Firebase',
+      'AI/LLM APIs',
+    ],
   },
 ];

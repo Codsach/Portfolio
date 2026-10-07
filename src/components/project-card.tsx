@@ -28,7 +28,11 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
 
   return (
     <Card
-      className="group overflow-hidden rounded-xl border border-zinc-200 hover:border-zinc-300 transition-all duration-300 flex flex-col h-full bg-white shadow-sm hover:shadow-md"
+      className={`group overflow-hidden rounded-xl border transition-all duration-300 flex flex-col h-full bg-white shadow-sm hover:shadow-md ${
+        project.featured
+          ? 'border-amber-300 hover:border-amber-400 ring-1 ring-amber-200/60'
+          : 'border-zinc-200 hover:border-zinc-300'
+      }`}
     >
       {/* Chrome Header */}
       <div className="flex items-center gap-2 px-5 py-3 border-b border-zinc-100 bg-zinc-50/70">
@@ -41,6 +45,13 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
         <span className="ml-3 text-xs font-mono font-medium text-zinc-500 bg-white px-2 py-0.5 rounded border border-zinc-200/60 truncate max-w-[200px] sm:max-w-none">
           {displayDomain}
         </span>
+
+        {project.featured && (
+          <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 border border-amber-200 text-[10px] font-bold uppercase tracking-wider text-amber-700">
+            <Trophy className="w-3 h-3" />
+            Flagship
+          </span>
+        )}
 
         <div className="ml-auto flex items-center gap-2">
           <Button
