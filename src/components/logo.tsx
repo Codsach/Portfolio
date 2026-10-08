@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
-export default function Logo({ className }: { className?: string }) {
+export default function Logo({ className, textClassName }: { className?: string; textClassName?: string }) {
   return (
     <Link
       href="/"
@@ -27,7 +27,7 @@ export default function Logo({ className }: { className?: string }) {
           className="w-full h-full object-cover"
         />
       </motion.div>
-      <span className="font-headline font-bold text-zinc-900 group-hover:text-amber-600 transition-colors duration-200">
+      <span className={cn("font-sans font-semibold text-[18px] text-[var(--ink)] group-hover:text-[var(--amber)] transition-colors duration-200", textClassName)}>
         Sachin R
       </span>
     </Link>

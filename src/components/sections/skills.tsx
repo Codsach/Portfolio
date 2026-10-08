@@ -5,7 +5,6 @@ import { Card, CardContent } from '../ui/card';
 import { skills } from '@/lib/data';
 import { getIconForTechnology } from '@/components/brand-icons';
 import { useRef } from 'react';
-import { Wrench } from 'lucide-react';
 
 // 3D tilt card wrapper
 function TiltCard({ children }: { children: React.ReactNode }) {
@@ -91,16 +90,15 @@ export default function SkillsSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative overflow-hidden px-6 py-24 md:py-32 bg-white"
+      className="relative overflow-hidden py-24 md:py-32 bg-white"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
-      <div className="container mx-auto max-w-6xl relative z-10 w-full">
+      <div className="container mx-auto relative z-10 w-full">
         {/* Section Header */}
         <div className="max-w-2xl mb-14 sm:mb-18">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 border border-zinc-200 text-xs font-semibold uppercase tracking-wider text-zinc-700 mb-4">
-            <Wrench className="w-3.5 h-3.5 text-amber-600" />
-            <span>Technical Capabilities</span>
+          <div className="t-label mb-4">
+            Technical Capabilities
           </div>
 
           <motion.h2
@@ -108,9 +106,9 @@ export default function SkillsSection({ id }: { id: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 mb-4 font-jakarta tracking-tight leading-tight"
+            className="t-section mb-4"
           >
-            Engineering <span className="text-amber-600">Toolbox.</span>
+            Engineering Toolbox<span className="text-[var(--amber)]">.</span>
           </motion.h2>
 
           <motion.p
@@ -118,7 +116,7 @@ export default function SkillsSection({ id }: { id: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-base sm:text-lg text-zinc-600 leading-relaxed font-normal"
+            className="t-lead max-w-2xl"
           >
             A breakdown of technologies, frameworks, and architectural tools I leverage to build robust applications.
           </motion.p>
@@ -146,7 +144,7 @@ export default function SkillsSection({ id }: { id: string }) {
                         >
                           <category.icon className="h-5 w-5" />
                         </div>
-                        <h3 className="text-xl font-bold text-zinc-900 font-jakarta">{category.title}</h3>
+                        <h3 className="t-card">{category.title}</h3>
                         <div className={`h-0.5 w-8 ${theme.accentLine} rounded-full mt-2`} />
                       </div>
 
@@ -167,7 +165,7 @@ export default function SkillsSection({ id }: { id: string }) {
                               className={`flex items-center gap-2 bg-white border border-zinc-200 ${theme.tagHover} rounded-lg px-2.5 py-1.5 transition-all duration-150 cursor-default shadow-2xs`}
                             >
                               {Icon && <Icon className="h-4 w-4 flex-shrink-0" />}
-                              <span className="text-xs font-semibold text-zinc-800">
+                              <span className="font-sans font-medium text-[13px] text-[var(--ink)]">
                                 {tech}
                               </span>
                             </motion.div>
@@ -190,10 +188,10 @@ export default function SkillsSection({ id }: { id: string }) {
               return (
                 <div
                   key={i}
-                  className="flex-shrink-0 flex items-center gap-2 bg-white border border-zinc-300 px-3.5 py-1.5 rounded-lg cursor-default text-zinc-900 shadow-2xs hover:border-amber-400 transition-colors duration-150"
+                  className="flex-shrink-0 flex items-center gap-2 bg-white border border-zinc-300 px-3.5 py-1.5 rounded-lg cursor-default text-[var(--ink)] shadow-2xs hover:border-amber-400 transition-colors duration-150"
                 >
                   {Icon && <Icon className="h-4 w-4 flex-shrink-0" />}
-                  <span className="text-xs font-mono font-bold tracking-tight text-zinc-900 uppercase">
+                  <span className="font-sans font-medium text-[12px] uppercase tracking-[0.08em] text-[var(--ink)]">
                     {tech}
                   </span>
                 </div>

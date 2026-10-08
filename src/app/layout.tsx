@@ -1,24 +1,28 @@
 
-import { Inter, Outfit, Plus_Jakarta_Sans } from 'next/font/google';
+import { Anton, Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Providers } from '@/components/layout/providers';
 import { AmbientLight } from '@/components/ui/ambient-light';
 import type { Metadata } from 'next';
 
+const anton = Anton({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
+  display: 'swap',
 });
 
-const headlineFont = Outfit({
+const mono = JetBrains_Mono({
   subsets: ['latin'],
-  variable: '--font-outfit',
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  variable: '--font-plus-jakarta-sans',
+  variable: '--font-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -35,14 +39,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={cn('scroll-smooth', anton.variable, inter.variable, mono.variable)}>
       <body
-        className={cn(
-          'min-h-screen bg-slate-50 text-slate-900 font-body antialiased relative selection:bg-indigo-500 selection:text-white',
-          inter.variable,
-          headlineFont.variable,
-          plusJakartaSans.variable
-        )}
+        className="min-h-screen bg-slate-50 text-[var(--ink)] font-sans antialiased relative selection:bg-indigo-500 selection:text-white"
       >
         {/* Ambient atmospheric lighting — sits behind everything */}
         <AmbientLight />

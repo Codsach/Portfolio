@@ -10,6 +10,12 @@ html {
 /* ── Base color overrides ──────────────────────────────────────────── */
 @layer base {
   :root {
+    --ink: #1A1411;
+    --body: #5E5249;
+    --muted: #8A7B6F;
+    --amber: #C8690A;
+    --amber-text: #A85708;
+
     --background: 0 0% 98%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -20,7 +26,7 @@ html {
     --primary-foreground: 0 0% 100%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
+    --muted-bg: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 24.6 95% 53.1%;
     --accent-foreground: 0 0% 100%;
@@ -39,7 +45,107 @@ html {
   }
   body {
     background-color: #FAFAFA;
-    color: #18181B;
+    color: var(--body);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── Typography Scale ─────────────────────────────────────────────── */
+@layer components {
+  .t-hero {
+    font-family: var(--font-display), Impact, 'Arial Narrow', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(56px, 9vw, 120px);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .t-section {
+    font-family: var(--font-display), Impact, 'Arial Narrow', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: clamp(40px, 5.5vw, 64px);
+    line-height: 1;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+
+  .t-stat {
+    font-family: var(--font-display), Impact, 'Arial Narrow', sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .t-name {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .t-card {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+
+  .t-lead {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 300;
+    font-size: clamp(17px, 1.6vw, 20px);
+    line-height: 1.5;
+    color: var(--body);
+    text-wrap: pretty;
+  }
+
+  .t-body {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--body);
+    max-width: 65ch;
+    text-wrap: pretty;
+  }
+  @media (min-width: 1024px) {
+    .t-body {
+      font-size: 17px;
+    }
+  }
+
+  .t-label {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--amber-text);
+  }
+
+  .t-ui {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .t-code {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.6;
   }
 }
 
@@ -235,8 +341,94 @@ html, body {
   .animate-ambient-drift-1,
   .animate-ambient-drift-2,
   .animate-ambient-drift-3,
-  .hero-lamp-glow {
+  .hero-lamp-glow,
+  .hero-bg i {
     animation: none !important;
     transform: none !important;
   }
 }
+
+/* ── Hero Mockup Ambient Drift Animations ───────────────────────────── */
+@keyframes hero-d1 {
+  to { transform: translate3d(9%, 11%, 0) scale(1.1); }
+}
+@keyframes hero-d2 {
+  to { transform: translate3d(-10%, 7%, 0) scale(1.08); }
+}
+@keyframes hero-d3 {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-5%, -4%, 0) scale(1.05); }
+}
+@keyframes hero-glow {
+  to { transform: translate3d(14%, -10%, 0) scale(1.3); opacity: 0.9; }
+}
+
+.hero-c1 {
+  width: 70vw;
+  aspect-ratio: 1;
+  left: 14%;
+  top: -60%;
+  background: radial-gradient(circle, #c9650f 0%, #a9500b 58%, rgba(169, 80, 11, 0) 72%);
+  animation: hero-d1 20s ease-in-out infinite alternate;
+}
+.hero-c2 {
+  width: 56vw;
+  aspect-ratio: 1;
+  right: -20%;
+  top: -34%;
+  background: radial-gradient(circle at 40% 62%, #f6eadd 0%, #e7cfb6 62%, #dbb894 100%);
+  box-shadow: 0 0 90px rgba(224, 138, 44, 0.35);
+  animation: hero-d2 24s ease-in-out infinite alternate;
+}
+.hero-c4 {
+  width: 42vw;
+  aspect-ratio: 1;
+  right: -26%;
+  bottom: -34%;
+  background: radial-gradient(circle at 30% 30%, #f1dfcb 0%, #d9b48c 70%);
+  opacity: 0.8;
+  animation: hero-d2 28s ease-in-out infinite alternate-reverse;
+}
+.hero-glow-blob {
+  width: 60vw;
+  aspect-ratio: 1;
+  left: -10%;
+  bottom: -40%;
+  background: radial-gradient(circle, rgba(200, 105, 10, 0.55), transparent 65%);
+  filter: blur(30px);
+  animation: hero-glow 16s ease-in-out infinite alternate;
+}
+.hero-ringpos {
+  position: absolute;
+  z-index: 0;
+  left: 60%;
+  top: 34%;
+  width: 60%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.hero-ring {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  will-change: transform;
+  background: radial-gradient(circle at 62% 38%, #8a3906 0%, #5b2305 72%);
+  box-shadow: 0 0 0 2px rgba(224, 138, 44, 0.35), 0 0 70px rgba(200, 105, 10, 0.45);
+  animation: hero-d3 22s ease-in-out infinite alternate;
+}
+
+/* Mobile-only hero adjustments (<=860px) */
+@media (max-width: 860px) {
+  .hero-c4 {
+    width: 90vw;
+    right: -35%;
+    bottom: 8%;
+    opacity: 0.75;
+  }
+
+  .hero-ringpos {
+    width: 62%;
+  }
+}
+

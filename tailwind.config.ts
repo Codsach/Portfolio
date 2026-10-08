@@ -11,18 +11,27 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: '1rem',
+      padding: {
+        DEFAULT: '1.5rem',
+        md: '2rem',
+      },
       screens: {
         '2xl': '1200px',
       },
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['var(--font-outfit)', 'sans-serif'],
-        jakarta: ['var(--font-plus-jakarta-sans)', 'sans-serif'],
+        display: ['var(--font-display)', 'Impact', 'Arial Narrow', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+        body: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       colors: {
+        ink: 'var(--ink)',
+        'theme-body': 'var(--body)',
+        'theme-muted': 'var(--muted)',
+        'theme-amber': 'var(--amber)',
+        'amber-text': 'var(--amber-text)',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

@@ -80,16 +80,16 @@ export default function Header() {
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         isScrolled
           ? 'border-b border-zinc-200 shadow-xs backdrop-blur-md bg-white/90'
-          : 'border-b border-transparent backdrop-blur-sm bg-white/50'
+          : 'border-b border-white/10 backdrop-blur-sm bg-transparent'
       )}
     >
-      <div className="container mx-auto relative flex h-16 items-center justify-between px-6">
+      <div className="container mx-auto relative flex h-16 items-center justify-between">
         <div className="flex items-center">
-          <Logo />
+          <Logo textClassName={isScrolled ? 'text-[var(--ink)]' : 'text-white'} />
         </div>
 
         {/* Desktop Navigation - Mathematically Centered */}
-        <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-zinc-100/90 border border-zinc-200/80 absolute left-1/2 -translate-x-1/2 shadow-2xs">
+        <nav className="hidden min-[860px]:flex items-center gap-1 p-1 rounded-full bg-zinc-100/90 border border-zinc-200/80 absolute left-1/2 -translate-x-1/2 shadow-2xs">
           {navItems.map((item) => {
             const sectionId = item.href.replace('#', '');
             const isActive = activeSection === sectionId;
@@ -99,10 +99,10 @@ export default function Header() {
                   variant="ghost"
                   asChild
                   className={cn(
-                    'text-xs font-semibold rounded-full transition-all duration-200 px-4 h-8',
+                    'font-sans font-medium text-[14px] rounded-full transition-all duration-200 px-4 h-8',
                     isActive
                       ? 'text-white'
-                      : 'text-zinc-600 hover:text-zinc-950 hover:bg-white/60'
+                      : 'text-[var(--body)] hover:text-[var(--ink)] hover:bg-white/60'
                   )}
                 >
                   <Link
@@ -131,14 +131,14 @@ export default function Header() {
         </nav>
 
         {/* Header Action Buttons */}
-        <div className="hidden md:flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5">
           <Button
             size="sm"
             variant="outline"
             onClick={() => {
               window.open('/resume.pdf', '_blank');
             }}
-            className="rounded-full bg-white hover:bg-amber-50/60 border border-zinc-200 hover:border-amber-400 text-zinc-800 hover:text-zinc-950 font-bold text-xs uppercase tracking-wider px-4 py-2 shadow-2xs gap-1.5 transition-all duration-200"
+            className="hidden min-[860px]:inline-flex rounded-full bg-white hover:bg-amber-50/60 border border-zinc-200 hover:border-amber-400 text-zinc-800 hover:text-zinc-950 font-sans font-semibold text-[13px] uppercase tracking-[0.06em] px-4 py-2 shadow-2xs gap-1.5 transition-all duration-200"
           >
             <FileText className="w-3.5 h-3.5 text-amber-600" />
             <span>Resume</span>
@@ -149,18 +149,27 @@ export default function Header() {
             onClick={() => {
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="rounded-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 shadow-xs hover:shadow transition-all duration-200"
+            className="hidden sm:inline-flex rounded-full bg-amber-600 hover:bg-amber-700 text-white font-sans font-semibold text-[13px] uppercase tracking-[0.06em] px-5 py-2.5 shadow-xs hover:shadow transition-all duration-200"
           >
             Let&apos;s Talk
           </Button>
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden">
+        <div className="min-[860px]:hidden">
           {isClient && (
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-lg hover:bg-zinc-100 text-zinc-700">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={cn(
+                    'rounded-lg transition-colors',
+                    isScrolled
+                      ? 'text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900'
+                      : 'text-white hover:bg-white/10 hover:text-white'
+                  )}
+                >
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Open menu</span>
                 </Button>

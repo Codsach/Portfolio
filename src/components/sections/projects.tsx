@@ -23,15 +23,11 @@ function StackingCardItem({
   // Smooth scale down as next card slides over (solid 100% opacity throughout)
   const scale = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.98, 0.95]);
 
-  // Uniform sticky top offset for complete 100% card-over-card alignment
-  const stickyTop = 80;
-
   return (
     <div
       ref={cardRef}
-      className="sticky pb-[35vh] sm:pb-[45vh] lg:pb-[50vh] last:pb-0"
+      className="sticky top-[64px] sm:top-[72px] lg:top-[76px] pb-[50vh] last:pb-0"
       style={{
-        top: `${stickyTop}px`,
         zIndex: (index + 1) * 10,
       }}
     >
@@ -52,21 +48,21 @@ export default function ProjectsSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative px-6 py-20 pb-20 bg-[#F8F9FA] -mb-[35vh] sm:-mb-[45vh] lg:-mb-[50vh]"
+      className="relative py-16 sm:py-20 bg-[#F8F9FA] -mb-[50vh]"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
-      <div className="container mx-auto max-w-5xl relative z-10 w-full">
+      <div className="container mx-auto relative z-10 w-full">
         {/* Section Header */}
-        <div className="max-w-2xl mb-14 sm:mb-18">
+        <div className="max-w-2xl mb-10 sm:mb-14 lg:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-950 mb-4 font-jakarta tracking-tight leading-tight"
+            className="t-section mb-3 sm:mb-4"
           >
-            Selected <span className="text-amber-600">Works.</span>
+            SELECTED WORKS<span className="text-[var(--amber)]">.</span>
           </motion.h2>
 
           <motion.p
@@ -74,7 +70,7 @@ export default function ProjectsSection({ id }: { id: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-base sm:text-lg text-zinc-600 leading-relaxed font-normal"
+            className="t-lead max-w-[52ch]"
           >
             A curated selection of web and mobile applications engineered with clean architecture,
             robust backends, and responsive user experience.
@@ -91,7 +87,7 @@ export default function ProjectsSection({ id }: { id: string }) {
             />
           ))}
           {/* Spacer: gives the last sticky card enough scroll runway to fully overlap the previous card */}
-          <div className="h-[35vh] sm:h-[45vh] lg:h-[50vh]" aria-hidden="true" />
+          <div className="h-[50vh]" aria-hidden="true" />
         </div>
       </div>
     </section>

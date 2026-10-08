@@ -1,6 +1,6 @@
 'use client';
 
-import { User, Layers, Server, Network, Bot } from 'lucide-react';
+import { Layers, Server, Network, Bot } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const focusAreas = [
@@ -34,61 +34,29 @@ const focusAreas = [
   },
 ];
 
-// Split a string into word spans for staggered animation
-function WordReveal({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
-  const words = text.split(' ');
-  return (
-    <motion.span
-      className={className}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: '-60px' }}
-      variants={{
-        hidden: {},
-        show: { transition: { staggerChildren: 0.08, delayChildren: delay / 1000 } },
-      }}
-    >
-      {words.map((word, i) => (
-        <motion.span
-          key={i}
-          className="inline-block mr-[0.25em]"
-          variants={{
-            hidden: { opacity: 0, y: 16 },
-            show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 18 } },
-          }}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
-
 export default function AboutSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative flex items-center overflow-hidden px-6 py-24 md:py-32 bg-white"
+      className="relative flex items-center overflow-hidden py-24 md:py-32 bg-white"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
-      <div className="container mx-auto max-w-6xl relative z-10 w-full">
+      <div className="container mx-auto relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
           {/* Left Column: Title */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 border border-zinc-200 text-xs font-semibold uppercase tracking-wider text-zinc-700">
-              <User className="w-3.5 h-3.5 text-amber-600" />
-              <span>About Me</span>
-            </div>
+            <div className="t-label">About Me</div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-jakarta font-extrabold text-zinc-950 leading-tight">
-              <WordReveal text="Sachin R." />
-              <br />
-              <span className="text-zinc-500 font-jakarta font-semibold italic text-2xl md:text-3xl lg:text-4xl block mt-2">
-                <WordReveal text="Builder. Engineer. Occasional Overbuilder." delay={200} />
-              </span>
-            </h2>
+            <div className="space-y-3">
+              <h2 className="t-section">
+                SACHIN R<span className="text-[var(--amber)]">.</span>
+              </h2>
+              <p className="font-sans font-normal italic text-[20px] text-[var(--body)] leading-snug">
+                Builder. Engineer. Occasional Overbuilder.
+              </p>
+            </div>
 
             {/* Signature Accent Line */}
             <motion.div
@@ -96,7 +64,7 @@ export default function AboutSection({ id }: { id: string }) {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="h-1 w-20 bg-amber-600 rounded-full"
+              className="h-1 w-20 bg-[var(--amber)] rounded-full"
             />
           </div>
 
@@ -108,9 +76,9 @@ export default function AboutSection({ id }: { id: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-base sm:text-lg text-zinc-700 leading-relaxed font-normal"
+                className="t-body"
               >
-                I&apos;m a <strong className="font-semibold text-zinc-950">Software Engineer</strong> who builds things end-to-end — from database schema to the UI pixel. I&apos;ve worked across full-stack web apps, AI-integrated backends, and blockchain systems, and I care a lot about clean architecture.
+                I&apos;m a <strong className="font-semibold text-[var(--ink)]">Software Engineer</strong> who builds things end-to-end — from database schema to the UI pixel. I&apos;ve worked across full-stack web apps, AI-integrated backends, and blockchain systems, and I care a lot about clean architecture.
               </motion.p>
 
               <motion.p
@@ -118,7 +86,7 @@ export default function AboutSection({ id }: { id: string }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-base sm:text-lg text-zinc-600 leading-relaxed font-normal"
+                className="t-body"
               >
                 I prioritize clean architecture and maintainable systems over short-lived trends, engineering tools that deliver real utility.
               </motion.p>
@@ -139,11 +107,11 @@ export default function AboutSection({ id }: { id: string }) {
                     <div className={`w-8 h-8 rounded-md flex items-center justify-center ${iconBg} transition-transform duration-200 group-hover:scale-105`}>
                       <Icon className="w-4 h-4" />
                     </div>
-                    <div className="text-base font-bold text-zinc-900 font-jakarta">
+                    <div className="font-sans font-semibold text-[18px] text-[var(--ink)] leading-snug">
                       {label}
                     </div>
                   </div>
-                  <div className="text-xs font-medium text-zinc-500 font-jakarta ml-11">
+                  <div className="font-sans font-normal text-[14px] text-[var(--body)] ml-11">
                     {sub}
                   </div>
                 </motion.div>
