@@ -79,10 +79,10 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
         </div>
       </div>
 
-      {/* Main Content Area: Compact Screenshot + Story & Highlights Layout */}
+      {/* Main Content Area: Screenshot + Story & Highlights Layout */}
       <CardContent className="p-0">
-        {/* Screenshot Banner - Sized comfortably to fit viewport on both mobile and desktop */}
-        <div className="relative w-full overflow-hidden h-[125px] sm:h-[155px] lg:h-[175px] bg-zinc-100 border-b border-zinc-100">
+        {/* Screenshot Banner - Sized to display rich preview on desktop while fitting viewport */}
+        <div className="relative w-full overflow-hidden h-[125px] sm:h-[155px] lg:h-[250px] xl:h-[275px] 2xl:h-[295px] bg-zinc-100 border-b border-zinc-100">
           {projectImage && !imageError ? (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -103,37 +103,37 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
           )}
         </div>
 
-        {/* Info Grid: Responsive 2-column or side-by-side */}
-        <div className="p-3.5 sm:p-5 lg:p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-5 lg:gap-6 items-start">
+        {/* Info Grid: Responsive 2-column on desktop */}
+        <div className="p-3.5 sm:p-5 lg:py-3.5 lg:px-5 xl:py-4 xl:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-5 lg:gap-5 xl:gap-6 items-start">
             
             {/* Left Column (lg:col-span-8): Project Story & Problem/Approach/Result */}
-            <div className="lg:col-span-8 space-y-2.5 sm:space-y-3.5">
+            <div className="lg:col-span-8 space-y-2 sm:space-y-3.5 lg:space-y-2.5">
               {/* Title & Description */}
-              <div className="space-y-1">
+              <div className="space-y-0.5 sm:space-y-1">
                 <div className="flex items-center gap-2">
                   <div
                     className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full flex-shrink-0"
                     style={{ backgroundColor: project.accentColor }}
                   />
-                  <h3 className="font-sans font-semibold text-[18px] sm:text-[22px] lg:text-[24px] leading-tight text-[var(--ink)] tracking-tight">
+                  <h3 className="font-sans font-semibold text-[18px] sm:text-[22px] lg:text-[21px] xl:text-[23px] leading-tight text-[var(--ink)] tracking-tight">
                     {project.title}
                   </h3>
                 </div>
-                <p className="font-sans font-normal text-[13px] sm:text-[14.5px] lg:text-[15px] text-[var(--body)] leading-relaxed">
+                <p className="font-sans font-normal text-[13px] sm:text-[14.5px] lg:text-[13.5px] xl:text-[14.5px] text-[var(--body)] leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
               {/* Problem → Approach → Result */}
-              <div className="space-y-2 sm:space-y-2.5 bg-zinc-50/90 p-3 sm:p-3.5 rounded-xl border border-zinc-200/70">
+              <div className="space-y-2 sm:space-y-2.5 lg:space-y-1.5 bg-zinc-50/90 p-3 sm:p-3.5 lg:py-2.5 lg:px-3.5 rounded-xl border border-zinc-200/70">
                 <div className="flex gap-2.5 items-start">
                   <div className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 mt-0.5 bg-amber-100 text-amber-700 shadow-2xs">
                     <Lightbulb className="w-3 h-3 text-amber-700" />
                   </div>
                   <div className="space-y-0.5 min-w-0">
                     <span className="t-label block text-[11px] sm:text-[12px] text-[var(--amber-text)]">Problem</span>
-                    <p className="font-sans font-normal text-[13.5px] sm:text-[14px] leading-[1.45] sm:leading-[1.5] text-[var(--body)]">{project.problem}</p>
+                    <p className="font-sans font-normal text-[13.5px] sm:text-[14px] lg:text-[13px] xl:text-[13.5px] leading-[1.45] sm:leading-[1.5] text-[var(--body)]">{project.problem}</p>
                   </div>
                 </div>
 
@@ -143,7 +143,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                   </div>
                   <div className="space-y-0.5 min-w-0">
                     <span className="t-label block text-[11px] sm:text-[12px] text-[var(--amber-text)]">Approach</span>
-                    <p className="font-sans font-normal text-[13.5px] sm:text-[14px] leading-[1.45] sm:leading-[1.5] text-[var(--body)]">{project.approach}</p>
+                    <p className="font-sans font-normal text-[13.5px] sm:text-[14px] lg:text-[13px] xl:text-[13.5px] leading-[1.45] sm:leading-[1.5] text-[var(--body)]">{project.approach}</p>
                   </div>
                 </div>
 
@@ -153,14 +153,14 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                   </div>
                   <div className="space-y-0.5 min-w-0">
                     <span className="t-label block text-[11px] sm:text-[12px] text-[var(--amber-text)]">Result</span>
-                    <p className="font-sans font-normal text-[13.5px] sm:text-[14px] leading-[1.45] sm:leading-[1.5] text-[var(--body)]">{project.result}</p>
+                    <p className="font-sans font-normal text-[13.5px] sm:text-[14px] lg:text-[13px] xl:text-[13.5px] leading-[1.45] sm:leading-[1.5] text-[var(--body)]">{project.result}</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Right Column (lg:col-span-4): Highlights & Tech Stack */}
-            <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-4 lg:space-y-4 lg:gap-0 lg:pl-4 lg:border-l lg:border-zinc-200/70">
+            <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 sm:gap-4 lg:space-y-3 xl:space-y-3.5 lg:gap-0 lg:pl-4 lg:border-l lg:border-zinc-200/70">
               {/* Highlights */}
               <div className="space-y-1.5">
                 <span className="t-label block text-[11px] sm:text-[12px] text-[var(--amber-text)]">
@@ -170,7 +170,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                   {project.highlights.map((h) => (
                     <span
                       key={h}
-                      className="font-sans font-medium text-[11.5px] sm:text-[12.5px] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-zinc-100 border border-zinc-200 text-[var(--ink)]"
+                      className="font-sans font-medium text-[11.5px] sm:text-[12.5px] lg:text-[11.5px] xl:text-[12px] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md bg-zinc-100 border border-zinc-200 text-[var(--ink)]"
                     >
                       {h}
                     </span>
@@ -179,7 +179,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
               </div>
 
               {/* Tech Stack */}
-              <div className="space-y-1.5 lg:pt-1">
+              <div className="space-y-1.5 lg:pt-0.5">
                 <span className="t-label block text-[11px] sm:text-[12px] text-[var(--amber-text)]">
                   Technologies
                 </span>
@@ -189,7 +189,7 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
                     return (
                       <div
                         key={tech}
-                        className="flex items-center gap-1 sm:gap-1.5 bg-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-zinc-200 text-[var(--ink)] font-sans font-medium text-[11.5px] sm:text-[12.5px] shadow-2xs"
+                        className="flex items-center gap-1 sm:gap-1.5 bg-white px-2 py-0.5 sm:px-2.5 sm:py-0.5 xl:py-1 rounded-md border border-zinc-200 text-[var(--ink)] font-sans font-medium text-[11.5px] sm:text-[12.5px] lg:text-[11px] xl:text-[12px] shadow-2xs"
                       >
                         {Icon && <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5 flex-shrink-0" />}
                         <span>{tech}</span>

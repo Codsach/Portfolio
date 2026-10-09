@@ -139,7 +139,7 @@ export default function HeroSection({ id }: { id: string }) {
           </div>
 
           {/* Stats row */}
-          <div className="flex gap-7 min-[861px]:gap-10 mt-9 sm:mt-10">
+          <div className="flex gap-7 min-[861px]:gap-10 mt-7 sm:mt-8 pb-2.5 sm:pb-3">
             <StatCounter target={10} suffix="+" label="Projects built" duration={1200} />
             <StatCounter target={15} suffix="+" label="Technologies" duration={1000} />
           </div>
