@@ -33,6 +33,7 @@ export default {
         'theme-amber': 'var(--amber)',
         'amber-text': 'var(--amber-text)',
         /* ── Warm palette ───────────────────────────────────── */
+        sand:        'var(--sand)',
         paper:       'var(--paper)',
         'card-warm': 'var(--card-warm)',
         tile:        'var(--tile)',
@@ -43,8 +44,8 @@ export default {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--ink)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',

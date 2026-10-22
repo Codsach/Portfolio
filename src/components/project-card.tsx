@@ -33,7 +33,10 @@ export function ProjectCard({ project }: { project: Project; index?: number }) {
           ? 'border-[rgba(217,112,15,0.35)] hover:border-[rgba(217,112,15,0.6)] ring-1 ring-[rgba(217,112,15,0.15)]'
           : 'border-[var(--line)] hover:border-[rgba(217,112,15,0.3)]'
       }`}
-      style={{ backgroundColor: 'var(--card-warm)' }}
+      style={{
+        backgroundColor: 'var(--card-warm)',
+        boxShadow: '0 8px 30px -4px rgba(42, 26, 16, 0.09), 0 2px 6px -1px rgba(42, 26, 16, 0.04)',
+      }}
     >
       {/* ── Chrome Header ─────────────────────────────────────────────── */}
       <div

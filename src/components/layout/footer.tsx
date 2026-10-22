@@ -20,19 +20,19 @@ const socialLinks = [
     href: 'https://github.com/Codsach',
     icon: IconBrandGithub,
     label: 'GitHub',
-    hoverClass: 'group-hover:bg-zinc-200 group-hover:text-zinc-900 group-hover:border-zinc-300',
+    hoverClass: 'group-hover:bg-[var(--card)] group-hover:text-[var(--burnt)] group-hover:border-[rgba(217,112,15,0.4)]',
   },
   {
     href: 'https://www.linkedin.com/in/sachinr-dev/',
     icon: IconBrandLinkedin,
     label: 'LinkedIn',
-    hoverClass: 'group-hover:bg-zinc-200 group-hover:text-zinc-900 group-hover:border-zinc-300',
+    hoverClass: 'group-hover:bg-[var(--card)] group-hover:text-[var(--burnt)] group-hover:border-[rgba(217,112,15,0.4)]',
   },
   {
     href: 'mailto:rsachinsachi@gmail.com?subject=Opportunity%20Discussion',
     icon: Mail,
     label: 'Email',
-    hoverClass: 'group-hover:bg-amber-100 group-hover:text-amber-800 group-hover:border-amber-300',
+    hoverClass: 'group-hover:bg-[var(--card)] group-hover:text-[var(--burnt)] group-hover:border-[rgba(217,112,15,0.4)]',
   },
 ];
 
@@ -42,7 +42,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative pt-16 pb-12 overflow-hidden bg-white border-t border-zinc-200">
+    <footer className="relative pt-16 pb-12 overflow-hidden bg-[var(--sand)] border-t border-[var(--line)]">
       <div className="container mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-14">
           {/* Brand Column */}
@@ -52,7 +52,7 @@ export default function Footer() {
               Building scalable web applications, decentralized blockchain systems, and
               AI-driven workflows focused on maintainability and craft.
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 border border-zinc-200">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[var(--tile)] border border-[var(--line)]">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -71,7 +71,7 @@ export default function Footer() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="font-sans font-normal text-[15px] text-[var(--body)] hover:text-[var(--amber)] transition-colors duration-150"
+                    className="font-sans font-normal text-[15px] text-[var(--body)] hover:text-[var(--burnt)] transition-colors duration-150"
                   >
                     {item.label}
                   </Link>
@@ -93,7 +93,7 @@ export default function Footer() {
                   className="flex items-center gap-2.5 text-[var(--body)] hover:text-[var(--ink)] transition-colors duration-150 group"
                   whileHover={{ x: 2 }}
                 >
-                  <div className={`flex items-center justify-center w-7 h-7 rounded-md bg-zinc-100 border border-zinc-200 transition-all duration-150 ${link.hoverClass}`}>
+                  <div className={`flex items-center justify-center w-7 h-7 rounded-md bg-[var(--tile)] border border-[var(--line)] text-[var(--icon-muted)] transition-all duration-150 ${link.hoverClass}`}>
                     <link.icon className="h-3.5 w-3.5" />
                   </div>
                   <span className="font-sans font-normal text-[15px] text-[var(--body)] group-hover:text-[var(--ink)] transition-colors duration-150">{link.label}</span>
@@ -104,7 +104,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-zinc-200 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="pt-6 border-t border-[var(--line)] flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="font-sans font-normal text-[13px] text-[var(--muted)] text-center md:text-left">
             <span>© {new Date().getFullYear()} Sachin R. All rights reserved.</span>
           </div>
@@ -113,7 +113,7 @@ export default function Footer() {
             variant="outline"
             size="sm"
             onClick={scrollToTop}
-            className="rounded-md bg-white hover:bg-zinc-50 border-zinc-200 hover:border-zinc-300 font-sans font-normal text-[13px] text-[var(--muted)] hover:text-[var(--ink)] gap-1.5 shadow-2xs transition-all duration-150"
+            className="rounded-md bg-[var(--card)] hover:bg-[var(--tile)] border-[var(--line)] hover:border-[rgba(42,26,16,0.25)] font-sans font-normal text-[13px] text-[var(--muted)] hover:text-[var(--ink)] gap-1.5 shadow-2xs transition-all duration-150"
           >
             <span>Back to top</span>
             <ArrowUp className="h-3 w-3" />

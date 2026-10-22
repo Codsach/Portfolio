@@ -13,7 +13,9 @@ html {
     /* ── Warm palette ───────────────────────────────────────────────── */
     --brown:      #1a0e08;
     --burnt:      #d9700f;
+    --sand:       #efe6da;
     --paper:      #f7f1ea;
+    --card:       #fffaf4;
     --card-warm:  #fffaf4;
     --tile:       #f1e6d8;
     --line:       rgba(42, 26, 16, 0.12);
@@ -30,7 +32,6 @@ html {
     /* --background ≈ #f7f1ea (--paper), --card ≈ #fffaf4 (--card-warm) */
     --background: 32 45% 94%;
     --foreground: 240 10% 3.9%;
-    --card: 33 100% 98%;
     --card-foreground: 240 10% 3.9%;
     --popover: 33 100% 98%;
     --popover-foreground: 240 10% 3.9%;
