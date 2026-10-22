@@ -83,7 +83,7 @@ function StatCounterLink({
 
   return (
     <a
-      ref={ref as React.RefObject<HTMLAnchorElement>}
+      ref={ref as unknown as React.RefObject<HTMLAnchorElement>}
       href={href}
       target="_blank"
       rel="noopener noreferrer"

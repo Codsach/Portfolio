@@ -96,7 +96,7 @@ function RowIcon({
       filter: isHovered ? 'none' : filter,
       transition: 'filter 0.18s ease',
     },
-  });
+  }) as React.ReactElement;
 }
 
 // ── Magnetic tool row ────────────────────────────────────────────────────────
@@ -252,7 +252,7 @@ function ToolboxMarquee() {
               }}
             >
               {Icon &&
-                Icon({
+                (Icon({
                   alt: '',
                   'aria-hidden': true,
                   style: {
@@ -261,7 +261,7 @@ function ToolboxMarquee() {
                     filter: 'grayscale(1) opacity(0.40)',
                     flexShrink: 0,
                   },
-                })}
+                }) as React.ReactElement)}
               <span
                 style={{
                   fontFamily: 'var(--font-sans), system-ui, sans-serif',
