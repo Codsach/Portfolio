@@ -38,7 +38,7 @@ export default function AboutSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative flex items-center overflow-hidden py-24 md:py-32 bg-white"
+      className="relative flex items-center overflow-hidden py-24 md:py-32 bg-[var(--paper)]"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 

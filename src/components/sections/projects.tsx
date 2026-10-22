@@ -48,7 +48,7 @@ export default function ProjectsSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative py-16 sm:py-20 bg-[#F8F9FA] -mb-[50vh]"
+      className="relative py-16 sm:py-20 bg-[var(--paper)] -mb-[50vh]"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 

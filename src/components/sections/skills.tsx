@@ -347,7 +347,7 @@ export default function SkillsSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative overflow-hidden py-24 md:py-32 bg-white"
+      className="relative overflow-hidden py-24 md:py-32 bg-[var(--paper)]"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 

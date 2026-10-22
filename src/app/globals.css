@@ -10,30 +10,42 @@ html {
 /* ── Base color overrides ──────────────────────────────────────────── */
 @layer base {
   :root {
-    --ink: #1A1411;
-    --body: #5E5249;
-    --muted: #8A7B6F;
-    --amber: #C8690A;
+    /* ── Warm palette ───────────────────────────────────────────────── */
+    --brown:      #1a0e08;
+    --burnt:      #d9700f;
+    --paper:      #f7f1ea;
+    --card-warm:  #fffaf4;
+    --tile:       #f1e6d8;
+    --line:       rgba(42, 26, 16, 0.12);
+    --icon-muted: #8a6f5c;
+
+    /* Updated ink/muted to warm values */
+    --ink:        #2a1a10;
+    --body:       #5E5249;
+    --muted:      #6b5a4e;
+    --amber:      #C8690A;
     --amber-text: #A85708;
 
-    --background: 0 0% 98%;
+    /* ── Shadcn tokens (updated to warm) ───────────────────────────── */
+    /* --background ≈ #f7f1ea (--paper), --card ≈ #fffaf4 (--card-warm) */
+    --background: 32 45% 94%;
     --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
+    --card: 33 100% 98%;
     --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
+    --popover: 33 100% 98%;
     --popover-foreground: 240 10% 3.9%;
     --primary: 24.6 95% 53.1%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 4.8% 95.9%;
+    --secondary: 30 30% 93%;
     --secondary-foreground: 240 5.9% 10%;
-    --muted-bg: 240 4.8% 95.9%;
+    --muted-bg: 30 30% 93%;
     --muted-foreground: 240 3.8% 46.1%;
     --accent: 24.6 95% 53.1%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
+    --border: 30 20% 88%;
+    --input: 30 20% 88%;
     --ring: 24.6 95% 53.1%;
     --radius: 0.75rem;
   }
@@ -44,7 +56,7 @@ html {
     @apply border-border;
   }
   body {
-    background-color: #FAFAFA;
+    background-color: var(--paper);
     color: var(--body);
     font-family: var(--font-sans), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -273,14 +285,14 @@ html, body {
   }
 
   .separator-fade {
-    background: linear-gradient(90deg, transparent, rgba(212, 212, 216, 0.6), transparent);
+    background: linear-gradient(90deg, transparent, rgba(42, 26, 16, 0.10), transparent);
     height: 1px;
   }
 
   .bg-grid {
     background-image:
-      linear-gradient(rgba(212, 212, 216, 0.4) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212, 212, 216, 0.4) 1px, transparent 1px);
+      linear-gradient(rgba(42, 26, 16, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(42, 26, 16, 0.07) 1px, transparent 1px);
     background-size: 32px 32px;
   }
 

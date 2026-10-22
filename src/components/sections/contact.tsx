@@ -50,7 +50,7 @@ export default function ContactSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative overflow-hidden py-24 md:py-32 bg-[#F8F9FA]"
+      className="relative overflow-hidden py-24 md:py-32 bg-[var(--paper)]"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 

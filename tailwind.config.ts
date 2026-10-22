@@ -32,6 +32,14 @@ export default {
         'theme-muted': 'var(--muted)',
         'theme-amber': 'var(--amber)',
         'amber-text': 'var(--amber-text)',
+        /* ── Warm palette ───────────────────────────────────── */
+        paper:       'var(--paper)',
+        'card-warm': 'var(--card-warm)',
+        tile:        'var(--tile)',
+        burnt:       'var(--burnt)',
+        brown:       'var(--brown)',
+        'icon-muted':'var(--icon-muted)',
+        line:        'var(--line)',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -62,8 +70,8 @@ export default {
           DEFAULT: '#DC2626',
           foreground: '#FFFFFF',
         },
-        border: '#E4E4E7',
-        input: '#E4E4E7',
+        border: 'var(--line)',
+        input: 'var(--line)',
         ring: '#EA580C',
       },
       borderRadius: {
