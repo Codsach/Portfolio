@@ -34,10 +34,10 @@ const focusAreas = [
 
 /* ── Component ───────────────────────────────────────────────────────────── */
 export default function AboutSection({ id }: { id: string }) {
-  const sectionRef  = useRef<HTMLElement>(null);
-  const stmtRef     = useRef<HTMLParagraphElement>(null);
-  const detailRef   = useRef<HTMLDivElement>(null);
-  const cardsRef    = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const stmtRef = useRef<HTMLParagraphElement>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -46,8 +46,8 @@ export default function AboutSection({ id }: { id: string }) {
     let ctx: any = null;
 
     const init = async () => {
-      const { default: gsap }       = await import('gsap');
-      const { ScrollTrigger }       = await import('gsap/ScrollTrigger');
+      const { default: gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
@@ -134,7 +134,7 @@ export default function AboutSection({ id }: { id: string }) {
       <div className="container mx-auto relative z-10 w-full">
 
         {/* ── a) Label + Heading ──────────────────────────────────────────── */}
-        <div className="mb-12 md:mb-16">
+        <div className="mb-10 sm:mb-14">
           <div className="t-label mb-3">About Me</div>
           <h2 className="t-section">
             SACHIN R<span style={{ color: 'var(--amber)' }}>.</span>
@@ -145,8 +145,7 @@ export default function AboutSection({ id }: { id: string }) {
         <p
           ref={stmtRef}
           aria-label={STATEMENT}
-          className="about-statement font-display font-normal uppercase"
-          style={{ color: 'var(--ink)' }}
+          className="about-statement font-display font-normal uppercase mb-14 sm:mb-18"
         >
           {STATEMENT_WORDS.map((word, i) => (
             <span
@@ -156,14 +155,12 @@ export default function AboutSection({ id }: { id: string }) {
               className="about-word"
             >
               {word}
-              {/* trailing hair-space so words don't collide at line ends */}
-              {'\u200a'}
             </span>
           ))}
         </p>
 
         {/* ── c) Detail — two columns ─────────────────────────────────────── */}
-        <div ref={detailRef} className="about-detail">
+        <div ref={detailRef} className="about-detail mb-14 sm:mb-18">
           {/* Left: tagline + orange rule */}
           <div>
             <p className="about-tagline">
@@ -173,14 +170,9 @@ export default function AboutSection({ id }: { id: string }) {
           </div>
 
           {/* Right: body paragraphs */}
-          <div className="about-body-col">
-            <p className="t-body" style={{ marginBottom: '1rem' }}>
-              I&apos;m a{' '}
-              <strong style={{ fontWeight: 600, color: 'var(--ink)' }}>
-                Software Engineer
-              </strong>{' '}
-              who builds things end-to-end — from database schema to the UI
-              pixel. I&apos;ve worked across full-stack web apps, AI-integrated
+          <div className="about-body-col space-y-4">
+            <p className="t-body">
+              I&apos;ve worked across full-stack web apps, AI-integrated
               backends, and blockchain systems, and I care a lot about clean
               architecture.
             </p>
@@ -216,15 +208,19 @@ export default function AboutSection({ id }: { id: string }) {
       <style>{`
         /* b) Statement */
         .about-statement {
-          font-size: clamp(2rem, 5.6vw, 4.7rem);
-          line-height: 1.06;
-          max-width: 980px;
+          font-size: clamp(2rem, 5.2vw, 4.25rem);
+          line-height: 1.1;
+          letter-spacing: 0.01em;
+          color: var(--ink);
+          max-width: 1000px;
         }
         .about-word {
           display: inline-block;
+          margin-right: 0.3em;
           opacity: 0.16;
-          /* No margin-right; the hair-space \u200a + inline-block handles spacing
-             and ensures words never break across lines. */
+        }
+        .about-word:last-child {
+          margin-right: 0;
         }
         /* Reduced-motion: show all words at full opacity immediately */
         @media (prefers-reduced-motion: reduce) {
@@ -234,53 +230,52 @@ export default function AboutSection({ id }: { id: string }) {
         /* c) Detail */
         .about-detail {
           display: grid;
-          grid-template-columns: 0.8fr 1.2fr;
-          gap: 3rem;
-          margin-top: 6rem;
+          grid-template-columns: 1fr 1fr;
+          gap: 2.5rem 3.5rem;
           align-items: start;
         }
-        @media (max-width: 760px) {
+        @media (max-width: 768px) {
           .about-detail {
             grid-template-columns: 1fr;
             gap: 2rem;
-            margin-top: 3.5rem;
           }
         }
         .about-tagline {
           font-family: var(--font-sans), system-ui, sans-serif;
           font-style: italic;
-          font-size: clamp(17px, 1.6vw, 20px);
+          font-size: clamp(18px, 1.6vw, 22px);
           color: var(--muted);
-          line-height: 1.5;
+          line-height: 1.45;
         }
         .about-rule {
           width: 56px;
           height: 3px;
           background: var(--amber);
           border-radius: 2px;
-          margin-top: 1.5rem;
+          margin-top: 1.25rem;
         }
         .about-body-col {
-          max-width: 56ch;
+          max-width: 100%;
         }
 
         /* d) Cards */
         .about-cards {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-          margin-top: 3rem;
+          gap: 1.5rem;
         }
-        @media (max-width: 760px) {
-          .about-cards { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+          .about-cards {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
         }
         .about-card {
-          background: var(--card-warm);
+          background: var(--card-warm, #fffaf4);
           border: 1px solid var(--line);
-          border-radius: 26px;
-          padding: 1.5rem;
-          box-shadow: 0 2px 16px rgba(42, 26, 16, 0.07),
-                      0 1px 3px rgba(42, 26, 16, 0.05);
+          border-radius: 24px;
+          padding: 1.75rem;
+          box-shadow: 0 2px 16px rgba(42, 26, 16, 0.05);
           cursor: default;
           transition:
             transform      0.22s ease,
@@ -290,9 +285,7 @@ export default function AboutSection({ id }: { id: string }) {
         .about-card:hover {
           transform: translateY(-4px);
           border-color: rgba(217, 112, 15, 0.45);
-          box-shadow:
-            0 8px 28px rgba(42, 26, 16, 0.13),
-            0 2px 6px rgba(42, 26, 16, 0.07);
+          box-shadow: 0 10px 28px -6px rgba(42, 26, 16, 0.12);
         }
         .about-card:focus-visible {
           outline: 2px solid var(--burnt);
@@ -306,7 +299,7 @@ export default function AboutSection({ id }: { id: string }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 1rem;
+          margin-bottom: 1.25rem;
         }
         .about-icon {
           color: var(--icon-muted);
