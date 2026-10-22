@@ -1,126 +1,337 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { Layers, Server, Network, Bot } from 'lucide-react';
-import { motion } from 'framer-motion';
+
+/* ── Static data ─────────────────────────────────────────────────────────── */
+const STATEMENT =
+  "I'm a Software Engineer who builds things end-to-end, from database schema to the UI pixel.";
+
+const STATEMENT_WORDS = STATEMENT.split(' ');
 
 const focusAreas = [
   {
     label: 'Full-Stack Apps',
     sub: 'React, Next.js & Node.js',
     icon: Layers,
-    theme: 'border-indigo-200/80 bg-indigo-50/70 hover:border-indigo-300 text-indigo-700',
-    iconBg: 'bg-indigo-100 text-indigo-700',
   },
   {
     label: 'Backend Systems',
     sub: 'APIs, Databases & Microservices',
     icon: Server,
-    theme: 'border-emerald-200/80 bg-emerald-50/70 hover:border-emerald-300 text-emerald-700',
-    iconBg: 'bg-emerald-100 text-emerald-700',
   },
   {
     label: 'Distributed Systems',
     sub: 'Blockchain, IPFS & Smart Contracts',
     icon: Network,
-    theme: 'border-purple-200/80 bg-purple-50/70 hover:border-purple-300 text-purple-700',
-    iconBg: 'bg-purple-100 text-purple-700',
   },
   {
     label: 'AI Integrations',
     sub: 'LLMs, Pipelines & Workflows',
     icon: Bot,
-    theme: 'border-rose-200/80 bg-rose-50/70 hover:border-rose-300 text-rose-700',
-    iconBg: 'bg-rose-100 text-rose-700',
   },
 ];
 
+/* ── Component ───────────────────────────────────────────────────────────── */
 export default function AboutSection({ id }: { id: string }) {
+  const sectionRef  = useRef<HTMLElement>(null);
+  const stmtRef     = useRef<HTMLParagraphElement>(null);
+  const detailRef   = useRef<HTMLDivElement>(null);
+  const cardsRef    = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let ctx: any = null;
+
+    const init = async () => {
+      const { default: gsap }       = await import('gsap');
+      const { ScrollTrigger }       = await import('gsap/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger);
+
+      ctx = gsap.context(() => {
+        /* b) Statement word-scrub (disabled under reduced-motion) */
+        if (!prefersReduced && stmtRef.current) {
+          const words = Array.from(
+            stmtRef.current.querySelectorAll<HTMLElement>('[data-word]'),
+          );
+          if (words.length > 0) {
+            gsap.fromTo(
+              words,
+              { opacity: 0.16 },
+              {
+                opacity: 1,
+                ease: 'none',
+                stagger: 0.1,
+                duration: 0.4,
+                scrollTrigger: {
+                  trigger: stmtRef.current,
+                  start: 'top 78%',
+                  end: 'bottom 42%',
+                  scrub: true,
+                },
+              },
+            );
+          }
+        }
+
+        /* c) Detail columns — one-time reveal */
+        if (!prefersReduced && detailRef.current) {
+          gsap.fromTo(
+            Array.from(detailRef.current.children),
+            { opacity: 0, y: 36 },
+            {
+              opacity: 1,
+              y: 0,
+              stagger: 0.1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: detailRef.current,
+                start: 'top 82%',
+                toggleActions: 'play none none reverse',
+              },
+            },
+          );
+        }
+
+        /* d) Cards — one-time reveal */
+        if (!prefersReduced && cardsRef.current) {
+          gsap.fromTo(
+            Array.from(cardsRef.current.children),
+            { opacity: 0, y: 36 },
+            {
+              opacity: 1,
+              y: 0,
+              stagger: 0.1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: cardsRef.current,
+                start: 'top 86%',
+                toggleActions: 'play none none reverse',
+              },
+            },
+          );
+        }
+      }, sectionRef);
+    };
+
+    init();
+
+    return () => {
+      ctx?.revert();
+    };
+  }, []);
+
   return (
     <section
       id={id}
-      className="relative flex items-center overflow-hidden py-24 md:py-32 bg-[var(--paper)]"
+      ref={sectionRef}
+      className="relative overflow-hidden py-24 md:py-32 bg-[var(--paper)]"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
       <div className="container mx-auto relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-          {/* Left Column: Title */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="t-label">About Me</div>
+        {/* ── a) Label + Heading ──────────────────────────────────────────── */}
+        <div className="mb-12 md:mb-16">
+          <div className="t-label mb-3">About Me</div>
+          <h2 className="t-section">
+            SACHIN R<span style={{ color: 'var(--amber)' }}>.</span>
+          </h2>
+        </div>
 
-            <div className="space-y-3">
-              <h2 className="t-section">
-                SACHIN R<span className="text-[var(--amber)]">.</span>
-              </h2>
-              <p className="font-sans font-normal italic text-[20px] text-[var(--body)] leading-snug">
-                Builder. Engineer. Occasional Overbuilder.
-              </p>
-            </div>
+        {/* ── b) Statement ────────────────────────────────────────────────── */}
+        <p
+          ref={stmtRef}
+          aria-label={STATEMENT}
+          className="about-statement font-display font-normal uppercase"
+          style={{ color: 'var(--ink)' }}
+        >
+          {STATEMENT_WORDS.map((word, i) => (
+            <span
+              key={i}
+              aria-hidden="true"
+              data-word=""
+              className="about-word"
+            >
+              {word}
+              {/* trailing hair-space so words don't collide at line ends */}
+              {'\u200a'}
+            </span>
+          ))}
+        </p>
 
-            {/* Signature Accent Line */}
-            <motion.div
-              initial={{ scaleX: 0, originX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="h-1 w-20 bg-[var(--amber)] rounded-full"
-            />
+        {/* ── c) Detail — two columns ─────────────────────────────────────── */}
+        <div ref={detailRef} className="about-detail">
+          {/* Left: tagline + orange rule */}
+          <div>
+            <p className="about-tagline">
+              Builder. Engineer. Occasional Overbuilder.
+            </p>
+            <div className="about-rule" aria-hidden="true" />
           </div>
 
-          {/* Right Column: Description & Focus Area Cards */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="space-y-4 max-w-xl">
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="t-body"
-              >
-                I&apos;m a <strong className="font-semibold text-[var(--ink)]">Software Engineer</strong> who builds things end-to-end — from database schema to the UI pixel. I&apos;ve worked across full-stack web apps, AI-integrated backends, and blockchain systems, and I care a lot about clean architecture.
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="t-body"
-              >
-                I prioritize clean architecture and maintainable systems over short-lived trends, engineering tools that deliver real utility.
-              </motion.p>
-            </div>
-
-            {/* Focus area grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2 max-w-xl w-full">
-              {focusAreas.map(({ label, sub, icon: Icon, theme, iconBg }, i) => (
-                <motion.div
-                  key={label}
-                  className={`group cursor-default rounded-xl p-4 border transition-all duration-200 shadow-2xs hover:shadow-xs ${theme}`}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
-                >
-                  <div className="flex items-center gap-3 mb-1.5">
-                    <div className={`w-8 h-8 rounded-md flex items-center justify-center ${iconBg} transition-transform duration-200 group-hover:scale-105`}>
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div className="font-sans font-semibold text-[18px] text-[var(--ink)] leading-snug">
-                      {label}
-                    </div>
-                  </div>
-                  <div className="font-sans font-normal text-[14px] text-[var(--body)] ml-11">
-                    {sub}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+          {/* Right: body paragraphs */}
+          <div className="about-body-col">
+            <p className="t-body" style={{ marginBottom: '1rem' }}>
+              I&apos;m a{' '}
+              <strong style={{ fontWeight: 600, color: 'var(--ink)' }}>
+                Software Engineer
+              </strong>{' '}
+              who builds things end-to-end — from database schema to the UI
+              pixel. I&apos;ve worked across full-stack web apps, AI-integrated
+              backends, and blockchain systems, and I care a lot about clean
+              architecture.
+            </p>
+            <p className="t-body">
+              I prioritize clean architecture and maintainable systems over
+              short-lived trends, engineering tools that deliver real utility.
+            </p>
           </div>
         </div>
+
+        {/* ── d) Cards — 2 × 2 grid ───────────────────────────────────────── */}
+        <div ref={cardsRef} className="about-cards">
+          {focusAreas.map(({ label, sub, icon: Icon }) => (
+            <div key={label} className="about-card">
+              {/* Icon tile */}
+              <div className="about-icon-tile" aria-hidden="true">
+                <Icon
+                  aria-hidden="true"
+                  style={{ width: 20, height: 20, strokeWidth: 1.7 }}
+                  className="about-icon"
+                />
+              </div>
+
+              {/* Card text */}
+              <h3 className="about-card-title">{label}</h3>
+              <p className="about-card-sub">{sub}</p>
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* ── Scoped styles ─────────────────────────────────────────────────── */}
+      <style>{`
+        /* b) Statement */
+        .about-statement {
+          font-size: clamp(2rem, 5.6vw, 4.7rem);
+          line-height: 1.06;
+          max-width: 980px;
+        }
+        .about-word {
+          display: inline-block;
+          opacity: 0.16;
+          /* No margin-right; the hair-space \u200a + inline-block handles spacing
+             and ensures words never break across lines. */
+        }
+        /* Reduced-motion: show all words at full opacity immediately */
+        @media (prefers-reduced-motion: reduce) {
+          .about-word { opacity: 1 !important; }
+        }
+
+        /* c) Detail */
+        .about-detail {
+          display: grid;
+          grid-template-columns: 0.8fr 1.2fr;
+          gap: 3rem;
+          margin-top: 6rem;
+          align-items: start;
+        }
+        @media (max-width: 760px) {
+          .about-detail {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 3.5rem;
+          }
+        }
+        .about-tagline {
+          font-family: var(--font-sans), system-ui, sans-serif;
+          font-style: italic;
+          font-size: clamp(17px, 1.6vw, 20px);
+          color: var(--muted);
+          line-height: 1.5;
+        }
+        .about-rule {
+          width: 56px;
+          height: 3px;
+          background: var(--amber);
+          border-radius: 2px;
+          margin-top: 1.5rem;
+        }
+        .about-body-col {
+          max-width: 56ch;
+        }
+
+        /* d) Cards */
+        .about-cards {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+          margin-top: 3rem;
+        }
+        @media (max-width: 760px) {
+          .about-cards { grid-template-columns: 1fr; }
+        }
+        .about-card {
+          background: var(--card-warm);
+          border: 1px solid var(--line);
+          border-radius: 26px;
+          padding: 1.5rem;
+          box-shadow: 0 2px 16px rgba(42, 26, 16, 0.07),
+                      0 1px 3px rgba(42, 26, 16, 0.05);
+          cursor: default;
+          transition:
+            transform      0.22s ease,
+            border-color   0.22s ease,
+            box-shadow     0.22s ease;
+        }
+        .about-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(217, 112, 15, 0.45);
+          box-shadow:
+            0 8px 28px rgba(42, 26, 16, 0.13),
+            0 2px 6px rgba(42, 26, 16, 0.07);
+        }
+        .about-card:focus-visible {
+          outline: 2px solid var(--burnt);
+          outline-offset: 3px;
+        }
+        .about-icon-tile {
+          width: 44px;
+          height: 44px;
+          border-radius: 14px;
+          background: var(--tile);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1rem;
+        }
+        .about-icon {
+          color: var(--icon-muted);
+          transition: color 0.22s ease;
+        }
+        .about-card:hover .about-icon {
+          color: var(--burnt);
+        }
+        .about-card-title {
+          font-family: var(--font-display), Impact, 'Arial Narrow', sans-serif;
+          font-weight: 400;
+          text-transform: uppercase;
+          font-size: 1.35rem;
+          letter-spacing: 0.01em;
+          line-height: 1.2;
+          color: var(--ink);
+          margin-bottom: 0.4rem;
+        }
+        .about-card-sub {
+          font-family: var(--font-sans), system-ui, sans-serif;
+          font-size: 14px;
+          color: var(--muted);
+          line-height: 1.5;
+        }
+      `}</style>
     </section>
   );
 }
-
