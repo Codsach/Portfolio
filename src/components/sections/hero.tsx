@@ -93,11 +93,11 @@ function StatCounterLink({
         {count}
         <u className="no-underline text-[#e08a2c]">{suffix}</u>
       </b>
-      <small className="text-[12px] font-medium tracking-[0.12em] uppercase text-[#d8c9bb] flex items-center gap-1">
-        {label}
+      <small className="text-[12px] font-medium tracking-[0.12em] uppercase text-[#d8c9bb] flex items-center gap-1 group-hover:text-white transition-colors duration-150">
+        <span>{label}</span>
         <span
           aria-hidden="true"
-          className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-[10px] leading-none"
+          className="text-[11px] leading-none opacity-60 group-hover:opacity-100 text-[#d8c9bb] group-hover:text-[#e08a2c] transition-all duration-150"
         >
           ↗
         </span>
@@ -190,7 +190,7 @@ export default function HeroSection({ id }: { id: string }) {
             <StatCounterLink
               target={10}
               suffix="+"
-              label="Projects built"
+              label="Projects on GitHub"
               duration={1200}
               href="https://github.com/Codsach"
             />

@@ -48,7 +48,7 @@ export default function ProjectsSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative py-16 sm:py-20 bg-[var(--sand)] -mb-[50vh]"
+      className="relative py-16 sm:py-20 bg-[var(--sand)]"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
@@ -87,32 +87,26 @@ export default function ProjectsSection({ id }: { id: string }) {
             />
           ))}
           {/* Spacer: gives the last sticky card enough scroll runway to fully overlap the previous card */}
-          <div className="h-[50vh]" aria-hidden="true" />
+          <div className="h-[30vh]" aria-hidden="true" />
         </div>
 
         {/* GitHub link */}
-        <div className="flex flex-col items-center gap-4 pt-10 pb-4">
-          <p className="text-sm font-['Inter',sans-serif]" style={{ color: 'var(--muted)' }}>
+        <div className="relative z-50 flex flex-col items-center gap-4 pt-8 sm:pt-12 pb-6">
+          <p className="text-sm font-sans" style={{ color: 'var(--muted)' }}>
             A selection of my work. Everything else lives on GitHub.
           </p>
           <a
             href="https://github.com/Codsach"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full border text-sm font-medium font-['Inter',sans-serif] bg-transparent transition-colors duration-150 no-underline outline-offset-4 focus-visible:outline focus-visible:outline-2"
+            className="group inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full border text-sm font-medium font-sans bg-[var(--card)] hover:bg-[var(--tile)] transition-all duration-150 no-underline shadow-2xs outline-offset-4 focus-visible:outline focus-visible:outline-2"
             style={{
               borderColor: 'var(--line)',
               color: 'var(--ink)',
               outlineColor: 'var(--burnt)',
             }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--tile)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
-            }}
           >
-            More on GitHub
+            <span>More on GitHub</span>
             <span
               aria-hidden="true"
               className="inline-block transition-transform duration-150 group-hover:translate-x-[3px]"
