@@ -92,14 +92,25 @@ export default function ProjectsSection({ id }: { id: string }) {
 
         {/* GitHub link */}
         <div className="flex flex-col items-center gap-4 pt-10 pb-4">
-          <p className="text-sm text-[#6B7280] font-['Inter',sans-serif]">
+          <p className="text-sm font-['Inter',sans-serif]" style={{ color: 'var(--muted)' }}>
             A selection of my work. Everything else lives on GitHub.
           </p>
           <a
             href="https://github.com/Codsach"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full border border-[#D1D5DB] text-sm font-medium font-['Inter',sans-serif] text-[#374151] bg-transparent hover:bg-[#F3F4F6] transition-colors duration-150 no-underline outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#374151]/60"
+            className="group inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full border text-sm font-medium font-['Inter',sans-serif] bg-transparent transition-colors duration-150 no-underline outline-offset-4 focus-visible:outline focus-visible:outline-2"
+            style={{
+              borderColor: 'var(--line)',
+              color: 'var(--ink)',
+              outlineColor: 'var(--burnt)',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--tile)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
+            }}
           >
             More on GitHub
             <span

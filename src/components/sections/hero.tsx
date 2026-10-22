@@ -89,7 +89,7 @@ function StatCounterLink({
       rel="noopener noreferrer"
       className="group flex flex-col gap-1.5 no-underline rounded-sm outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
     >
-      <b className="font-display font-normal text-[40px] leading-none text-white transition-colors duration-150 group-hover:text-[#c8690a]">
+      <b className="font-display font-normal text-[40px] leading-none text-white transition-colors duration-150 group-hover:text-[var(--burnt)]">
         {count}
         <u className="no-underline text-[#e08a2c]">{suffix}</u>
       </b>
