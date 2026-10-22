@@ -1,19 +1,10 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { useAnimation } from '@/context/animation-context';
 
-function StatCounter({
-  target,
-  suffix,
-  label,
-  duration = 1200,
-}: {
-  target: number;
-  suffix: string;
-  label: string;
-  duration?: number;
-}) {
+function useStatCounter(target: number, duration: number) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -46,6 +37,22 @@ function StatCounter({
     return () => observer.disconnect();
   }, [target, duration]);
 
+  return { count, ref };
+}
+
+function StatCounter({
+  target,
+  suffix,
+  label,
+  duration = 1200,
+}: {
+  target: number;
+  suffix: string;
+  label: string;
+  duration?: number;
+}) {
+  const { count, ref } = useStatCounter(target, duration);
+
   return (
     <div ref={ref} className="flex flex-col gap-1.5">
       <b className="font-display font-normal text-[40px] leading-none text-white">
@@ -56,6 +63,46 @@ function StatCounter({
         {label}
       </small>
     </div>
+  );
+}
+
+function StatCounterLink({
+  target,
+  suffix,
+  label,
+  duration = 1200,
+  href,
+}: {
+  target: number;
+  suffix: string;
+  label: string;
+  duration?: number;
+  href: string;
+}) {
+  const { count, ref } = useStatCounter(target, duration);
+
+  return (
+    <a
+      ref={ref as React.RefObject<HTMLAnchorElement>}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex flex-col gap-1.5 no-underline rounded-sm outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
+    >
+      <b className="font-display font-normal text-[40px] leading-none text-white transition-colors duration-150 group-hover:text-[#c8690a]">
+        {count}
+        <u className="no-underline text-[#e08a2c]">{suffix}</u>
+      </b>
+      <small className="text-[12px] font-medium tracking-[0.12em] uppercase text-[#d8c9bb] flex items-center gap-1">
+        {label}
+        <span
+          aria-hidden="true"
+          className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-[10px] leading-none"
+        >
+          ↗
+        </span>
+      </small>
+    </a>
   );
 }
 
@@ -140,7 +187,13 @@ export default function HeroSection({ id }: { id: string }) {
 
           {/* Stats row */}
           <div className="flex gap-7 min-[861px]:gap-10 mt-7 sm:mt-8 pb-2.5 sm:pb-3">
-            <StatCounter target={10} suffix="+" label="Projects built" duration={1200} />
+            <StatCounterLink
+              target={10}
+              suffix="+"
+              label="Projects built"
+              duration={1200}
+              href="https://github.com/Codsach"
+            />
             <StatCounter target={15} suffix="+" label="Technologies" duration={1000} />
           </div>
         </div>

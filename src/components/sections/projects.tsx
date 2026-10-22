@@ -89,6 +89,27 @@ export default function ProjectsSection({ id }: { id: string }) {
           {/* Spacer: gives the last sticky card enough scroll runway to fully overlap the previous card */}
           <div className="h-[50vh]" aria-hidden="true" />
         </div>
+
+        {/* GitHub link */}
+        <div className="flex flex-col items-center gap-4 pt-10 pb-4">
+          <p className="text-sm text-[#6B7280] font-['Inter',sans-serif]">
+            A selection of my work. Everything else lives on GitHub.
+          </p>
+          <a
+            href="https://github.com/Codsach"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full border border-[#D1D5DB] text-sm font-medium font-['Inter',sans-serif] text-[#374151] bg-transparent hover:bg-[#F3F4F6] transition-colors duration-150 no-underline outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#374151]/60"
+          >
+            More on GitHub
+            <span
+              aria-hidden="true"
+              className="inline-block transition-transform duration-150 group-hover:translate-x-[3px]"
+            >
+              →
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );
