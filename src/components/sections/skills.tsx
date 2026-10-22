@@ -2,15 +2,20 @@
 
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { skills } from '@/lib/data';
-import { useRef, useCallback, useEffect, useState } from 'react';
+import { useRef, useCallback, useEffect, useState, useSyncExternalStore } from 'react';
+import { getIconForTechnology } from '@/components/brand-icons';
 
 // ── Touch guard ─────────────────────────────────────────────────────────────
+const subscribeTouch = (callback: () => void) => {
+  const mql = window.matchMedia('(hover: none)');
+  mql.addEventListener('change', callback);
+  return () => mql.removeEventListener('change', callback);
+};
+const getTouchSnapshot = () => window.matchMedia('(hover: none)').matches;
+const getTouchServerSnapshot = () => false;
+
 function useIsTouchDevice() {
-  const [isTouch, setIsTouch] = useState(false);
-  useEffect(() => {
-    setIsTouch(window.matchMedia('(hover: none)').matches);
-  }, []);
-  return isTouch;
+  return useSyncExternalStore(subscribeTouch, getTouchSnapshot, getTouchServerSnapshot);
 }
 
 // ── Card theme tokens ────────────────────────────────────────────────────────
@@ -23,6 +28,8 @@ const LIGHT = {
   divider: 'rgba(0,0,0,0.06)',
   ghost: 'rgba(0,0,0,0.045)',
   spotlightColor: 'rgba(200,105,10,0.10)',
+  // muted: greyscale at 45% opacity on the light linen background
+  iconRestFilter: 'grayscale(1) opacity(0.45)',
 };
 
 const DARK = {
@@ -34,7 +41,49 @@ const DARK = {
   divider: 'rgba(255,255,255,0.08)',
   ghost: 'rgba(255,255,255,0.045)',
   spotlightColor: 'rgba(200,105,10,0.14)',
+  // soft paper tone: invert + brighten so icons read as warm paper on dark bg
+  iconRestFilter: 'grayscale(1) invert(1) brightness(1.6) opacity(0.45)',
 };
+
+// ── Row icon helper ───────────────────────────────────────────────────────────
+function RowIcon({
+  tech,
+  filter,
+  isHovered,
+}: {
+  tech: string;
+  filter: string;
+  isHovered?: boolean;
+}) {
+  const Icon = getIconForTechnology(tech);
+  if (!Icon) {
+    return (
+      <span
+        aria-hidden="true"
+        style={{
+          display: 'inline-block',
+          width: 6,
+          height: 6,
+          borderRadius: '50%',
+          background: isHovered ? 'var(--burnt)' : 'var(--icon-muted)',
+          flexShrink: 0,
+          transition: 'background 0.18s ease',
+        }}
+      />
+    );
+  }
+  return Icon({
+    alt: '',
+    'aria-hidden': true,
+    style: {
+      width: 18,
+      height: 18,
+      flexShrink: 0,
+      filter: isHovered ? 'none' : filter,
+      transition: 'filter 0.18s ease',
+    },
+  });
+}
 
 // ── Magnetic tool row ────────────────────────────────────────────────────────
 function MagneticRow({
@@ -43,16 +92,19 @@ function MagneticRow({
   dividerColor,
   isLast,
   mouseY,
+  iconRestFilter,
 }: {
   tech: string;
   color: string;
   dividerColor: string;
   isLast: boolean;
   mouseY: number | null;
+  iconRestFilter: string;
 }) {
   const rowRef = useRef<HTMLLIElement>(null);
   const y = useMotionValue(0);
   const springY = useSpring(y, { stiffness: 180, damping: 22 });
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (mouseY === null || !rowRef.current) {
@@ -70,25 +122,19 @@ function MagneticRow({
   return (
     <motion.li
       ref={rowRef}
+      tabIndex={0}
       style={{
         y: springY,
         borderBottom: isLast ? 'none' : `1px solid ${dividerColor}`,
         listStyle: 'none',
       }}
-      className="flex items-center gap-3 py-2.5"
+      className="flex items-center gap-3 py-2.5 outline-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-[var(--burnt)] rounded-sm cursor-default"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
     >
-      {/* 6×6 px solid orange dot */}
-      <span
-        aria-hidden
-        style={{
-          display: 'inline-block',
-          width: 6,
-          height: 6,
-          borderRadius: '50%',
-          background: 'var(--amber)',
-          flexShrink: 0,
-        }}
-      />
+      <RowIcon tech={tech} filter={iconRestFilter} isHovered={isHovered} />
       <span
         className="font-sans font-medium text-[14px] leading-snug"
         style={{ color }}
@@ -96,6 +142,147 @@ function MagneticRow({
         {tech}
       </span>
     </motion.li>
+  );
+}
+
+// ── Marquee ───────────────────────────────────────────────────────────────────
+// All listed technologies (flat, in order). Duplicated in JSX for seamless loop.
+const MARQUEE_ITEMS = skills.flatMap((cat) => cat.technologies);
+
+function ToolboxMarquee() {
+  const outerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let ctx: any = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let tl: any = null;
+    let velocityTimer: ReturnType<typeof setTimeout>;
+    const outer = outerRef.current;
+
+    const pauseMarquee = () => tl?.pause();
+    const resumeMarquee = () => {
+      if (!prefersReduced) tl?.resume();
+    };
+
+    const init = async () => {
+      const { default: gsap } = await import('gsap');
+      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger);
+
+      if (!outerRef.current || !trackRef.current) return;
+
+      ctx = gsap.context(() => {
+        // Main tween: xPercent -50 on the doubled track = seamless loop
+        tl = gsap.to(trackRef.current, {
+          xPercent: -50,
+          ease: 'none',
+          duration: 25,
+          repeat: -1,
+        });
+
+        if (prefersReduced) {
+          tl.pause();
+          return;
+        }
+
+        // Scroll velocity → timeScale up to 6×, ease back to 1× in 0.8s
+        ScrollTrigger.create({
+          onUpdate: (self) => {
+            const v = Math.abs(self.getVelocity());
+            const scale = Math.min(1 + v / 400, 6);
+            if (tl) gsap.to(tl, { timeScale: scale, duration: 0.2 });
+            clearTimeout(velocityTimer);
+            velocityTimer = setTimeout(() => {
+              if (tl) gsap.to(tl, { timeScale: 1, duration: 0.8, ease: 'power1.out' });
+            }, 150);
+          },
+        });
+      }, outerRef);
+
+      if (outer) {
+        outer.addEventListener('mouseenter', pauseMarquee);
+        outer.addEventListener('mouseleave', resumeMarquee);
+      }
+    };
+
+    init();
+
+    return () => {
+      clearTimeout(velocityTimer);
+      if (outer) {
+        outer.removeEventListener('mouseenter', pauseMarquee);
+        outer.removeEventListener('mouseleave', resumeMarquee);
+      }
+      ctx?.revert();
+    };
+  }, []);
+
+  return (
+    <div
+      ref={outerRef}
+      style={{ overflow: 'hidden', width: '100%', marginTop: '3.5rem' }}
+      aria-hidden="true"
+    >
+      <div
+        ref={trackRef}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.6rem',
+          width: 'max-content',
+        }}
+      >
+        {/* Content duplicated so GSAP xPercent -50 seamlessly loops */}
+        {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((tech, i) => {
+          const Icon = getIconForTechnology(tech);
+          return (
+            <div
+              key={i}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                padding: '0.28rem 0.72rem',
+                border: '1px solid var(--line)',
+                borderRadius: '9999px',
+                flexShrink: 0,
+                backgroundColor: 'transparent',
+              }}
+            >
+              {Icon &&
+                Icon({
+                  alt: '',
+                  'aria-hidden': true,
+                  style: {
+                    width: 14,
+                    height: 14,
+                    filter: 'grayscale(1) opacity(0.40)',
+                    flexShrink: 0,
+                  },
+                })}
+              <span
+                style={{
+                  fontFamily: 'var(--font-sans), system-ui, sans-serif',
+                  fontSize: '11px',
+                  fontVariant: 'small-caps',
+                  letterSpacing: '0.05em',
+                  color: 'var(--muted)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {tech}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -149,9 +336,10 @@ function SpecCard({
     setMouseY(null);
   }, [rotateX, rotateY]);
 
+  // Ghost numeral: padded to 2 digits, matches actual list length (08/07/07)
   const ghostNum = String(category.technologies.length).padStart(2, '0');
 
-  // Shared interior — same markup for both touch and pointer
+  // Shared interior
   const interior = (
     <>
       {/* Spotlight radial glow */}
@@ -170,7 +358,7 @@ function SpecCard({
         />
       )}
 
-      {/* Heading row: title left, ghost numeral right — same baseline, can never collide */}
+      {/* Heading row: title left, ghost numeral right */}
       <div
         style={{
           display: 'flex',
@@ -185,7 +373,6 @@ function SpecCard({
         <h3
           style={{
             fontFamily: 'var(--font-display), Impact, "Arial Narrow", sans-serif',
-            /* Tight clamp so long titles wrap at ≈2 lines rather than squeeze the numeral */
             fontSize: 'clamp(17px, 1.55vw, 22px)',
             fontWeight: 400,
             textTransform: 'uppercase',
@@ -213,7 +400,6 @@ function SpecCard({
             userSelect: 'none',
             pointerEvents: 'none',
             flexShrink: 0,
-            /* Pull it up so the baseline of the numeral aligns with the cap-height of the heading */
             marginTop: '-0.1em',
           }}
         >
@@ -233,6 +419,7 @@ function SpecCard({
       >
         {category.technologies.map((tech, i) =>
           isTouch ? (
+            /* Touch: simple li with icon at rest filter */
             <li
               key={tech}
               className="flex items-center gap-3 py-2.5"
@@ -244,18 +431,7 @@ function SpecCard({
                     : 'none',
               }}
             >
-              {/* 6×6 px solid orange dot */}
-              <span
-                aria-hidden
-                style={{
-                  display: 'inline-block',
-                  width: 6,
-                  height: 6,
-                  borderRadius: '50%',
-                  background: 'var(--amber)',
-                  flexShrink: 0,
-                }}
-              />
+              <RowIcon tech={tech} filter={theme.iconRestFilter} />
               <span
                 className="font-sans font-medium text-[14px] leading-snug"
                 style={{ color: theme.toolColor }}
@@ -264,6 +440,7 @@ function SpecCard({
               </span>
             </li>
           ) : (
+            /* Pointer: full magnetic row with hover icon activation */
             <MagneticRow
               key={tech}
               tech={tech}
@@ -271,6 +448,7 @@ function SpecCard({
               dividerColor={theme.divider}
               isLast={i === category.technologies.length - 1}
               mouseY={mouseY}
+              iconRestFilter={theme.iconRestFilter}
             />
           ),
         )}
@@ -278,14 +456,13 @@ function SpecCard({
     </>
   );
 
-  // Shared card style — list anchored to top, guaranteed bottom padding
+  // Shared card style
   const cardClass = 'h-full relative overflow-hidden cursor-default';
   const cardStyle = {
     background: theme.bg,
     border: `1px solid ${theme.border}`,
     boxShadow: theme.shadow,
     borderRadius: 28,
-    // flex column so the list fills top-down and bottom padding is always present
     display: 'flex',
     flexDirection: 'column' as const,
     padding: '28px 28px 32px',
@@ -396,6 +573,9 @@ export default function SkillsSection({ id }: { id: string }) {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Marquee: muted tech pills, GSAP scroll-velocity speed-up */}
+        <ToolboxMarquee />
       </div>
     </section>
   );
