@@ -134,7 +134,7 @@ export default function AboutSection({ id }: { id: string }) {
       <div className="container mx-auto relative z-10 w-full">
 
         {/* ── a) Label + Heading ──────────────────────────────────────────── */}
-        <div className="mb-10 sm:mb-14">
+        <div className="mb-10 sm:mb-14 text-left">
           <div className="t-label mb-3">About Me</div>
           <h2 className="t-section">
             SACHIN R<span style={{ color: 'var(--amber)' }}>.</span>
@@ -213,6 +213,9 @@ export default function AboutSection({ id }: { id: string }) {
           letter-spacing: 0.01em;
           color: var(--ink);
           max-width: 1000px;
+          margin-left: 0;
+          margin-right: auto;
+          text-align: left;
         }
         .about-word {
           display: inline-block;
@@ -246,6 +249,7 @@ export default function AboutSection({ id }: { id: string }) {
           font-size: clamp(18px, 1.6vw, 22px);
           color: var(--muted);
           line-height: 1.45;
+          text-align: left;
         }
         .about-rule {
           width: 56px;
@@ -253,9 +257,11 @@ export default function AboutSection({ id }: { id: string }) {
           background: var(--amber);
           border-radius: 2px;
           margin-top: 1.25rem;
+          margin-left: 0;
         }
         .about-body-col {
           max-width: 100%;
+          text-align: left;
         }
 
         /* d) Cards */
@@ -317,12 +323,14 @@ export default function AboutSection({ id }: { id: string }) {
           line-height: 1.2;
           color: var(--ink);
           margin-bottom: 0.4rem;
+          text-align: left;
         }
         .about-card-sub {
           font-family: var(--font-sans), system-ui, sans-serif;
           font-size: 14px;
           color: var(--muted);
           line-height: 1.5;
+          text-align: left;
         }
       `}</style>
     </section>
