@@ -10,12 +10,12 @@ export default function Logo({ className, textClassName }: { className?: string;
     <Link
       href="/"
       className={cn(
-        'group flex items-center gap-3 text-lg font-bold tracking-tight text-slate-900',
+        'group flex items-center gap-3 text-lg font-bold tracking-tight text-[var(--ink)]',
         className
       )}
     >
       <motion.div
-        className="relative w-8 h-8 rounded-xl overflow-hidden shadow-sm border border-slate-200/80 group-hover:scale-105 group-hover:shadow-md transition-all duration-300 flex-shrink-0"
+        className="relative w-8 h-8 rounded-xl overflow-hidden shadow-sm border border-[var(--line)] group-hover:scale-105 group-hover:shadow-md transition-all duration-300 flex-shrink-0"
         whileTap={{ scale: 0.95 }}
       >
         <Image

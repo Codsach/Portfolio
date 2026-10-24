@@ -1,10 +1,13 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ProjectCard } from '../project-card';
 import { projects, type Project } from '@/lib/data';
+import { Button } from '@/components/ui/button';
+import { ArrowUpRight } from 'lucide-react';
 
+/* ── Sticky stacking card — unchanged ───────────────────────────────────── */
 function StackingCardItem({
   project,
   index,
@@ -44,11 +47,12 @@ function StackingCardItem({
   );
 }
 
+/* ── Section ─────────────────────────────────────────────────────────────── */
 export default function ProjectsSection({ id }: { id: string }) {
   return (
     <section
       id={id}
-      className="relative py-16 sm:py-20 bg-[#F8F9FA] -mb-[50vh]"
+      className="relative py-16 sm:py-20 bg-[var(--sand)] -mb-[50vh]"
     >
       <div className="absolute top-0 inset-x-0 separator-fade" />
 
@@ -77,7 +81,7 @@ export default function ProjectsSection({ id }: { id: string }) {
           </motion.p>
         </div>
 
-        {/* Sticky Stacking Deck of Cards */}
+        {/* Sticky Stacking Deck of Cards — logic untouched */}
         <div className="relative flex flex-col">
           {projects.map((project, index) => (
             <StackingCardItem
@@ -89,29 +93,108 @@ export default function ProjectsSection({ id }: { id: string }) {
           {/* Spacer: gives the last sticky card enough scroll runway to fully overlap the previous card */}
           <div className="h-[50vh]" aria-hidden="true" />
         </div>
-
-        {/* GitHub link */}
-        <div className="flex flex-col items-center gap-4 pt-10 pb-4">
-          <p className="text-sm text-[#6B7280] font-['Inter',sans-serif]">
-            A selection of my work. Everything else lives on GitHub.
-          </p>
-          <a
-            href="https://github.com/Codsach"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1.5 px-6 py-2.5 rounded-full border border-[#D1D5DB] text-sm font-medium font-['Inter',sans-serif] text-[#374151] bg-transparent hover:bg-[#F3F4F6] transition-colors duration-150 no-underline outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#374151]/60"
-          >
-            More on GitHub
-            <span
-              aria-hidden="true"
-              className="inline-block transition-transform duration-150 group-hover:translate-x-[3px]"
-            >
-              →
-            </span>
-          </a>
-        </div>
       </div>
     </section>
   );
 }
 
+/* ── GitHub CTA — exported so page.tsx can place it outside the projects    ──
+   stacking context (z-[3]). Skills section is z-[4], so anything inside     ──
+   the projects section is painted below skills no matter its own z-index.   ──
+   Rendering between the two sections in the root div (z-auto) solves this.  ── */
+export function GitHubCTA() {
+  const blockRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = blockRef.current;
+    if (!el) return;
+
+    const prefersReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    if (prefersReduced) {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+      return;
+    }
+
+    // Start hidden + shifted down
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition =
+      'opacity 0.6s cubic-bezier(0.33, 1, 0.68, 1), transform 0.6s cubic-bezier(0.33, 1, 0.68, 1)';
+
+    // Trigger as soon as any part of the block enters the viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.01, rootMargin: '0px' },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={blockRef}
+      className="flex flex-col items-center gap-4 py-10 sm:py-12 bg-[var(--sand)]"
+    >
+      {/* Caption */}
+      <p
+        className="text-[14px] font-['Inter',sans-serif] text-center leading-snug"
+        style={{ color: 'var(--muted)' }}
+      >
+        A selection of my work. Everything else lives on GitHub.
+      </p>
+
+      {/* Button — shadcn outline, all overrides via Tailwind, button.tsx untouched */}
+      <Button
+        asChild
+        variant="outline"
+        className="
+          group
+          rounded-full h-11 px-6
+          font-['Inter',sans-serif] font-medium text-[15px]
+          bg-transparent
+          border border-[rgba(42,26,16,0.18)]
+          text-[var(--ink)]
+          hover:border-[var(--burnt)]
+          hover:text-[var(--burnt)]
+          hover:bg-[rgba(217,112,15,0.06)]
+          active:scale-[0.98]
+          focus-visible:outline-none
+          focus-visible:ring-2
+          focus-visible:ring-[var(--burnt)]
+          focus-visible:ring-offset-[3px]
+          focus-visible:ring-offset-[var(--sand)]
+          transition-all duration-200 ease-out
+          shadow-none
+          no-underline
+        "
+      >
+        <a
+          href="https://github.com/Codsach"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          More on GitHub
+          <ArrowUpRight
+            aria-hidden="true"
+            className="
+              w-4 h-4 flex-shrink-0
+              transition-transform duration-200 ease-out
+              group-hover:translate-x-[3px] group-hover:-translate-y-[3px]
+            "
+          />
+        </a>
+      </Button>
+    </div>
+  );
+}

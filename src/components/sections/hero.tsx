@@ -83,21 +83,21 @@ function StatCounterLink({
 
   return (
     <a
-      ref={ref as React.RefObject<HTMLAnchorElement>}
+      ref={ref as unknown as React.RefObject<HTMLAnchorElement>}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="group flex flex-col gap-1.5 no-underline rounded-sm outline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
     >
-      <b className="font-display font-normal text-[40px] leading-none text-white transition-colors duration-150 group-hover:text-[#c8690a]">
+      <b className="font-display font-normal text-[40px] leading-none text-white transition-colors duration-150 group-hover:text-[var(--burnt)]">
         {count}
         <u className="no-underline text-[#e08a2c]">{suffix}</u>
       </b>
-      <small className="text-[12px] font-medium tracking-[0.12em] uppercase text-[#d8c9bb] flex items-center gap-1">
-        {label}
+      <small className="text-[12px] font-medium tracking-[0.12em] uppercase text-[#d8c9bb] flex items-center gap-1 group-hover:text-white transition-colors duration-150">
+        <span>{label}</span>
         <span
           aria-hidden="true"
-          className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-[10px] leading-none"
+          className="text-[11px] leading-none opacity-60 group-hover:opacity-100 text-[#d8c9bb] group-hover:text-[#e08a2c] transition-all duration-150"
         >
           ↗
         </span>
@@ -190,7 +190,7 @@ export default function HeroSection({ id }: { id: string }) {
             <StatCounterLink
               target={10}
               suffix="+"
-              label="Projects built"
+              label="Projects on GitHub"
               duration={1200}
               href="https://github.com/Codsach"
             />
